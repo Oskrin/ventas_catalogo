@@ -195,7 +195,7 @@ include '../menus/menu.php';
                                         </fieldset>
 
                                         <div class="form-actions">
-                                            <button class="btn btn-primary" id="btnGuardar"><i class="icon-save"></i> Guardar</button>
+                                            <!--<button class="btn btn-primary" id="btnGuardar"><i class="icon-save"></i> Guardar</button>-->
                                             <button class="btn btn-primary" id='btnModificar'><i class="icon-edit"></i> Modificar</button>
                                             <button class="btn btn-primary" id='btnBuscar'><i class="icon-search"></i> Buscar</button>
                                             <button class="btn btn-primary" id='btnNuevo'><i class="icon-pencil"></i> Nuevo</button>
