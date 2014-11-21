@@ -98,13 +98,11 @@ function abrirMarca() {
 $(function(){
     Test = {
         UpdatePreview: function(obj){
-
             if(!window.FileReader){
-
+            // don't know how to proceed to assign src to image tag
             } else {
                 var reader = new FileReader();
                 var target = null;
-             
                 reader.onload = function(e) {
                     target =  e.target || e.srcElement;
                     $("#foto").prop("src", target.result);
@@ -136,13 +134,13 @@ function guardar_producto(){
                         $("#series").focus();
                         alertify.alert("Seleccione una opción");
                     } else {
-                        if ($("#utilidad_minorista").val() === "") {
-                            $("#utilidad_minorista").focus();
-                            alertify.alert("Ingrese la utilidad al minorista");
+                        if ($("#precio_minorista").val() === "") {
+                            $("#precio_minorista").focus();
+                            alertify.alert("Ingrese precio minorista");
                         } else {
-                            if ($("#utilidad_mayorista").val() === "") {
-                                $("#utilidad_mayorista").focus();
-                                alertify.alert("Ingrese la utilidad al mayorista");
+                            if ($("#precio_mayorista").val() === "") {
+                                $("#precio_mayorista").focus();
+                                alertify.alert("Ingrese precio mayorista");
                             } else {
                                 if ($("#fecha_creacion").val() === "") {
                                     $("#fecha_creacion").focus();
@@ -227,13 +225,13 @@ function modificar_producto(){
                             $("#series").focus();
                             alertify.alert("Seleccione una opción");
                         } else {
-                            if ($("#utilidad_minorista").val() === "") {
-                                $("#utilidad_minorista").focus();
-                                alertify.alert("Ingrese la utilidad al minorista");
+                            if ($("#precio_minorista").val() === "") {
+                                $("#precio_minorista").focus();
+                                alertify.alert("Ingrese precio minorista");
                             } else {
-                                if ($("#utilidad_mayorista").val() === "") {
-                                    $("#utilidad_mayorista").focus();
-                                    alertify.alert("Ingrese la utilidad al mayorista");
+                                if ($("#precio_mayorista").val() === "") {
+                                    $("#precio_mayorista").focus();
+                                    alertify.alert("Ingrese precio mayorista");
                                 } else {
                                     if ($("#fecha_creacion").val() === "") {
                                         $("#fecha_creacion").focus();
@@ -258,8 +256,8 @@ function modificar_producto(){
                                                         var res=data;
                                                         if(res == 1){
                                                             alertify.alert("Datos Modificados Correctamente",function(){
-                                                                location.reload();
-                                                            });
+                                                               location.reload();
+                                                          });
                                                         } else{
                                                             alertify.alert("Error..... Datos no Modificados");
                                                         }
@@ -404,14 +402,18 @@ function agregar_marca() {
 
 function Valida_punto() {
     var key;
-    if (window.event) {
+    if (window.event)
+    {
         key = event.keyCode;
-    } else if (event.which) {
+    } else if (event.which)
+{
         key = event.which;
     }
 
-    if (key < 48 || key > 57) {
-        if (key === 46 || key === 8) {
+    if (key < 48 || key > 57)
+    {
+        if (key === 46 || key === 8)
+        {
             return true;
         } else {
             return false;
@@ -427,116 +429,38 @@ function ValidNum() {
     return true;
 }
 
-function guardarCargar(){
-    $("#tabla_excel tbody").empty(); 
-    $("#formulario_excel").submit(function(e) {
-        var formObj = $(this);
-        var formURL = formObj.attr("action");
-        if(window.FormData !== undefined) {	
-            var formData = new FormData(this);   
-            formURL=formURL;        	
-            $.ajax({
-                url: "../procesos/guardarExcel.php",
-                type: "POST",
-                data:  formData,
-                mimeType:"multipart/form-data",
-                dataType: 'json',
-                contentType: false,
-                cache: false,
-                processData:false,
-                success: function(data, textStatus, jqXHR) {
-                    var res=data;
-                    if(res != ""){
-                        cargarTabla(data);
-                        alertify.alert("Datos cargados");
-                    } else{
-                        cargarTabla(data);
-                        alertify.alert("Error..... Al cargar los registros");
-                    }
-                },
-                error: function(jqXHR, textStatus, errorThrown) 
-                {
-                } 	        
-            });
-            e.preventDefault();
-            $(this).unbind("submit");
-        } else {
-            var  iframeId = "unique" + (new Date().getTime());
-            var iframe = $('<iframe src="javascript:false;" name="'+iframeId+'" />');
-            iframe.hide();
-            formObj.attr("target",iframeId);
-            iframe.appendTo("body");
-            iframe.load(function(e) {
-                var doc = getDoc(iframe[0]);
-                var docRoot = doc.body ? doc.body : doc.documentElement;
-                var data = docRoot.innerHTML;
-            });
-        }
-    });
-	
-}
-
-function cargarTabla(data){
-    for(var i=0;i<data.length;i+=13){
-        vector = new Array();
-        vector[0]=data[i];
-        vector[1]=data[i+1];
-        vector[2]=data[i+2];
-        vector[3]=data[i+3];
-        vector[4]=data[i+4];
-        vector[5]=data[i+5];
-        vector[6]=data[i+6];
-        vector[7]=data[i+7];
-        vector[8]=data[i+8];
-        vector[9]=data[i+9];
-        vector[10]=data[i+10];
-        vector[11]=data[i+11];
-        vector[12]=data[i+12];
-        guardar_datos_excel(vector);
+function enter(e) {
+    if (e.which === 13 || e.keyCode === 13) {
+        porcenta();
+        return false;
     }
+    return true;
 }
 
-function guardar_datos_excel(vector){
-    $.ajax({
-        type: "POST",
-        url: "../procesos/guardar_producto_excel.php",
-        data: "var="+vector[0]+"&var1="+vector[1]+"&var2="+vector[2]+"&var3="+vector[3]+"&var4="+vector[4]+"&var5="+vector[5]+"&var6="+vector[6]+"&var7="+vector[7]+"&var8="+vector[8]+"&var9="+vector[9]+"&var10="+vector[10]+"&var11="+vector[11]+"&var12="+vector[12],
-        success: function(data) {
-            var val = data;
-            if (val == 1)
-            {
-                $("#tabla_excel tbody").append( "<tr>" +
-                    "<td align=center>" + vector[0] + "</td>" +
-                    "<td align=center>" + vector[1] + "</td>" +	            
-                    "<td align=center>" + 'Guardado Correctamente' + "</td>" +            
-                    "<td align=center>" + " <a class='elimina'><img src='../imagenes/valid.png'/>"  + "</td>" + "</tr>" );
-            }
-            if (val == 2)
-            {
-                $("#tabla_excel tbody").append( "<tr>" +
-                    "<td align=center>" + vector[0] + "</td>" +
-                    "<td align=center>" + vector[1] + "</td>" +	            
-                    "<td align=center>" + 'Producto Repetido' + "</td>" +            
-                    "<td align=center>" + " <a class='elimina'><img src='../imagenes/invalid.png' />"  + "</td>" + "</tr>" );
-            }
-            if (val == 3)
-            {
-                $("#tabla_excel tbody").append( "<tr>" +
-                    "<td align=center>" + vector[0] + "</td>" +
-                    "<td align=center>" + vector[1] + "</td>" +	            
-                    "<td align=center>" + 'Sintaxis incorrecta' + "</td>" +            
-                    "<td align=center>" + " <a class='elimina'><img src='../imagenes/delete.png' />"  + "</td>" + "</tr>" );
-            }
-        }
-    });
+function enter2(e) {
+    if (e.which === 13 || e.keyCode === 13) {
+        porcenta2();
+        return false;
+    }
+    return true;
+}
+
+function porcenta(){
+    var resta = parseFloat($("#precio_minorista").val() - $("#precio_compra").val());
+    $("#utilidad_minorista").val(resta);   
+}
+
+function porcenta2(){
+    var resta = parseFloat($("#precio_mayorista").val() - $("#precio_compra").val());
+    $("#utilidad_mayorista").val(resta);   
 }
 
 function inicio() {
+    
     jQuery().UItoTop({
         easingType: 'easeOutQuart'
     });
     
-       
     //////////////////para cargar fotos/////////////
     function getDoc(frame) {
         var doc = null;     
@@ -558,7 +482,7 @@ function inicio() {
         }
         return doc;
     }
-    //////////////////////////
+    //////////////////////////  
     
     /////////////////verificar repetidos/////////////
     $("#cod_prod").blur(function() {
@@ -583,7 +507,11 @@ function inicio() {
     /////////atributos/////////////
     $("#utilidad_minorista").attr("maxlength", "5");
     $("#utilidad_mayorista").attr("maxlength", "5");
+    $("#precio_minorista").attr("maxlength", "10");
+    $("#precio_mayorista").attr("maxlength", "10");
     $("#precio_compra").keypress(Valida_punto);
+    $("#precio_minorista").keypress(Valida_punto);
+    $("#precio_mayorista").keypress(Valida_punto);
     $("#utilidad_minorista").keypress(ValidNum);
     $("#utilidad_mayorista").keypress(ValidNum);
     $("#descuento").keypress(ValidNum);
@@ -624,7 +552,6 @@ function inicio() {
         e.preventDefault();
     });
     
-
     $("#btnGuardarCategoria").on("click", agregar_categoria);
     $("#btnGuardarMarca").on("click", agregar_marca);
     $("#btnGuardar").on("click", guardar_producto);
@@ -638,7 +565,9 @@ function inicio() {
     $("#btnSalir").on("click", cancelar);
     $("#btnAcceder").on("click", validar_acceso);
     $("#btnCancelar").on("click", cancelar_acceso);
-    $("#btnGuardarCargar").on("click",guardarCargar);
+    
+    $("#precio_minorista").on("keypress", enter);
+    $("#precio_mayorista").on("keypress", enter2);
     
     $("#productos").dialog(dialogos);
     $("#categorias").dialog(dialogos_categoria);
@@ -646,22 +575,7 @@ function inicio() {
     $("#clave_permiso").dialog(dialogo3);
     $("#seguro").dialog(dialogo4);
     ///////////////////////////////////////////////
-    
-    //////////////imput spinner////////////////
-    $("#stock").spinner({
-        min: 1
-    });
-    $("#minimo").spinner({
-        min: 1
-    });
-    $("#maximo").spinner({
-        min: 1
-    });
-    $("#descuento").spinner({
-        min: 1
-    });
-    /////////////////////////////////
-    
+
     /////////calendarios///////
     $("#fecha_creacion").datepicker({
         dateFormat: 'yy-mm-dd'
@@ -685,6 +599,7 @@ function inicio() {
             }
         }
     });
+    
 
     $("#utilidad_mayorista").keyup(function() {
         if($("#precio_compra").val() === ""){
@@ -702,7 +617,39 @@ function inicio() {
             }
         }
     });
-    //////////////////////////
+//////////////////////////
+
+
+////////////////calcular datos 2//////////////////
+$("#precio_minorista").keyup(function() {
+        if($("#precio_compra").val() === ""){
+             $("#precio_minorista").val("");
+             $("#precio_compra").focus();  
+             alertify.error("Error... Ingrese precio compra");
+        }else{
+            if ($("#precio_minorista").val() === "") {
+                $("#utilidad_minorista").val("");
+            }
+        }
+    });
+
+/////////////////////////////////////////////////
+
+////////////////calcular datos 2//////////////////
+$("#precio_mayorista").keyup(function() {
+        if($("#precio_compra").val() === ""){
+             $("#precio_mayorista").val("");
+             $("#precio_compra").focus();  
+             alertify.error("Error... Ingrese precio compra");
+        }else{
+            if ($("#precio_mayorista").val() === "") {
+                $("#utilidad_mayorista").val("");
+            }
+        }
+    });
+
+/////////////////////////////////////////////////
+
 
     //////////////tabla Productos////////////////
     jQuery("#list").jqGrid({
@@ -710,357 +657,32 @@ function inicio() {
         datatype: 'xml',
         colNames: ['ID', 'CÓDIGO', 'CÓDIGO BARRAS', 'ARTICULO', 'IVA', 'SERIES', 'PRECIO COMPRA', 'UTILIDAD MINORISTA', 'PRECIO MINORISTA', 'UTILIDAD MAYORISTA', 'PRECIO MAYORISTA', 'CATEGORIA', 'MARCA', 'DESCUENTO', 'STOCK', 'MÍNIMO', 'MÁXIMO', 'FECHA COMPRA', 'CARACTERISTICAS', 'OBSERVACIONES', 'ESTADO','INVENTARIABLE', 'IMAGEN'],
         colModel: [
-        {
-            name: 'cod_productos', 
-            index: 'cod_productos', 
-            editable: true, 
-            align: 'center', 
-            width: '60', 
-            search: false, 
-            frozen: true, 
-            editoptions: {
-                readonly: 'readonly'
-            }, 
-            formoptions: {
-                elmprefix: ""
-            }
-        },
-
-        {
-            name: 'cod_prod', 
-            index: 'cod_prod', 
-            editable: true, 
-            align: 'center', 
-            width: '120', 
-            search: true, 
-            frozen: true, 
-            formoptions: {
-                elmsuffix: " (*)"
-            }, 
-            editrules: {
-                required: true
-            }
-        },
-
-        {
-            name: 'cod_barras', 
-            index: 'cod_barras', 
-            editable: true, 
-            align: 'center', 
-            width: '120', 
-            search: true, 
-            frozen: true, 
-            formoptions: {
-                elmsuffix: " (*)"
-            }, 
-            editrules: {
-                required: true
-            }
-        },
-        {
-            name: 'nombre_art', 
-            index: 'nombre_art', 
-            editable: true, 
-            align: 'center', 
-            width: '180', 
-            search: true, 
-            frozen: true, 
-            editoptions: {
-                readonly: 'readonly'
-            }, 
-            formoptions: {
-                elmprefix: ""
-            }
-        },
-        {
-            name: 'iva', 
-            index: 'iva', 
-            editable: true, 
-            align: 'center', 
-            width: '50', 
-            search: false, 
-            frozen: true, 
-            editoptions: {
-                readonly: 'readonly'
-            }, 
-            formoptions: {
-                elmprefix: ""
-            }
-        },
-        {
-            name: 'series', 
-            index: 'series', 
-            editable: true, 
-            align: 'center', 
-            width: '50', 
-            search: false, 
-            frozen: true, 
-            editoptions: {
-                readonly: 'readonly'
-            }, 
-            formoptions: {
-                elmprefix: ""
-            }
-        },
-        {
-            name: 'precio_compra', 
-            index: 'precio_compra', 
-            editable: true, 
-            align: 'center', 
-            width: '120', 
-            search: false, 
-            frozen: true, 
-            editoptions: {
-                readonly: 'readonly'
-            }, 
-            formoptions: {
-                elmprefix: ""
-            }
-        },
-        {
-            name: 'utilidad_minorista', 
-            index: 'utilidad_minorista', 
-            editable: true, 
-            align: 'center', 
-            width: '120', 
-            search: false, 
-            frozen: true, 
-            editoptions: {
-                readonly: 'readonly'
-            }, 
-            formoptions: {
-                elmprefix: ""
-            }
-        },
-        {
-            name: 'precio_minorista', 
-            index: 'precio_minorista', 
-            editable: true, 
-            align: 'center', 
-            width: '120', 
-            search: false, 
-            frozen: true, 
-            editoptions: {
-                readonly: 'readonly'
-            }, 
-            formoptions: {
-                elmprefix: ""
-            }
-        },
-        {
-            name: 'utilidad_mayorista', 
-            index: 'utilidad_mayorista', 
-            editable: true, 
-            align: 'center', 
-            width: '120', 
-            search: false, 
-            frozen: true, 
-            editoptions: {
-                readonly: 'readonly'
-            }, 
-            formoptions: {
-                elmprefix: ""
-            }
-        },
-        {
-            name: 'precio_mayorista', 
-            index: 'precio_mayorista', 
-            editable: true, 
-            align: 'center', 
-            width: '120', 
-            search: false, 
-            frozen: true, 
-            editoptions: {
-                readonly: 'readonly'
-            }, 
-            formoptions: {
-                elmprefix: ""
-            }
-        },
-        {
-            name: 'categoria', 
-            index: 'categoria', 
-            editable: true, 
-            align: 'center', 
-            width: '120', 
-            search: false, 
-            frozen: true, 
-            editoptions: {
-                readonly: 'readonly'
-            }, 
-            formoptions: {
-                elmprefix: ""
-            }
-        },
-        {
-            name: 'marca', 
-            index: 'marca', 
-            editable: true, 
-            align: 'center', 
-            width: '120', 
-            search: false, 
-            frozen: true, 
-            editoptions: {
-                readonly: 'readonly'
-            }, 
-            formoptions: {
-                elmprefix: ""
-            }
-        },
-        {
-            name: 'descuento', 
-            index: 'descuento', 
-            editable: true, 
-            align: 'center', 
-            width: '120', 
-            search: false, 
-            frozen: true, 
-            editoptions: {
-                readonly: 'readonly'
-            }, 
-            formoptions: {
-                elmprefix: ""
-            }
-        },
-        {
-            name: 'stock', 
-            index: 'stock', 
-            editable: true, 
-            align: 'center', 
-            width: '120', 
-            search: false, 
-            frozen: true, 
-            editoptions: {
-                readonly: 'readonly'
-            }, 
-            formoptions: {
-                elmprefix: ""
-            }
-        },
-        {
-            name: 'minimo', 
-            index: 'minimo', 
-            editable: true, 
-            align: 'center', 
-            width: '120', 
-            search: false, 
-            frozen: true, 
-            editoptions: {
-                readonly: 'readonly'
-            }, 
-            formoptions: {
-                elmprefix: ""
-            }
-        },
-        {
-            name: 'maximo', 
-            index: 'maximo', 
-            editable: true, 
-            align: 'center', 
-            width: '120', 
-            search: false, 
-            frozen: true, 
-            editoptions: {
-                readonly: 'readonly'
-            }, 
-            formoptions: {
-                elmprefix: ""
-            }
-        },
-        {
-            name: 'fecha_creacion', 
-            index: 'fecha_creacion', 
-            editable: true, 
-            align: 'center', 
-            width: '120', 
-            search: false, 
-            frozen: true, 
-            editoptions: {
-                readonly: 'readonly'
-            }, 
-            formoptions: {
-                elmprefix: ""
-            }
-        },
-        {
-            name: 'modelo', 
-            index: 'modelo', 
-            editable: true, 
-            align: 'center', 
-            width: '120', 
-            search: false, 
-            frozen: true, 
-            editoptions: {
-                readonly: 'readonly'
-            }, 
-            formoptions: {
-                elmprefix: ""
-            }
-        },
-        {
-            name: 'aplicacion', 
-            index: 'aplicacion', 
-            editable: true, 
-            align: 'center', 
-            width: '120', 
-            search: false, 
-            frozen: true, 
-            editoptions: {
-                readonly: 'readonly'
-            }, 
-            formoptions: {
-                elmprefix: ""
-            }
-        },
-        {
-            name: 'vendible', 
-            index: 'vendible', 
-            editable: true, 
-            align: 'center', 
-            width: '120', 
-            search: false, 
-            frozen: true, 
-            editoptions: {
-                readonly: 'readonly'
-            }, 
-            formoptions: {
-                elmprefix: ""
-            }
-        },
-        {
-            name: 'inventario', 
-            index: 'inventario', 
-            editable: true, 
-            align: 'center', 
-            width: '120', 
-            search: false, 
-            frozen: true, 
-            editoptions: {
-                readonly: 'readonly'
-            }, 
-            formoptions: {
-                elmprefix: ""
-            }
-        },
-        {
-            name: 'imagen', 
-            index: 'imagen', 
-            editable: true, 
-            align: 'center', 
-            width: '120', 
-            search: false, 
-            frozen: true, 
-            editoptions: {
-                readonly: 'readonly'
-            }, 
-            formoptions: {
-                elmprefix: ""
-            }
-        }
+            {name: 'cod_productos', index: 'cod_productos', editable: true, align: 'center', width: '60', search: false, frozen: true, editoptions: {readonly: 'readonly'}, formoptions: {elmprefix: ""}},
+            {name: 'cod_prod', index: 'cod_prod', editable: true, align: 'center', width: '120', search: true, frozen: true, formoptions: {elmsuffix: " (*)"}, editrules: {required: true}},
+            {name: 'cod_barras', index: 'cod_barras', editable: true, align: 'center', width: '120', search: true, frozen: true, formoptions: {elmsuffix: " (*)"}, editrules: {required: true}},
+            {name: 'nombre_art', index: 'nombre_art', editable: true, align: 'center', width: '180', search: true, frozen: true, editoptions: {readonly: 'readonly'}, formoptions: {elmprefix: ""}},
+            {name: 'iva', index: 'iva', editable: true, align: 'center', width: '50', search: false, frozen: true, editoptions: {readonly: 'readonly'}, formoptions: {elmprefix: ""}},
+            {name: 'series', index: 'series', editable: true, align: 'center', width: '50', search: false, frozen: true, editoptions: {readonly: 'readonly'}, formoptions: {elmprefix: ""}},
+            {name: 'precio_compra', index: 'precio_compra', editable: true, align: 'center', width: '120', search: false, frozen: true, editoptions: {readonly: 'readonly'}, formoptions: {elmprefix: ""}},
+            {name: 'utilidad_minorista', index: 'utilidad_minorista', editable: true, align: 'center', width: '120', search: false, frozen: true, editoptions: {readonly: 'readonly'}, formoptions: {elmprefix: ""}},
+            {name: 'precio_minorista', index: 'precio_minorista', editable: true, align: 'center', width: '120', search: false, frozen: true, editoptions: {readonly: 'readonly'}, formoptions: {elmprefix: ""}},
+            {name: 'utilidad_mayorista', index: 'utilidad_mayorista', editable: true, align: 'center', width: '120', search: false, frozen: true, editoptions: {readonly: 'readonly'}, formoptions: {elmprefix: ""}},
+            {name: 'precio_mayorista', index: 'precio_mayorista', editable: true, align: 'center', width: '120', search: false, frozen: true, editoptions: {readonly: 'readonly'}, formoptions: {elmprefix: ""}},
+            {name: 'categoria', index: 'categoria', editable: true, align: 'center', width: '120', search: false, frozen: true, editoptions: {readonly: 'readonly'}, formoptions: {elmprefix: ""}},
+            {name: 'marca', index: 'marca', editable: true, align: 'center', width: '120', search: false, frozen: true, editoptions: {readonly: 'readonly'}, formoptions: {elmprefix: ""}},
+            {name: 'descuento', index: 'descuento', editable: true, align: 'center', width: '120', search: false, frozen: true, editoptions: {readonly: 'readonly'}, formoptions: {elmprefix: ""}},
+            {name: 'stock', index: 'stock', editable: true, align: 'center', width: '120', search: false, frozen: true, editoptions: {readonly: 'readonly'}, formoptions: {elmprefix: ""}},
+            {name: 'minimo', index: 'minimo', editable: true, align: 'center', width: '120', search: false, frozen: true, editoptions: {readonly: 'readonly'}, formoptions: {elmprefix: ""}},
+            {name: 'maximo', index: 'maximo', editable: true, align: 'center', width: '120', search: false, frozen: true, editoptions: {readonly: 'readonly'}, formoptions: {elmprefix: ""}},
+            {name: 'fecha_creacion', index: 'fecha_creacion', editable: true, align: 'center', width: '120', search: false, frozen: true, editoptions: {readonly: 'readonly'}, formoptions: {elmprefix: ""}},
+            {name: 'modelo', index: 'modelo', editable: true, align: 'center', width: '120', search: false, frozen: true, editoptions: {readonly: 'readonly'}, formoptions: {elmprefix: ""}},
+            {name: 'aplicacion', index: 'aplicacion', editable: true, align: 'center', width: '120', search: false, frozen: true, editoptions: {readonly: 'readonly'}, formoptions: {elmprefix: ""}},
+            {name: 'vendible', index: 'vendible', editable: true, align: 'center', width: '120', search: false, frozen: true, editoptions: {readonly: 'readonly'}, formoptions: {elmprefix: ""}},
+            {name: 'inventario', index: 'inventario', editable: true, align: 'center', width: '120', search: false, frozen: true, editoptions: {readonly: 'readonly'}, formoptions: {elmprefix: ""}},
+            {name: 'imagen', index: 'imagen', editable: true, align: 'center', width: '120', search: false, frozen: true, editoptions: {readonly: 'readonly'}, formoptions: {elmprefix: ""}}
         ],
         rowNum: 10,
         width: 830,
-        height: 190,
         rowList: [10, 20, 30],
         pager: jQuery('#pager'),
         sortname: 'cod_productos',
@@ -1069,66 +691,58 @@ function inicio() {
         caption: 'Lista de Productos',
         editurl: 'procesos/estadio_del.php',
         viewrecords: true,
-        ondblClickRow: function(){
+         ondblClickRow: function(){
+         var id = jQuery("#list").jqGrid('getGridParam', 'selrow');
+         jQuery('#list').jqGrid('restoreRow', id);   
+         var ret = jQuery("#list").jqGrid('getRowData', id);
+         $("#foto").attr("src", "../fotos_productos/"+ ret.imagen);
+         jQuery("#list").jqGrid('GridToForm', id, "#productos_form");
+         $("#btnGuardar").attr("disabled", true);
+         document.getElementById("cod_prod").readOnly = true;
+         $("#productos").dialog("close");      
+         }
+    }).jqGrid('navGrid', '#pager',
+            {
+                add: false,
+                edit: false,
+                del: false,
+                refresh: true,
+                search: true,
+                view: false
+            },
+    {
+        recreateForm: true, closeAfterEdit: true, checkOnUpdate: true, reloadAfterSubmit: true, closeOnEscape: true
+    },
+    {
+        reloadAfterSubmit: true, closeAfterAdd: true, checkOnUpdate: true, closeOnEscape: true,
+        bottominfo: "Todos los campos son obligatorios son obligatorios"
+    },
+    {
+        width: 300, closeOnEscape: true
+    },
+    {
+        closeOnEscape: true,
+        multipleSearch: false, overlay: false
+    },
+    {
+    },
+            {
+                closeOnEscape: true
+            }
+    );
+    /////////////////		
+    jQuery("#list").jqGrid('navButtonAdd', '#pager', {caption: "Añadir",
+        onClickButton: function() {
             var id = jQuery("#list").jqGrid('getGridParam', 'selrow');
+
+            if (id) {
             jQuery('#list').jqGrid('restoreRow', id);   
             var ret = jQuery("#list").jqGrid('getRowData', id);
             $("#foto").attr("src", "../fotos_productos/"+ ret.imagen);
             jQuery("#list").jqGrid('GridToForm', id, "#productos_form");
             $("#btnGuardar").attr("disabled", true);
-            $("#productos").dialog("close");      
-        }
-    }).jqGrid('navGrid', '#pager',
-    {
-        add: false,
-        edit: false,
-        del: false,
-        refresh: true,
-        search: true,
-        view: false
-    },
-    {
-        recreateForm: true, 
-        closeAfterEdit: true, 
-        checkOnUpdate: true, 
-        reloadAfterSubmit: true, 
-        closeOnEscape: true
-    },
-    {
-        reloadAfterSubmit: true, 
-        closeAfterAdd: true, 
-        checkOnUpdate: true, 
-        closeOnEscape: true,
-        bottominfo: "Todos los campos son obligatorios son obligatorios"
-    },
-    {
-        width: 300, 
-        closeOnEscape: true
-    },
-    {
-        closeOnEscape: true,
-        multipleSearch: false, 
-        overlay: false
-    },
-    {
-    },
-    {
-        closeOnEscape: true
-    }
-    );
-    /////////////////		
-    jQuery("#list").jqGrid('navButtonAdd', '#pager', {
-        caption: "Añadir",
-        onClickButton: function() {
-            var id = jQuery("#list").jqGrid('getGridParam', 'selrow');
-
-            if (id) {
-                jQuery('#list').jqGrid('restoreRow', id);   
-                var ret = jQuery("#list").jqGrid('getRowData', id);
-                $("#foto").attr("src", "../fotos_productos/"+ ret.imagen);
-                jQuery("#list").jqGrid('GridToForm', id, "#productos_form");
-                $("#btnGuardar").attr("disabled", true);
-                $("#productos").dialog("close"); 
+            document.getElementById("cod_prod").readOnly = true;
+            $("#productos").dialog("close"); 
             } else {
                 alertify.alert("Seleccione un fila");
             }

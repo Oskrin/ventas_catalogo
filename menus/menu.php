@@ -18,7 +18,6 @@ function menu_1() {
                     <ul>
                           <li><a href="../html/categorias.php" target="_blank">Categorias</a></li>
                           <li><a href="../html/marcas.php" target="_blank">Marcas</a></li>
-                          <li><a href="../html/colores.php" target="_blank"">Colores</a></li>
                     </ul>
                     </li>
                 </ul>
@@ -28,7 +27,6 @@ function menu_1() {
                 <ul>
                     <li><a href="../html/inventario.php" target="_blank">Inventario</a></li>
                     <li><a href="../html/proformas.php" target="_blank">Proformas</a></li>
-                    <li><a href="../html/produccion.php" target="_blank">Ordenes Producción</a></li>
                     <li><a href="" target="_parent">Compras</a>
                         <ul>
                             <li><a href="../html/factura_compra.php" target="_blank">Productos Bodega</a></li>
@@ -37,7 +35,7 @@ function menu_1() {
                     </li>
                     <li><a href="" target="_parent">Ventas</a>
                         <ul>
-                            <li><a href="../html/factura_venta.php" target="_blank">Ventas facturacion</a></li>
+                            <li><a href="../html/factura_venta.php" target="_blank">Ventas facturación</a></li>
                             <li><a href="../html/notasCredito.php" target="_blank">Notas de crédito</a></li>
                         </ul>
                     </li>
@@ -61,21 +59,6 @@ function menu_1() {
                     </li>
                     <li><a href="../html/registroGastos.php" target="_blank">Registro Gastos</a></li>
                     <li><a href="../html/gastos.php" target="_blank">Gastos Internos</a></li>
-                </ul>
-            </li>
-            
-           <li><a href="" target="_parent"><i class="icon-tasks"></i> Mantenimiento</a>
-                <ul>
-                    <li><a href="../html/registroEquipo.php" target="_blank">Registro Equipo</a></li>
-                    <li><a href="../html/repacionEquipo.php" target="_blank">Reparación</a></li>
-                    <li><a href="../html/entregaEquipos.php" target="_blank">Entrega</a></li>
-                    <li><a href="../html/restablecer.php" target="_blank">Restablecer</a></li>
-                    <li><a href="">Estado Equipos</a>
-                        <ul>
-                            <li><a href="../html/reparacionInterna.php" target="_blank">Reparación Interna</a></li>
-                            <li><a href="../html/reparacionExterna.php" target="_blank">Reparación Externa</a></li>
-                        </ul>
-                  </li>
                 </ul>
             </li>
             
@@ -153,14 +136,6 @@ function menu_1() {
                             <li><a href="" id="lista_proformas">Lista de Proformas</a></li>
                         </ul>
                   </li>  
-                  <li><a href="" target="_parent">Mantenimiento</a>
-                      <ul>
-                          <li><a href="" id="equipos_recibidos">Lista de Registo de Equipos</a></li>
-                          <li><a href="" id="equipos_reparados">Lista equipos Reparados</a></li>
-                          <li><a href="" id="equipos_en_reparacion">Lista equipos en Reparación</a></li>
-                          <li><a href="" id="equipos_entregados">Lista de Equipos Entregados</a></li>
-                      </ul>
-                  </li>
                   <li><a href="" target="_parent">Gastos</a>
                       <ul>
                         <li><a href="" id="gastos">Gastos por factura</a></li> 
@@ -168,8 +143,6 @@ function menu_1() {
                         <li><a href="" id="gastos_internos">Gastos Internos Fechas</a></li>         
                       </ul>
                   </li> 
-                  <li><a href="" id="orden_produccion">Ordenes de Producción</a></li>
-                  <li><a href="" id="ordenes_produccion_fechas">Ordenes de Producción Fechas</a></li>
                    <li><a href="" target="_parent">Autorizaciones</a>
                       <ul>
                           <li><a href="" id="autorizaciones_cliente">Autorizaciones CLientes</a></li>
@@ -187,19 +160,6 @@ function menu_1() {
                     <li><a href="../html/index.php">Salir</a></li>
                 </ul>
             </li>
-            
-            <li><a href="" target="_parent"><i class="icon-warning-sign"></i> Ayuda</a>
-                <ul class="mega-menu">
-                    <li>
-                        <!-- The mega drop down contents -->
-                        <div style="width:400px;max-width:100%;">
-                            <div style="padding:1px 10px;">
-                              <li><a href="../procesos/backup.php" id="">Respaldo de la base de datos</a></li>     
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-            </li>
         </ul>');
 }
 
@@ -215,7 +175,6 @@ function menu_2() {
                     <ul>
                           <li><a href="../html/categorias.php" target="_blank">Categorias</a></li>
                           <li><a href="../html/marcas.php" target="_blank">Marcas</a></li>
-                          <li><a href="../html/colores.php" target="_blank"">Colores</a></li>
                     </ul>
                     </li>
                 </ul>
@@ -225,7 +184,6 @@ function menu_2() {
                 <ul>
                     <li><a href="../html/inventario.php" target="_blank">Inventario</a></li>
                     <li><a href="../html/proformas.php" target="_blank">Proformas</a></li>
-                    <li><a href="../html/produccion.php" target="_blank">Ordenes Producción</a></li>
                     <li><a href="" target="_parent">Compras</a>
                         <ul>
                             <li><a href="../html/factura_compra.php" target="_blank">Productos Bodega</a></li>
@@ -234,7 +192,7 @@ function menu_2() {
                     </li>
                     <li><a href="" target="_parent">Ventas</a>
                         <ul>
-                            <li><a href="../html/factura_venta.php" target="_blank">Ventas facturacion</a></li>
+                            <li><a href="../html/factura_venta.php" target="_blank">Ventas facturación</a></li>
                             <li><a href="../html/notasCredito.php" target="_blank">Notas de crédito</a></li>
                         </ul>
                     </li>
@@ -338,14 +296,6 @@ function menu_2() {
                             <li><a href="" id="lista_proformas">Lista de Proformas</a></li>
                         </ul>
                    </li> 
-                  <li><a href="" target="_parent">Mantenimiento</a>
-                      <ul>
-                          <li><a href="" id="equipos_recibidos">Lista de Registo de Equipos</a></li>
-                          <li><a href="" id="equipos_reparados">Lista equipos Reparados</a></li>
-                          <li><a href="" id="equipos_en_reparacion">Lista equipos en Reparación</a></li>
-                          <li><a href="" id="equipos_entregados">Lista de Equipos Entregados</a></li>
-                      </ul>
-                  </li>
                   <li><a href="" target="_parent">Gastos</a>
                       <ul>
                         <li><a href="" id="gastos">Gastos por factura</a></li> 
@@ -353,8 +303,6 @@ function menu_2() {
                         <li><a href="" id="gastos_internos">Gastos Internos Fechas</a></li>         
                       </ul>
                   </li> 
-                  <li><a href="" id="orden_produccion">Ordenes de Producción</a></li>
-                  <li><a href="" id="ordenes_produccion_fechas">Ordenes de Producción Fechas</a></li>
                    <li><a href="" target="_parent">Autorizaciones</a>
                       <ul>
                           <li><a href="" id="autorizaciones_cliente">Autorizaciones CLientes</a></li>

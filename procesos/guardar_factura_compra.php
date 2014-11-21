@@ -76,20 +76,21 @@ if ($forma === "Credito") {
         $consulta2 = pg_query("select * from productos where cod_productos = '$arreglo1[$i]'");
         while ($row = pg_fetch_row($consulta2)) {
             $stock = $row[13];
-            $utilidad_mi = $row[7];
-            $utilidad_ma = $row[8];
+//            $utilidad_mi = $row[7];
+//            $utilidad_ma = $row[8];
         }
-        $total1 = ($arreglo3[$i] * $utilidad_mi) / 100;
-        $total2 = $arreglo3[$i] + $total1;
-        $utilidad_numero_mi = number_format($total2, 2, '.', '');
-
-        $total3 = ($arreglo3[$i] * $utilidad_ma) / 100;
-        $total4 = $arreglo3[$i] + $total3;
-        $utilidad_numero_ma = number_format($total4, 2, '.', '');
-
+//        
+//        $total1 = ($arreglo3[$i] * $utilidad_mi) / 100;
+//        $total2 = $arreglo3[$i] + $total1;
+//        $utilidad_numero_mi = number_format($total2, 2, '.', '');
+//
+//        $total3 = ($arreglo3[$i] * $utilidad_ma) / 100;
+//        $total4 = $arreglo3[$i] + $total3;
+//        $utilidad_numero_ma = number_format($total4, 2, '.', '');
+//
         $cal = $stock + $arreglo2[$i];
 
-        pg_query("Update productos Set precio_compra='" . $arreglo3[$i] . "', iva_minorista = '" . $utilidad_numero_mi . "', iva_mayorista = '" . $utilidad_numero_ma . "', stock='" . $cal . "' where cod_productos='" . $arreglo1[$i] . "'");
+        pg_query("Update productos Set precio_compra='" . $arreglo3[$i] . "', stock='" . $cal . "' where cod_productos='" . $arreglo1[$i] . "'");
         ////////////////////////////////////////////////////////
     }
 } else {
@@ -113,20 +114,20 @@ if ($forma === "Credito") {
             $consulta2 = pg_query("select * from productos where cod_productos = '$arreglo1[$i]'");
             while ($row = pg_fetch_row($consulta2)) {
                 $stock = $row[13];
-                $utilidad_mi = $row[7];
-                $utilidad_ma = $row[8];
+//                $utilidad_mi = $row[7];
+//                $utilidad_ma = $row[8];
             }
-            $total1 = ($arreglo3[$i] * $utilidad_mi) / 100;
-            $total2 = $arreglo3[$i] + $total1;
-            $utilidad_numero_mi = number_format($total2, 2, '.', '');
-
-            $total3 = ($arreglo3[$i] * $utilidad_ma) / 100;
-            $total4 = $arreglo3[$i] + $total3;
-            $utilidad_numero_ma = number_format($total4, 2, '.', '');
+//            $total1 = ($arreglo3[$i] * $utilidad_mi) / 100;
+//            $total2 = $arreglo3[$i] + $total1;
+//            $utilidad_numero_mi = number_format($total2, 2, '.', '');
+//
+//            $total3 = ($arreglo3[$i] * $utilidad_ma) / 100;
+//            $total4 = $arreglo3[$i] + $total3;
+//            $utilidad_numero_ma = number_format($total4, 2, '.', '');
 
             $cal = $stock + $arreglo2[$i];
 
-            pg_query("Update productos Set precio_compra='" . $arreglo3[$i] . "', iva_minorista = '" . $utilidad_numero_mi . "', iva_mayorista = '" . $utilidad_numero_ma . "', stock='" . $cal . "' where cod_productos='" . $arreglo1[$i] . "'");
+            pg_query("Update productos Set precio_compra='" . $arreglo3[$i] . "', stock='" . $cal . "' where cod_productos='" . $arreglo1[$i] . "'");
             ///////////////////////////////////////////
         }
     }

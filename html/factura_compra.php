@@ -221,7 +221,7 @@ $cont1++;
                                                                 <td><label>Precio:</label></td>
                                                                 <td><label>Descuento:</label></td>
                                                                 <td><label>Iva:</label></td>
-                                                                <td><label>Series:</label></td>
+                                                                <!--<td><label>Series:</label></td>-->
                                                             </tr>
 
                                                             <tr>
@@ -235,7 +235,7 @@ $cont1++;
                                                                         <option value="Si">Si</option> 
                                                                         <option value="No">No</option> 
                                                                     </select></td>
-                                                                <td><input type="button" class="btn btn-primary" id='btncargar' style="margin-top: -10px" value="Cargar"></td>
+                                                                <!--<td><input type="button" class="btn btn-primary" id='btncargar' style="margin-top: -10px" value="Cargar"></td>-->
                                                                 <td><input type="hidden" name="carga_series" id="carga_series" class="campo" style="width: 100px" maxlength="10"/></td>
                                                                 <td><input type="hidden" name="cod_producto" id="cod_producto" class="campo" style="width: 100px" maxlength="10"/></td>
                                                             </tr>

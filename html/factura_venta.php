@@ -46,9 +46,10 @@ $cont1++;
         <link href="../css/sm-core-css.css" rel="stylesheet" type="text/css" />
         <link href="../css/sm-blue/sm-blue.css" rel="stylesheet" type="text/css" />
 
+        <script type="text/javascript"src="../js/jquery-1.7.2.min.js"></script>
         <script type="text/javascript" src="../js/bootstrap.js"></script>
         <script type="text/javascript" src="../js/jquery-loader.js"></script>
-        <script type="text/javascript" src="../js/jquery-1.10.2.js"></script>
+        <!--<script type="text/javascript" src="../js/jquery-1.10.2.js"></script>-->
         <script type="text/javascript" src="../js/jquery-ui-1.10.4.custom.min.js"></script>
         <script type="text/javascript" src="../js/grid.locale-es.js"></script>
         <script type="text/javascript" src="../js/jquery.jqGrid.src.js"></script>
@@ -175,17 +176,6 @@ $cont1++;
 
                                                         <table cellpadding="2" style="margin-left: 10px">
                                                             <tr>
-                                                                <td><label for="autorizacion"  style="width: 100%">Autorización: </label></td>
-                                                                <td><input type="text" name="autorizacion" id="autorizacion" class="campo" maxlength="45"/></td>
-                                                                <td><label for="fecha_auto" style="margin-left: 10px">Fecha autorización:</label></td>
-                                                                <td><input type="text" name="fecha_auto" id="fecha_auto" class="campo" style="width: 120px; margin-left: 5px" value="<?php echo date("Y-m-d"); ?>" readonly /></td>
-                                                                <td><label for="fecha_caducidad" style="margin-left: 10px">Fecha caducidad:</label></td>
-                                                                <td><input type="text" name="fecha_caducidad" id="fecha_caducidad" class="campo" style="width: 120px; margin-left: 5px" value="<?php echo date("Y-m-d"); ?>" readonly /></td>
-                                                            </tr>
-                                                        </table>
-
-                                                        <table cellpadding="2" style="margin-left: 10px">
-                                                            <tr>
                                                                 <td><label for="formas"  style="width: 100%">Formas de Pago:</label></td>
                                                                 <td><select name="formas" id="formas">
                                                                         <option value="Contado">Contado</option>
@@ -195,9 +185,20 @@ $cont1++;
                                                                 <td><label for="adelanto" style="margin-left: 10px">Adelanto:</label></td>
                                                                 <td><input type="text" name="adelanto" id="adelanto" class="campo" placeholder="$0.00" style="width: 120px"/></td>
                                                                 <td><label for="meses" style="margin-left: 10px">Meses:</label></td>
-                                                                <td><input type="text" name="meses" id="meses"  class="campo" style="width: 100px"/></td>
+                                                                <td><input type="number" name="meses" id="meses"  class="campo" style="width: 100px" min="1" max="3"/></td>
                                                                 <td><label for="cuotas" style="margin-left: 10px">Cuotas:</label></td>
                                                                 <td><select id="cuotas" name="cuotas" style="width: 100px"></select></td>
+                                                            </tr>
+                                                        </table>
+
+                                                        <table cellpadding="2" style="display: none">
+                                                            <tr>
+                                                                <td><label for="autorizacion"  style="width: 100%">Autorización: </label></td>
+                                                                <td><input type="text" name="autorizacion" id="autorizacion" class="campo" maxlength="45"/></td>
+                                                                <td><label for="fecha_auto" style="margin-left: 10px">Fecha autorización:</label></td>
+                                                                <td><input type="text" name="fecha_auto" id="fecha_auto" class="campo" style="width: 120px; margin-left: 5px" value="<?php echo date("Y-m-d"); ?>" readonly /></td>
+                                                                <td><label for="fecha_caducidad" style="margin-left: 10px">Fecha caducidad:</label></td>
+                                                                <td><input type="text" name="fecha_caducidad" id="fecha_caducidad" class="campo" style="width: 120px; margin-left: 5px" value="<?php echo date("Y-m-d"); ?>" readonly /></td>
                                                             </tr>
                                                         </table>
 
@@ -218,9 +219,9 @@ $cont1++;
                                                                 <td><input type="text" name="producto" id="producto" class="campo" style="width: 200px"  placeholder="Buscar..."/></td>
                                                                 <td><input type="text" name="cantidad" id="cantidad" class="campo" style="width: 60px" maxlength="10"/></td>
                                                                 <td><input type="text" name="p_venta" id="p_venta" style="width: 60px" class="campo" maxlength="10"/></td>
-                                                                <td><input type="text" name="descuento" id="descuento" class="campo" readonly style="width: 60px" maxlength="10" placeholder="%" /></td>
+                                                                <td><input type="number" name="descuento" id="descuento" class="campo" readonly style="width: 60px" maxlength="10" placeholder="%" min="0" max="0" /></td>
                                                                 <td><input type="text" name="disponibles" id="disponibles" class="campo" readonly style="width: 60px" maxlength="10" value=""/></td>
-                                                                <td><input type="button" class="btn btn-primary" id='btncargar' style="margin-top: -10px" value="Cargar"></td>
+                                                                <!--<td><input type="button" class="btn btn-primary" id='btncargar' style="margin-top: -10px" value="Cargar"></td>-->
                                                                 <td><input type="hidden" name="iva_producto" id="iva_producto" class="campo" /></td>
                                                                 <td><input type="hidden" name="carga_series" id="carga_series" class="campo" /></td>
                                                                 <td><input type="hidden" name="cod_producto" id="cod_producto" class="campo" /></td>

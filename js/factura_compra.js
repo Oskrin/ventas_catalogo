@@ -153,11 +153,11 @@ function entrar() {
             } else {
                 if ($("#cantidad").val() === "") {
                     $("#cantidad").focus();
-                    alertify.alert("Ingrese una cantidad");
+//                    alertify.alert("Ingrese una cantidad");
                 } else {
                     if ($("#cantidad").val() === "0") {
                         $("#cantidad").focus();
-                        alertify.alert("Ingrese una cantidad");
+                        alertify.alert("Ingrese una cantidad válida");
                     } else {
                         $("#precio").focus();
                     }
@@ -182,11 +182,11 @@ function comprobar() {
             } else {
                 if ($("#cantidad").val() === "") {
                     $("#cantidad").focus();
-                    alertify.alert("Ingrese una cantidad");
+//                    alertify.alert("Ingrese una cantidad");
                 } else {
                     if ($("#cantidad").val() === "0") {
                         $("#cantidad").focus();
-                        alertify.alert("Ingrese una cantidad");
+                        alertify.alert("Ingrese una cantidad válida");
                     } else {
                         if ($("#precio").val() === "") {
                             $("#precio").focus();
