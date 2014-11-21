@@ -75,16 +75,14 @@ textarea {
 }
 
 .navbar-inner {
-    padding: 7px 0;
-    background: #3ABE19 !important;
-    -moz-border-radius: 0;
-    -webkit-border-radius: 0;
-    border-radius: 0;
+    padding: 20px 0;
+    background: url(../images/banner.fw.png)!important;
+   
 }
 
 .brand{
     background: rgba(25,25,25,0.2);
-    border-radius: 3px;
+    
 }
 
 .navbar-fixed-top {
@@ -218,11 +216,11 @@ textarea {
 .subnavbar .container > ul > li > a:hover {
     color: #888;
     text-decoration: none;
+    background: red!important;
 }
 
 .subnavbar .container > ul > li > a > i {
     display: inline-block;
-
     width: 24px;
     height: 24px;
     margin-top: 11px;
@@ -237,7 +235,7 @@ textarea {
 
 
 .subnavbar .container > ul > li.active > a {
-    border-bottom:3px solid #ff7f74;
+    
     color: #383838;
 }
 
@@ -249,12 +247,7 @@ textarea {
 
 .subnavbar .dropdown .dropdown-menu {
     text-align: left;
-    -webkit-border-top-left-radius: 0;
-    -webkit-border-top-right-radius: 0;
-    -moz-border-radius-topleft: 0;
-    -moz-border-radius-topright: 0;
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
+    
 }
 
 
@@ -1474,7 +1467,7 @@ table.fc-border-separate {
     width:auto;
 }
 #main-menu ul {
-    width:12em; /* fixed width only please - you can use the "subMenusMinWidth"/"subMenusMaxWidth" script options to override this if you like */
+    width:12em; /* fixed width only please - you can use the "importantinWidth"/"subMenusMaxWidth" script options to override this if you like */
 }
 @media (min-width: 1200px) {
     .navbar .search-query {

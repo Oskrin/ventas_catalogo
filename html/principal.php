@@ -87,7 +87,6 @@ include '../menus/menu.php';
                                     <style type="text/css">
                                         .aur{
                                             background: #222222;
-
                                         }
                                     </style>
                                     <div class="tabbable aur" id="centro" >
