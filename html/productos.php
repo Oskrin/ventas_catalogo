@@ -183,7 +183,7 @@ include '../menus/menu.php';
                                                                 </div>
                                                             </div>
 
-                                                            <div class="control-group">
+                                                            <div class="control-group" style="display: none">
                                                                 <label class="control-label" for="vendible">Vendible:</label>
                                                                 <div class="controls">
                                                                     <select name="vendible" id="vendible" class="campo" style="width: 200px">
