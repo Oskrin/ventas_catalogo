@@ -444,6 +444,7 @@ function inicio() {
                             if(nat == true){
                                 if (digitoVerificador != d10){                          
                                     alertify.error('El número de cédula es incorrecto.');
+                                    $("#ruc_ci").val("");
                                 }else{
                                     alertify.success('El número de cédula es correcto.');
                                 }
@@ -459,6 +460,7 @@ function inicio() {
                                     if(nat == true){
                                      if (digitoVerificador != d10){                          
                                       alertify.error('El ruc persona natural es incorrecto.');
+                                      $("#ruc_ci").val("");
                                       }else{
                                        alertify.success('El ruc persona natural es correcto.');    
                                       } 
@@ -467,7 +469,8 @@ function inicio() {
                                     if(digito3 == 6){ 
                                         if (pub==true){  
                                             if (digitoVerificador != d9){                          
-                                                alertify.error('El ruc público es incorrecto.');            
+                                                alertify.error('El ruc público es incorrecto.'); 
+                                                $("#ruc_ci").val("");
                                             }else{
                                                 alertify.success('El ruc público es correcto.'); 
                                             } 
@@ -477,6 +480,7 @@ function inicio() {
                                             if(pri == true){
                                                 if (digitoVerificador != d10){                          
                                                     alertify.error('El ruc privado es incorrecto.');
+                                                    $("#ruc_ci").val("");
                                                 }else{
                                                     alertify.success('El ruc privado es correcto.');      
                                                 } 

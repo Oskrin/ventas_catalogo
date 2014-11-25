@@ -51,22 +51,8 @@ for ($i = 0; $i <= $nelem; $i++) {
     //////////////guardar detalle_factura////////
     pg_query("insert into detalle_inventario values('$cont2','$cont1','$arreglo1[$i]','$arreglo2[$i]','$arreglo3[$i]','$arreglo4[$i]','$arreglo5[$i]','$arreglo6[$i]','Activo')");
     ////////////////////////////////////////////
-    //
-    //////////////modificar productos///////////
-    $consulta2 = pg_query("select * from productos where cod_productos = '$arreglo1[$i]'");
-    while ($row = pg_fetch_row($consulta2)) {
-        $utilidad_mi = $row[7];
-        $utilidad_ma = $row[8];
-    }
-    $total1 = ($arreglo2[$i] * $utilidad_mi) / 100;
-    $total2 = $arreglo2[$i] + $total1;
-    $total3 = ($arreglo2[$i] * $utilidad_ma) / 100;
-    $total4 = $arreglo2[$i] + $total3;
 
-    $format_numero = number_format($total2, 2, '.', '');
-    $format_numero2 = number_format($total4, 2, '.', '');
-
-    pg_query("Update productos Set precio_compra='" . $arreglo2[$i] . "', iva_minorista = '" . $format_numero . "' , iva_mayorista = '" . $format_numero2 . "' ,stock='" . $arreglo4[$i] . "' ,existencia='" . $arreglo4[$i] . "', diferencia='" . $arreglo6[$i] . "' where cod_productos='" . $arreglo1[$i] . "'");
+    pg_query("Update productos Set stock='" . $arreglo4[$i] . "' ,existencia='" . $arreglo4[$i] . "', diferencia='" . $arreglo6[$i] . "' where cod_productos='" . $arreglo1[$i] . "'");
     ///////////////////////////////////////////
 }
 $data = 1;

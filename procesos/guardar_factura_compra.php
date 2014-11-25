@@ -38,7 +38,7 @@ $forma = $_POST['formas'];
 ///////////////////////////////////////////
 
 if ($forma === "Credito") {
-   
+
     ///////contador pagos compra//////
     $cont2 = 0;
     $consulta = pg_query("select max(id_pagos_compra) from pagos_compra");
@@ -47,18 +47,16 @@ if ($forma === "Credito") {
     }
     $cont2++;
     ////////////////////////////////
-    
-     //variables pagos////
+    //variables pagos////
     $total = $_POST['tot'];
     ///////////////
-
     //////////////guardar pagos compra//////////
     pg_query("insert into pagos_compra values('$cont2','$_POST[id_proveedor]','$cont1','$_SESSION[id]','$_POST[fecha_actual]','0','0','$_POST[tipo_comprobante]','$total','$total','Activo'");
     ///////////////////////////////////////////
     //
     ////////////////guardar detalle compra/////
     for ($i = 0; $i <= $nelem; $i++) {
-        
+
         /////////////////contador detalle factura compra/////////////
         $cont4 = 0;
         $consulta = pg_query("select max(id_detalle_compra) from detalle_factura_compra");
@@ -67,7 +65,6 @@ if ($forma === "Credito") {
         }
         $cont4++;
         /////////////////////////////////////////////////////////
-
         ///guardar detalle_factura/////
         pg_query("insert into detalle_factura_compra values('$cont4','$cont1','$arreglo1[$i]','$arreglo2[$i]','$arreglo3[$i]','$arreglo4[$i]','$arreglo5[$i]','Activo')");
         ////////////////////////////////
@@ -76,18 +73,7 @@ if ($forma === "Credito") {
         $consulta2 = pg_query("select * from productos where cod_productos = '$arreglo1[$i]'");
         while ($row = pg_fetch_row($consulta2)) {
             $stock = $row[13];
-//            $utilidad_mi = $row[7];
-//            $utilidad_ma = $row[8];
         }
-//        
-//        $total1 = ($arreglo3[$i] * $utilidad_mi) / 100;
-//        $total2 = $arreglo3[$i] + $total1;
-//        $utilidad_numero_mi = number_format($total2, 2, '.', '');
-//
-//        $total3 = ($arreglo3[$i] * $utilidad_ma) / 100;
-//        $total4 = $arreglo3[$i] + $total3;
-//        $utilidad_numero_ma = number_format($total4, 2, '.', '');
-//
         $cal = $stock + $arreglo2[$i];
 
         pg_query("Update productos Set precio_compra='" . $arreglo3[$i] . "', stock='" . $cal . "' where cod_productos='" . $arreglo1[$i] . "'");
@@ -96,7 +82,7 @@ if ($forma === "Credito") {
 } else {
     if ($forma === "Contado") {
         for ($i = 0; $i <= $nelem; $i++) {
-            
+
             /////////////////contador detalle factura compra/////////////
             $cont6 = 0;
             $consulta = pg_query("select  max(id_detalle_compra) from detalle_factura_compra");
@@ -105,7 +91,6 @@ if ($forma === "Credito") {
             }
             $cont6++;
             /////////////////////////////////////////////////////////////
-
             //////////////guardar detalle_factura////////
             pg_query("insert into detalle_factura_compra values('$cont6','$cont1','$arreglo1[$i]','$arreglo2[$i]','$arreglo3[$i]','$arreglo4[$i]','$arreglo5[$i]','Activo')");
             ////////////////////////////////////////////
@@ -114,17 +99,7 @@ if ($forma === "Credito") {
             $consulta2 = pg_query("select * from productos where cod_productos = '$arreglo1[$i]'");
             while ($row = pg_fetch_row($consulta2)) {
                 $stock = $row[13];
-//                $utilidad_mi = $row[7];
-//                $utilidad_ma = $row[8];
             }
-//            $total1 = ($arreglo3[$i] * $utilidad_mi) / 100;
-//            $total2 = $arreglo3[$i] + $total1;
-//            $utilidad_numero_mi = number_format($total2, 2, '.', '');
-//
-//            $total3 = ($arreglo3[$i] * $utilidad_ma) / 100;
-//            $total4 = $arreglo3[$i] + $total3;
-//            $utilidad_numero_ma = number_format($total4, 2, '.', '');
-
             $cal = $stock + $arreglo2[$i];
 
             pg_query("Update productos Set precio_compra='" . $arreglo3[$i] . "', stock='" . $cal . "' where cod_productos='" . $arreglo1[$i] . "'");

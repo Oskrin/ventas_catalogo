@@ -447,12 +447,16 @@ function enter2(e) {
 
 function porcenta(){
     var resta = parseFloat($("#precio_minorista").val() - $("#precio_compra").val());
-    $("#utilidad_minorista").val(resta);   
+    var entero = resta * 100;
+    var val = Math.round(entero / parseFloat($("#precio_compra").val()));
+   $("#utilidad_minorista").val(val); 
 }
 
 function porcenta2(){
     var resta = parseFloat($("#precio_mayorista").val() - $("#precio_compra").val());
-    $("#utilidad_mayorista").val(resta);   
+    var entero = resta * 100;
+    var val = Math.round(entero / parseFloat($("#precio_compra").val()));
+    $("#utilidad_mayorista").val(val);    
 }
 
 function inicio() {
