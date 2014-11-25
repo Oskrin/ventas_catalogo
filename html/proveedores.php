@@ -163,7 +163,7 @@ include '../menus/menu.php';
                                                     <div class="control-group">											
                                                         <label class="control-label" for="ruc_ci">RUC/CI: <font color="red">*</font></label>
                                                         <div class="controls">
-                                                            <input type="text" name="ruc_ci"  id="ruc_ci" placeholder="10000000000" required class="campo" />
+                                                            <input type="text" name="ruc_ci"  id="ruc_ci" placeholder="10000000000" required class="campo"  />
                                                             <input type="hidden" name="id_proveedor"  id="id_proveedor" readonly class="campo" >
                                                         </div>	
                                                         <!--<div id="mensaje1" class="errores">Dame tu nombre</div>-->
@@ -172,7 +172,7 @@ include '../menus/menu.php';
                                                     <div class="control-group">											
                                                         <label class="control-label" for="representante_legal">Representante Legal: </label>
                                                         <div class="controls">
-                                                            <input type="text" name="representante_legal" id="representante_legal" placeholder="Representante Legal" required class="campo" />
+                                                            <input type="text" name="representante_legal" id="representante_legal" placeholder="Representante Legal" required class="campo"  />
                                                         </div>
                                                     </div>
 
