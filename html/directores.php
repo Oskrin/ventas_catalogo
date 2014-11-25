@@ -9,7 +9,7 @@ include '../menus/menu.php';
 <html lang="es">
     <head>
         <meta charset="utf-8">
-        <title>.:CLIENTES:.</title>
+        <title>.:DIRECTORES:.</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
         <meta name="apple-mobile-web-app-capable" content="yes"> 
         <link rel="stylesheet" type="text/css" href="../css/buttons.css"/>
@@ -36,7 +36,7 @@ include '../menus/menu.php';
         <script type="text/javascript" src="../js/jquery.jqGrid.src.js"></script>
         <script type="text/javascript" src="../js/buttons.js" ></script>
         <script type="text/javascript" src="../js/validCampoFranz.js" ></script>
-        <script type="text/javascript" src="../js/clientes.js"></script>
+        <script type="text/javascript" src="../js/directores.js"></script>
         <script type="text/javascript" src="../js/datosUser.js"></script>
         <script type="text/javascript" src="../js/ventana_reporte.js"></script>
         <script type="text/javascript" src="../js/guidely/guidely.min.js"></script>
@@ -81,30 +81,19 @@ include '../menus/menu.php';
                             <div class="widget ">
                                 <div class="widget-header">
                                     <i class="icon-user"></i>
-                                    <h3>CLIENTES</h3>
+                                    <h3>DIRECTOR@</h3>
                                 </div> <!-- /widget-header -->
 
                                 <div class="widget-content">
                                     <div class="tabbable">
                                         <fieldset>
-                                            <form class="form-horizontal" id="clientes_form" name="clientes_form" method="post">
+                                            <form class="form-horizontal" id="directores_form" name="directores_form" method="post">
                                                 <section class="columna1">
                                                     <div class="control-group">											
-                                                        <label class="control-label" for="tipo_docu">Tipo Documento: <font color="red">*</font></label>
-                                                        <div class="controls" >
-                                                            <select name="tipo_docu" id="tipo_docu" required class="campo">
-                                                                <option value="">......Seleccione......</option>
-                                                                <option value="Cedula">Cedula</option>
-                                                                <option value="Ruc">Ruc</option>
-                                                                <option value="Pasaporte">Pasaporte</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="control-group">											
-                                                        <label class="control-label" for="nombres_cli">Nombres Completos: <font color="red">*</font></label>
+                                                        <label class="control-label" for="ruc_ci">C.I.: <font color="red">*</font></label>
                                                         <div class="controls">
-                                                            <input type="text" name="nombres_cli"  id="nombres_cli" placeholder="Nombres y Apellidos" required class="campo"/>
+                                                            <input type="text" name="ruc_ci"  id="ruc_ci" placeholder="10000000000" required class="campo" maxlength="10">
+                                                            <input type="hidden" name="id_director"  id="id_director" readonly class="campo">
                                                         </div>
                                                     </div>
 
@@ -128,42 +117,13 @@ include '../menus/menu.php';
                                                             <input type="text" name="direccion_cli" id="direccion_cli" placeholder="Direccion cliente" required  class="campo"/>
                                                         </div>
                                                     </div>
-
-                                                    <div class="control-group">											
-                                                        <label class="control-label" for="cupo_credito">Cupo de Crédito: <font color="red">*</font></label>
-                                                        <div class="controls">
-                                                            <div class="input-prepend input-append">
-                                                                <span class="add-on">$</span>
-                                                                <input type="text" name="cupo_credito" id="cupo_credito" class="campo" style="width: 165px" />
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="control-group">
-                                                        <label class="control-label" for="notas_cli">Notas: </label>
-                                                        <div class="controls">
-                                                            <textarea name="notas_cli" id="notas_cli" rows="3" class="campo"></textarea>
-                                                        </div>
-                                                    </div>
                                                 </section>
 
                                                 <section class="columna2">
                                                     <div class="control-group">											
-                                                        <label class="control-label" for="ruc_ci">RUC/CI: <font color="red">*</font></label>
+                                                        <label class="control-label" for="nombres_cli">Nombres Completos: <font color="red">*</font></label>
                                                         <div class="controls">
-                                                            <input type="text" name="ruc_ci"  id="ruc_ci" placeholder="10000000000" required class="campo">
-                                                            <input type="hidden" name="id_cliente"  id="id_cliente" readonly class="campo">
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="control-group">
-                                                        <label class="control-label" for="tipo_cli">Tipo Cliente: <font color="red">*</font></label>
-                                                        <div class="controls">
-                                                            <select name="tipo_cli" id="tipo_cli" required class="campo">
-                                                                <option value="">......Seleccione......</option>
-                                                                <option value="natural">Natural</option>
-                                                                <option value="juridico">Juridico</option>
-                                                            </select>
+                                                            <input type="text" name="nombres_cli"  id="nombres_cli" placeholder="Nombres y Apellidos" required class="campo"/>
                                                         </div>
                                                     </div>
 
@@ -190,14 +150,6 @@ include '../menus/menu.php';
                                                             </div>
                                                         </div>
                                                     </div>
-
-                                                    <div class="control-group">
-                                                        <label class="control-label" for="directores">Director@: <font color="red">*</font></label>
-                                                        <div class="controls">
-                                                            <input type="text" name="directores" id="directores" required class="campo" placeholder="Buscar..." />
-                                                            <input type="hidden" name="id_director"  id="id_director" readonly class="campo">
-                                                        </div>
-                                                    </div>
                                                 </section>
                                             </form>
                                         </fieldset>
@@ -211,7 +163,7 @@ include '../menus/menu.php';
                                         </div>
 
 
-                                        <div id="clientes" title="Búsqueda de Clientes" class="">
+                                        <div id="directores" title="Búsqueda de Directores" class="">
                                             <table id="list"><tr><td></td></tr></table>
                                             <div id="pager"></div>
                                         </div>
@@ -230,7 +182,7 @@ include '../menus/menu.php';
                                         </div> 
 
                                         <div id="seguro">
-                                            <label>Esta seguro de eliminar al cliente</label>  
+                                            <label>Esta seguro de eliminar al director@</label>  
                                             <br />
                                             <button class="btn btn-primary" id='btnAceptar'><i class="icon-ok"></i> Aceptar</button>
                                             <button class="btn btn-primary" id='btnSalir'><i class="icon-remove-sign"></i> Cancelar</button>

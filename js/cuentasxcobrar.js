@@ -396,23 +396,17 @@ function limpiar_cuenta(){
 
 function punto(e){
  var key;
-if (window.event)
-{
+if (window.event) {
     key = e.keyCode;
 }
-else if (e.which)
-{
+else if (e.which) {
     key = e.which;
 }
 
-if (key < 48 || key > 57)
-{
-    if (key === 46 || key === 8)
-    {
+if (key < 48 || key > 57) {
+    if (key === 46 || key === 8)     {
         return true;
-    }
-    else
-    {
+    } else {
         return false;
     }
 }

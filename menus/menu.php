@@ -11,7 +11,7 @@ function menu_1() {
                 <ul>
                     <li><a href="../html/usuarios.php" target="_blank">Usuarios</a></li>
                     <li><a href="../html/empresa.php" target="_blank">Empresa</a></li>
-                    <li><a href="../html/director.php" target="_blank">Directora</a></li>
+                    <li><a href="../html/directores.php" target="_blank">Directores</a></li>
                     <li><a href="../html/clientes.php" target="_blank">Clientes</a></li>
                     <li><a href="../html/proveedores.php"target="_blank">Proveedores</a></li>
                     <li><a href="../html/productos.php" target="_blank">Productos</a></li>
