@@ -1,5 +1,5 @@
 /* Import "PT Sans Narrow" font from Google fonts */
-@import url(http://fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700);
+
 
 
 /*
@@ -15,19 +15,7 @@
 
 	.sm-blue {
 		background:#3193c0; /* Old browsers */
-		background-image:url(css-gradients-fallback/main-menu-bg.png);
-		background-image:-moz-linear-gradient(top,#4cb1e0 0%,#1675a1 100%);
-		background-image:-webkit-gradient(linear,left top,left bottom,color-stop(0%,#4cb1e0),color-stop(100%,#1675a1));
-		background-image:-webkit-linear-gradient(top,#4cb1e0 0%,#1675a1 100%);
-		background-image:-o-linear-gradient(top,#4cb1e0 0%,#1675a1 100%);
-		background-image:-ms-linear-gradient(top,#4cb1e0 0%,#1675a1 100%);
-		background-image:linear-gradient(top,#4cb1e0 0%,#1675a1 100%);
-		-moz-border-radius:8px;
-		-webkit-border-radius:8px;
-		border-radius:8px;
-		-moz-box-shadow:0 1px 1px rgba(0,0,0,0.3);
-		-webkit-box-shadow:0 1px 1px rgba(0,0,0,0.3);
-		box-shadow:0 1px 1px rgba(0,0,0,0.3);
+		background-image:url(css-gradients-fallback/main-menu-bg.png)!important;		
 	}
 	.sm-blue-vertical {
 		-moz-box-shadow:0 1px 4px rgba(0,0,0,0.3);
@@ -63,7 +51,7 @@
 		font-size:18px;
 		line-height:23px;
 		font-family:"PT Sans Narrow","Arial Narrow",Arial,Helvetica,sans-serif;
-		font-weight:bold;
+		
 		text-decoration:none;
 		text-shadow:0 1px 0 rgba(0,0,0,0.3);
 	}
