@@ -497,9 +497,9 @@ function inicio() {
                                 }
                             }else{
                                 if(numero.length === 13){
-                                    alertify.error('El ruc es incorrecto.');     
+                                    alertify.error('El ruc es incorrecto.');  
+                                    $("#ruc_ci").val("");
                                 }
-
                             }
                         }
                     }
