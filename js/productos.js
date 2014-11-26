@@ -335,6 +335,10 @@ function aceptar(){
         success: function(data) {
             var val = data;
             if (val == 1) {
+                alertify.alert("Error... El Producto tiene movimientos en el sistema",function(){
+                    location.reload();
+                });
+            }else{
                 alertify.alert("Producto Eliminado Correctamente",function(){
                     location.reload();
                 });
