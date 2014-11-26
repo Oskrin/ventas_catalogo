@@ -17,5 +17,7 @@ if ($cont == 0) {
 } else {
     $data = 1;
 }
+
+
 echo $data;
 ?>

@@ -241,9 +241,13 @@ function aceptar(){
         success: function(data) {
             var val = data;
             if (val == 1) {
-                alertify.alert("Cliente Eliminado Correctamente",function(){
+                alertify.alert("Error.. El Cliente tiene movimientos en el sistema",function(){
                     location.reload();
                 });
+            }else{
+               alertify.alert("Cliente Eliminado Correctamente",function(){
+                    location.reload();
+                }); 
             }
         }
     });  

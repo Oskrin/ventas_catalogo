@@ -4,7 +4,7 @@ session_start();
 include 'base.php';
 conectarse();
 $texto = $_GET['term'];
-$consulta = pg_query("select * from clientes where nombres_cli like '%$texto%'");
+$consulta = pg_query("select * from clientes where nombres_cli like '%$texto%' and estado='Activo'");
 while ($row = pg_fetch_row($consulta)) {
     $data[] = array(
         'value' => $row[3],

@@ -5,7 +5,7 @@ include 'base.php';
 conectarse();
 $texto2 = $_GET['term'];
 
-$consulta = pg_query("select * from clientes where tipo_documento = '$_GET[tipo_docu]' and identificacion like '%$texto2%'");
+$consulta = pg_query("select * from clientes where tipo_documento = '$_GET[tipo_docu]' and identificacion like '%$texto2%' and estado='Activo'");
 while ($row = pg_fetch_row($consulta)) {
     $data[] = array(
         'value' => $row[2],

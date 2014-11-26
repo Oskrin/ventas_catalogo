@@ -191,9 +191,13 @@ function aceptar(){
         success: function(data) {
             var val = data;
             if (val == 1) {
-                alertify.alert("Director@ Eliminado Correctamente",function(){
+                alertify.alert("Error... Director@ tiene movimientos en el sistema",function(){
                     location.reload();
                 });
+            }else{
+              alertify.alert("Director@ Eliminado Correctamente",function(){
+                    location.reload();
+                });  
             }
         }
     });  
@@ -342,6 +346,7 @@ function inicio() {
                         if(nat == true){
                             if (digitoVerificador != d10){                          
                                 alertify.error('El número de cédula es incorrecto.');
+                                $("#ruc_ci").val("");
                             }else{
                                 alertify.success('El número de cédula es correcto.');
                             }
