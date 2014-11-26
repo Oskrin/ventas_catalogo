@@ -408,6 +408,7 @@ function inicio() {
         ],
         rowNum: 10,
         width: 830,
+        height: 200,
         rowList: [10, 20, 30],
         pager: jQuery('#pager'),
         sortname: 'id_director',
