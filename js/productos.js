@@ -489,22 +489,20 @@ function inicio() {
     //////////////////////////  
     
     /////////////////verificar repetidos/////////////
-    $("#cod_prod").blur(function() {
-        if ($("#cod_prod").val().length > 0) {
-            $.ajax({
-                type: "POST",
-                url: "../procesos/comparar_codigo.php",
-                data: "codigo=" + $("#cod_prod").val(),
-                success: function(data) {
-                    var val = data;
-                    if (val == 1) {
-                        $("#cod_prod").val("");
-                        $("#cod_prod").focus();
-                        alertify.alert("Error... El código ya existe");
-                    }
+    $("#cod_prod").keyup(function() {
+        $.ajax({
+            type: "POST",
+            url: "../procesos/comparar_codigo.php",
+            data: "codigo=" + $("#cod_prod").val(),
+            success: function(data) {
+                var val = data;
+                if (val == 1) {
+                    $("#cod_prod").val("");
+                    $("#cod_prod").focus();
+                    alertify.error("Error... El código ya existe");
                 }
-            });
-        }
+            }
+        });
     });
     /////////////////////////////////////////////////
 
