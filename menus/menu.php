@@ -144,13 +144,6 @@ function menu_1() {
                         <li><a href="" id="gastos_internos">Gastos Internos Fechas</a></li>         
                       </ul>
                   </li> 
-                   <li><a href="" target="_parent">Autorizaciones</a>
-                      <ul>
-                          <li><a href="" id="autorizaciones_cliente">Autorizaciones CLientes</a></li>
-                          <li><a href="" id="autorizaciones_cliente_fechas">Autorizaciones entre fechas</a></li>
-                          <li><a href="" id="autorizaciones_cliente_caducidad">Autorizaciones por caducar</a></li>
-                      </ul>
-                  </li> 
                 </ul>
             </li>
            
@@ -302,13 +295,6 @@ function menu_2() {
                         <li><a href="" id="gastos">Gastos por factura</a></li> 
                         <li><a href="" id="gastos_general">Gastos general</a></li>         
                         <li><a href="" id="gastos_internos">Gastos Internos Fechas</a></li>         
-                      </ul>
-                  </li> 
-                   <li><a href="" target="_parent">Autorizaciones</a>
-                      <ul>
-                          <li><a href="" id="autorizaciones_cliente">Autorizaciones CLientes</a></li>
-                          <li><a href="" id="autorizaciones_cliente_fechas">Autorizaciones entre fechas</a></li>
-                          <li><a href="" id="autorizaciones_cliente_caducidad">Autorizaciones por caducar</a></li>
                       </ul>
                   </li> 
                 </ul>
