@@ -159,7 +159,6 @@ function entrar() {
             } else {
                 if ($("#cantidad").val() === "") {
                     $("#cantidad").focus();
-//                    alertify.alert("Ingrese una cantidad");
                 } else {
                     $("#p_venta").focus();
                 }
@@ -183,7 +182,6 @@ function entrar2() {
             } else {
                 if ($("#cantidad").val() === "") {
                     $("#cantidad").focus();
-//                    alertify.alert("Ingrese una cantidad");
                 } else {
                     if ($("#p_venta").val() === "") {
                         $("#p_venta").focus();
@@ -212,7 +210,6 @@ function entrar3() {
             } else {
                 if ($("#cantidad").val() === "") {
                     $("#cantidad").focus();
-//                    alertify.alert("Ingrese una cantidad");
                 } else {
                     if ($("#p_venta").val() === "") {
                         $("#p_venta").focus();
@@ -1738,10 +1735,11 @@ function inicio() {
                 $("#cod_producto").val(ui.item.cod_producto);
                 $("#des").val(ui.item.des);
                 $("#inventar").val(ui.item.inventar);
-                $("#descuento").spinner({
-                    min: 0, 
-                    max: $("#des").val()
-                    });
+                
+//                $("#descuento").spinner({
+//                    min: 0, 
+//                    max: $("#des").val()
+//                    });
                 return false;
                 }
 
@@ -1779,10 +1777,10 @@ function inicio() {
                     $("#cod_producto").val(ui.item.cod_producto);
                     $("#des").val(ui.item.des);
                     $("#inventar").val(ui.item.inventar);
-                    $("#descuento").spinner({
-                        min: 0, 
-                        max: $("#des").val()
-                        });
+//                    $("#descuento").spinner({
+//                        min: 0, 
+//                        max: $("#des").val()
+//                        });
                     return false;
                     }
                     }).data("ui-autocomplete")._renderItem = function(ul, item) {
@@ -1826,10 +1824,10 @@ function inicio() {
                 $("#cod_producto").val(ui.item.cod_producto);
                 $("#des").val(ui.item.des);
                 $("#inventar").val(ui.item.inventar);
-                $("#descuento").spinner({
-                    min: 0, 
-                    max: $("#des").val()
-                    });
+//                $("#descuento").spinner({
+//                    min: 0, 
+//                    max: $("#des").val()
+//                    });
                 return false;
                 }
 
@@ -1867,10 +1865,10 @@ function inicio() {
                     $("#cod_producto").val(ui.item.cod_producto);
                     $("#des").val(ui.item.des);
                     $("#inventar").val(ui.item.inventar);
-                    $("#descuento").spinner({
-                        min: 0, 
-                        max: $("#des").val()
-                        });
+//                    $("#descuento").spinner({
+//                        min: 0, 
+//                        max: $("#des").val()
+//                        });
                     return false;
                     }
 
