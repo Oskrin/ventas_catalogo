@@ -91,4 +91,11 @@ hr{
 	font-weight: normal;
 	/*border: solid 1px;*/
 	text-align: center;
+}           
+#footer { 
+	position: fixed; 
+	left: 0px; 
+	top: 950px; 
+	right: 0px; height: 200px;  	
 }
+            
