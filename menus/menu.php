@@ -65,6 +65,11 @@ function menu_1() {
             
             <li><a href="" target="_parent"><i class="icon-print"></i> Reportes</a>
                 <ul>
+                 <li><a href="" target="_parent">Directores</a>
+                        <ul>
+                            <li><a href="" id="total_director">Total Por Director</a></li>                            
+                        </ul>
+                   </li>
                     <li><a href="" target="_parent">Productos</a>
                         <ul>
                             <li><a href="" id="producto_general">Lista precios en general</a></li>
