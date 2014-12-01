@@ -14,6 +14,7 @@ function menu_1() {
                     <li><a href="../html/clientes.php" target="_blank">Clientes</a></li>
                     <li><a href="../html/proveedores.php"target="_blank">Proveedores</a></li>
                     <li><a href="../html/productos.php" target="_blank">Productos</a></li>
+                    <li><a href="../html/archivosExcel.php" target="_blank">Cargar Productos</a></li>
                     <li><a href="" target="_parent">Clasificacion</a>
                     <ul>
                           <li><a href="../html/categorias.php" target="_blank">Categorias</a></li>

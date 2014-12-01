@@ -12,7 +12,7 @@ if (!is_numeric($_POST[var5]) || !is_numeric($_POST[var6]) || !is_numeric($_POST
 } else {
 /////////////////comparar codigos/////////////////////
     $contt = 0;
-    $consulta = pg_query("select * from productos where codigo='$_POST[var]' or cod_barras = '$_POST[var1]' or articulo = '$_POST[var2]'");
+    $consulta = pg_query("select * from productos where codigo='$_POST[var]'");
     while ($row = pg_fetch_row($consulta)) {
         $contt++;
     }
@@ -29,12 +29,21 @@ if (!is_numeric($_POST[var5]) || !is_numeric($_POST[var6]) || !is_numeric($_POST
 ////////////////////////////////////////
 //
 /////////////////guardar productos///////
-        $valor = number_format($_POST[var5], 2, '.', '');
-        $precio_minorista = (($_POST[var5] * $_POST[var6] / 100) + $valor);
-        $precio_mayorista = (($_POST[var5] * $_POST[var7] / 100) + $valor);
-        pg_query("insert into productos values('$cont','$_POST[var]','$_POST[var1]','$_POST[var2]','$_POST[var3]','$_POST[var4]','$valor','$_POST[var6]','$_POST[var7]','$precio_minorista','$precio_mayorista','','','$_POST[var8]','$_POST[var9]','$_POST[var10]','$fecha','','','$_POST[var11]','Activo','$_POST[var12]','0','0','')");
+        if ($_POST[var1] == "null") {
+            $_POST[var1] = "";
+            $valor = number_format($_POST[var5], 2, '.', '');
+            $precio_minorista = (($_POST[var5] * $_POST[var6] / 100) + $valor);
+            $precio_mayorista = (($_POST[var5] * $_POST[var7] / 100) + $valor);
+            pg_query("insert into productos values('$cont','$_POST[var]','$_POST[var1]','$_POST[var2]','$_POST[var3]','$_POST[var4]','$valor','$_POST[var6]','$_POST[var7]','$precio_minorista','$precio_mayorista','','','$_POST[var8]','$_POST[var9]','$_POST[var10]','$fecha','','','$_POST[var11]','Activo','$_POST[var12]','0','0','')");
 ////////////////////////////////////////
-        $data = 1;
+            $data = 1;
+        } else {
+            $valor = number_format($_POST[var5], 2, '.', '');
+            $precio_minorista = (($_POST[var5] * $_POST[var6] / 100) + $valor);
+            $precio_mayorista = (($_POST[var5] * $_POST[var7] / 100) + $valor);
+            pg_query("insert into productos values('$cont','$_POST[var]','$_POST[var1]','$_POST[var2]','$_POST[var3]','$_POST[var4]','$valor','$_POST[var6]','$_POST[var7]','$precio_minorista','$precio_mayorista','','','$_POST[var8]','$_POST[var9]','$_POST[var10]','$fecha','','','$_POST[var11]','Activo','$_POST[var12]','0','0','')");
+            $data = 1;
+        }
     } else {
         $data = 2;
     }
