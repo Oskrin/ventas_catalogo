@@ -27,10 +27,6 @@ while ($row = pg_fetch_row($consulta)) {
     }
 }
 
-
-
-
-
 if ($cont == 1) {
     $data = 1;
 } else {
