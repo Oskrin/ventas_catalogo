@@ -219,7 +219,7 @@ $cont1++;
                                                                 <td><input type="text" name="producto" id="producto" class="campo" style="width: 200px"  placeholder="Buscar..."/></td>
                                                                 <td><input type="text" name="cantidad" id="cantidad" class="campo" style="width: 60px" maxlength="10"/></td>
                                                                 <td><input type="text" name="p_venta" id="p_venta" style="width: 60px" class="campo" maxlength="10"/></td>
-                                                                <td><input type="number" name="descuento" id="descuento" class="campo" style="width: 60px" maxlength="3" placeholder="%" min="1" readonly/></td>
+                                                                <td><input type="number" name="descuento" id="descuento" class="campo" style="width: 60px" maxlength="3" placeholder="%" min="0" readonly/></td>
                                                                 <td><input type="text" name="disponibles" id="disponibles" class="campo" readonly style="width: 60px" maxlength="10" value=""/></td>
                                                                 <!--<td><input type="button" class="btn btn-primary" id='btncargar' style="margin-top: -10px" value="Cargar"></td>-->
                                                                 <td><input type="hidden" name="iva_producto" id="iva_producto" class="campo" /></td>
