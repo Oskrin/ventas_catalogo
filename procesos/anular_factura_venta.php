@@ -27,8 +27,6 @@ for ($i = 0; $i <= $nelem; $i++) {
         $stock = $row[13];
     }
 
-    ///////////////////////////////////////////////
-    //
     //////////////modificar productos///////////
     $consulta2 = pg_query("select * from productos where cod_productos = '$arreglo1[$i]'");
     while ($row = pg_fetch_row($consulta2)) {
@@ -40,12 +38,12 @@ for ($i = 0; $i <= $nelem; $i++) {
     ///////////////////////////////////////////
     //
     ///////cambiar estados series/////////////
-    $consulta4 = pg_query("select * from serie_venta where cod_productos = '" . $arreglo1[$i] . "' and id_factura_venta = '$_POST[comprobante]'");
-    while ($row = pg_fetch_row($consulta4)) {
-        $series2 = $row[3];
-        pg_query("Update series_compra Set estado='Activo'  where cod_productos='" . $arreglo1[$i] . "' and serie = '$series2'");
-        pg_query("delete from serie_venta  where cod_productos='" . $arreglo1[$i] . "' and id_factura_venta='$_POST[comprobante]'");
-    }
+//    $consulta4 = pg_query("select * from serie_venta where cod_productos = '" . $arreglo1[$i] . "' and id_factura_venta = '$_POST[comprobante]'");
+//    while ($row = pg_fetch_row($consulta4)) {
+//        $series2 = $row[3];
+//        pg_query("Update series_compra Set estado='Activo'  where cod_productos='" . $arreglo1[$i] . "' and serie = '$series2'");
+//        pg_query("delete from serie_venta  where cod_productos='" . $arreglo1[$i] . "' and id_factura_venta='$_POST[comprobante]'");
+//    }
 }
 
 $data = 1;
