@@ -25,7 +25,7 @@ session_start();
     </div>';
     include '../../procesos/base.php';
     conectarse();   
-     $consulta=pg_query("select id_director,identificacion,nombres from director where id_director='$_GET[id]'");
+     $consulta=pg_query("select id_director, identificacion_dire ,nombres from directores where id_director='$_GET[id]'");
         while($row=pg_fetch_row($consulta)){ 
             $codigo.='<h2 style="font-weight: bold;font-size:12px;padding:5;margin:0px;border:solid 1px #000;color:blue;background:beige">DIRECTOR: '.$row[2].'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CI/RUC: '.$row[1].'</h2>';
         }
@@ -36,13 +36,13 @@ session_start();
     <td style="width:50px;text-align:left;">Nro Facturas</td>
     <td style="width:100px;text-align:center;">Total Factura</td></tr><hr></table>';
     $codigo.='<table border = 0>';
-    $sql = pg_query("select id_cliente,identificacion,nombres_cli from clientes where id_director = '$_GET[id]' order by id_cliente asc;");    
+    $sql = pg_query("select id_cliente, identificacion, nombres_cli from clientes where id_director = '$_GET[id]' order by id_cliente asc;");    
     $cont1 = 0;
     $cont2 = 0;
     while($row = pg_fetch_row($sql)){
         $temp = 0;
         $temp1 = 0;
-        $sql1 = pg_query("select count(id_factura_venta) as contador, SUM(total_venta::float) as total_venta from factura_venta where id_cliente ='$row[0]'");
+        $sql1 = pg_query("select count(id_factura_venta) as contador, SUM(total_venta::float) as total_venta from factura_venta where id_cliente ='$row[0]' and estado ='Activo'");
         while($row1 = pg_fetch_row($sql1)){
             $temp = $row1[0];            
             if($row1[1] == ""){

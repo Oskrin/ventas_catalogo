@@ -9,7 +9,7 @@ session_start();
           </style>
     </head> 
     <body>
-        <header style="height:205px;border:solid 0px;">            
+        <header style="height:170px;border:solid 0px;">            
             <div id="me">
                 
             </div>        
@@ -43,20 +43,21 @@ session_start();
         </tr>';        
         $codigo.='</table>';                                     
     }
-    $sql = pg_query("select detalle_factura_venta.cantidad,productos.articulo,detalle_factura_venta.precio_venta,detalle_factura_venta.total_venta from factura_venta,detalle_factura_venta,productos where factura_venta.id_factura_venta=detalle_factura_venta.id_factura_venta and detalle_factura_venta.cod_productos=productos.cod_productos and detalle_factura_venta.id_factura_venta='$_GET[id]'");
-    $codigo.='<br /><br /><br /> <br /><table border=0>';
+    $sql = pg_query("select detalle_factura_venta.cantidad,productos.articulo,detalle_factura_venta.precio_venta,detalle_factura_venta.total_venta,codigo from factura_venta,detalle_factura_venta,productos where factura_venta.id_factura_venta=detalle_factura_venta.id_factura_venta and detalle_factura_venta.cod_productos=productos.cod_productos and detalle_factura_venta.id_factura_venta='$_GET[id]'");
+    $codigo.='<br /><br /><br /> <br /><br /><table border=0>';
     while($row=pg_fetch_row($sql)){ 
         $codigo.='<tr>                
             <td style="width:90px;text-align:center;height:19px;font-size:10px;">'.$row[0].'</td> 
-            <td style="width:440px;height:19px;font-size:10px;">'.$row[1].'</td>             
-            <td style="width:110px;text-align:center;height:19px;font-size:10px;">'.$row[2].'</td> 
-            <td style="width:100px;text-align:center;height:19px;font-size:10px;">'.$row[3].'</td> 
+            <td style="width:400px;height:19px;font-size:10px;">'.$row[4].' '. $row[1].'</td>             
+		<td style="width:40px;height:19px;font-size:10px;">'.$row[2].'</td>             
+            <td style="width:110px;text-align:center;height:19px;font-size:10px;">'.(number_format(($row[3] / 1.12),2,',','.')).'</td> 
+            <td style="width:100px;text-align:center;height:19px;font-size:10px;">'.(number_format(($row[3] / 1.12) * $row[0],2,',','.')) .'</td> 
         </tr>';
                                        
     }    
     $codigo.='</table>';
 
-    $sql = pg_query("select factura_venta.descuento_venta,factura_venta.tarifa0,factura_venta.tarifa12,factura_venta.iva_venta,factura_venta.total_venta from factura_venta,detalle_factura_venta,productos where factura_venta.id_factura_venta=detalle_factura_venta.id_factura_venta and detalle_factura_venta.cod_productos=productos.cod_productos and detalle_factura_venta.id_factura_venta='$_GET[id]'");      
+    $sql = pg_query("select factura_venta.descuento_venta,factura_venta.tarifa0,factura_venta.tarifa12,factura_venta.iva_venta,factura_venta.total_venta from factura_venta where factura_venta.id_factura_venta='$_GET[id]'");      
     $codigo.='<div id="footer">';
     $codigo.='<table border=0">';    
     while($row=pg_fetch_row($sql)){ 
