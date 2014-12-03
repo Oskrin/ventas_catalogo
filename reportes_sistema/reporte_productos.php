@@ -20,6 +20,7 @@ session_start();
     <div id="linea">
         <h3>LISTA DE PRODUCTOS EN EXISTENCIA MÍNIMA</h3>
     </div>';
+<<<<<<< HEAD
     include '../procesos/base.php';
     conectarse();    
     $total=0;
@@ -27,12 +28,20 @@ session_start();
     $sql=pg_query("select codigo,cod_barras,articulo,iva_minorista,iva_mayorista,stock from productos");
     $codigo.='<table border=0>';
     $codigo.='<tr style="font-weight:bold;">                
+=======
+include '../procesos/base.php';
+conectarse();
+
+$codigo.='<table border=0>';
+$codigo.='<tr style="font-weight:bold;">                
+>>>>>>> origin/master
     <td style="width:180px;text-align:center;">Código</td>
     <td style="width:300px;text-align:center;">Producto</td>
     <td style="width:100px;text-align:center;">Precio Minorista</td>
     <td style="width:100px;text-align:center;">Precio Mayorista</td>
     <td style="width:60px;text-align:center;">Stock</td>
     </tr>
+<<<<<<< HEAD
     <tr><td colspan=6><hr></td></tr>';
     while($row=pg_fetch_row($sql)){          
         $codigo.='<tr style="font-size:10px;">                
@@ -46,6 +55,23 @@ session_start();
     $codigo.='</table>';
     $codigo.='</body></html>';                           
     $codigo=utf8_decode($codigo);
+=======
+    <tr><td colspan=6><hr></td></tr></table>';
+    $sql = pg_query("select codigo,cod_barras,articulo,iva_minorista,iva_mayorista,stock from productos");    
+while ($row = pg_fetch_row($sql)) {
+    $codigo.='<table border=0>';
+    $codigo.='<tr style="font-size:10px;">                
+        <td style="width:180px;text-align:left;">' . $row[0] . '</td>
+        <td style="width:300px;text-align:left;">' . $row[2] . '</td>
+        <td style="width:100px;text-align:center;">' . $row[3] . '</td>
+        <td style="width:100px;text-align:center;">' . $row[4] . '</td>
+        <td style="width:60px;text-align:center;">' . $row[5] . '</td>
+        </tr>';
+        $codigo.='</table>';
+}
+$codigo.='</body></html>';
+$codigo = utf8_decode($codigo);
+>>>>>>> origin/master
 
     $dompdf= new DOMPDF();
     $dompdf->load_html($codigo);
