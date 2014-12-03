@@ -290,8 +290,8 @@ function flecha_atras(){
                 });
                 ///////////////////////////////////////////////////   
 
-                ////////////////////llamar facturas flechas tercera parte/////
-                $.getJSON('../procesos/retornar_proforma_venta2.php?com=' + valor, function(data) {
+                ////////////////////llamar inventario segunda parte/////
+                $.getJSON('../procesos/retornar_inventario2.php?com=' + valor, function(data) {
                     var tama = data.length;
                     if (tama !== 0) {
                         for (var i = 0; i < tama; i = i + 8)
@@ -299,12 +299,12 @@ function flecha_atras(){
                             var datarow = {
                                 cod_producto: data[i], 
                                 codigo: data[i + 1], 
-                                detalle: data[i + 2], 
-                                cantidad: data[i + 3], 
-                                precio_u: data[i + 4], 
-                                descuento: data[i + 5], 
-                                total: data[i + 6], 
-                                iva: data[i + 7]
+                                nombre_producto: data[i + 2], 
+                                precio_compra: data[i + 3], 
+                                precio_venta: data[i + 4], 
+                                stock: data[i + 5], 
+                                existencia: data[i + 6], 
+                                diferencia: data[i + 7]
                                 };
                             var su = jQuery("#list").jqGrid('addRowData', data[i], datarow);
                         }
@@ -316,6 +316,63 @@ function flecha_atras(){
        }
    }); 
 } 
+
+function flecha_siguiente(){
+   $.ajax({
+       type: "POST",
+       url: "../procesos/flechas.php",
+       data: "comprobante=" + $("#comprobante").val() + "&tabla=" + "inventario" + "&id_tabla=" + "id_inventario" + "&tipo=" + 2,
+       success: function(data) {
+           var val = data;
+           if(val != ""){
+                $("#comprobante").val(val);
+                var valor = $("#comprobante").val();
+                
+                ///////////////////llamar inventario primera parte/////
+                $("#btnGuardar").attr("disabled", true);
+                $("#codigo").attr("disabled", "disabled");
+                $("#producto").attr("disabled", "disabled");
+                $("#cantidad").attr("disabled", "disabled");
+                $("#list").jqGrid("clearGridData", true);
+  
+                $.getJSON('../procesos/retornar_inventario.php?com=' + valor, function(data) {
+                    var tama = data.length;
+                    if (tama !== 0) {
+                        for (var i = 0; i < tama; i = i + 4) {
+                            $("#fecha_actual").val(data[i]);
+                            $("#hora_actual").val(data[i + 1 ]);
+                            $("#digitador").val(data[i + 2 ] + " " + data[i + 3 ]);
+                        }
+                    }
+                });
+                ///////////////////////////////////////////////////   
+
+                ////////////////////llamar inventario segunda parte/////
+                $.getJSON('../procesos/retornar_inventario2.php?com=' + valor, function(data) {
+                    var tama = data.length;
+                    if (tama !== 0) {
+                        for (var i = 0; i < tama; i = i + 8)
+                        {
+                            var datarow = {
+                                cod_producto: data[i], 
+                                codigo: data[i + 1], 
+                                nombre_producto: data[i + 2], 
+                                precio_compra: data[i + 3], 
+                                precio_venta: data[i + 4], 
+                                stock: data[i + 5], 
+                                existencia: data[i + 6], 
+                                diferencia: data[i + 7]
+                                };
+                            var su = jQuery("#list").jqGrid('addRowData', data[i], datarow);
+                        }
+                    }
+                });
+           }else{
+               alertify.alert("No hay mas registros posteriores!!");
+           }
+       }
+   }); 
+}
 
 function nuevo(){
  location.reload();   
@@ -365,17 +422,26 @@ function inicio() {
     $("#btnGuardar").click(function(e) {
         e.preventDefault();
     });
-    $("#btnModificar").click(function(e) {
-        e.preventDefault();
-    });
-    $("#btnCancelar").click(function(e) {
-        e.preventDefault();
-    });
     $("#btnBuscar").click(function(e) {
         e.preventDefault();
     });
     $("#btnNuevo").click(function(e) {
         e.preventDefault();
+    });
+    $("#btnImprimir").click(function (){
+        $.ajax({
+        type: "POST",
+        url: "../procesos/validacion.php",
+        data: "comprobante=" + $("#comprobante").val() + "&tabla=" + "inventario" + "&id_tabla=" + "id_inventario" + "&tipo=" + 1,
+        success: function(data) {
+            var val = data;
+            if(val != "") {
+                window.open("../reportes/reportes/reporte_inventario.php?hoja=A4&id="+$("#comprobante").val(),'_blank');  
+            } else {
+              alertify.alert("Inventario no creado!!");
+            }   
+        }
+        });
     });
     $("#btnAtras").click(function(e) {
         e.preventDefault();
@@ -387,7 +453,7 @@ function inicio() {
     $("#btnGuardar").on("click", guardar_inventario);
     $("#btnNuevo").on("click", nuevo);
     $("#btnAtras").on("click", flecha_atras);
-//    $("#btnAdelante").on("click", flecha_siguiente);
+    $("#btnAdelante").on("click", flecha_siguiente);
     //////////////////////
     
     //////inmput////////
@@ -433,7 +499,6 @@ function inicio() {
         .append("<a>" + item.value + "</a>")
         .appendTo(ul);
     };
-
     //////////////////////////////
     
     /////buscador productos articulo///// 

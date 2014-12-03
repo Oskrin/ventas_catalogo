@@ -13,7 +13,6 @@ while ($row = pg_fetch_row($consulta)) {
     $arr_data[] = $row[1];
     $arr_data[] = $row[2];
     $arr_data[] = $row[3];
-   
 }
 echo json_encode($arr_data);
 ?>
