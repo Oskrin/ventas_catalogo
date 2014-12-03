@@ -48,8 +48,11 @@ $codigo.='<td style="width:100px;text-align:center;border:solid 1px;">Código</t
     <td style="width:80px;text-align:center;border:solid 1px;">Stock</td>
     <td style="width:80px;text-align:center;border:solid 1px;">Existencia</td>
     <td style="width:80px;text-align:center;border:solid 1px;">Diferencia</td>';
-
+$total1 = 0;
+$total2 = 0;
 while ($row = pg_fetch_row($sql2)) {
+    $total1 = $total1 + $row[3];
+    $total2 = $total2 + $row[4];
     $codigo.='<tr>
         <td style="width:100px;text-align:center;">' . $row[1] . '</td>   
         <td style="width:200px;text-align:left;">' . $row[2] . '</td>   
@@ -60,8 +63,16 @@ while ($row = pg_fetch_row($sql2)) {
         <td style="width:80px;text-align:center;">' . $row[7] . '</td>    
         </tr>';
 }
-
+$codigo.='<tr><hr></tr>';
 $codigo.='</table>';
+$codigo.='<table><tr>
+    <td style="width:280px;text-align:center;">Totales:</td>   
+    <td style="width:140px;text-align:center;">'.$total1.'</td>    
+    <td style="width:60px;text-align:center;">'.$total2.'</td>    
+</tr>';
+$codigo.='</table>';
+
+
 
 $codigo.='</body></html>';
 $codigo = utf8_decode($codigo);

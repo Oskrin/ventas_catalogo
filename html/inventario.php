@@ -40,8 +40,9 @@ $cont1++;
         <link href="../css/sm-core-css.css" rel="stylesheet" type="text/css" />
         <link href="../css/sm-blue/sm-blue.css" rel="stylesheet" type="text/css" />
 
+        <script type="text/javascript"src="../js/jquery-1.7.2.min.js"></script>
         <script type="text/javascript" src="../js/bootstrap.js"></script>
-        <script type="text/javascript" src="../js/jquery-1.10.2.js"></script>
+        <!--<script type="text/javascript" src="../js/jquery-1.10.2.js"></script>-->
         <script type="text/javascript" src="../js/jquery-ui-1.10.4.custom.min.js"></script>
         <script type="text/javascript" src="../js/grid.locale-es.js"></script>
         <script type="text/javascript" src="../js/jquery.jqGrid.src.js"></script>
@@ -168,8 +169,15 @@ $cont1++;
 
                                                         <div style="margin-left: 10px" id="grid_container">
                                                             <table id="list"></table>
-                                                            <div id="pager"></div>   
+                                                            <!--<div id="pager"></div>-->   
                                                         </div> 
+                                                        <table border="0" cellspacing="2" style="margin-left: 560px">
+                                                            <tr>
+                                                                <td><label for="total_p" style="width: 100%">Totales:</label></td>
+                                                                <td><input type="text" style="width:80px" name="total_costo" id="total_costo" readonly value="0.00" class="campo"/></td>
+                                                                <td><input type="text" style="width:80px" name="total_venta" id="total_venta" readonly value="0.00" class="campo"/></td>
+                                                            </tr>    
+                                                        </table> 
                                                     </fieldset> 
                                                 </form>
 
