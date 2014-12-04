@@ -1,17 +1,18 @@
 body {
     background: #f9f6f1;
     font: 13px/1.7em 'Open Sans';
+    font-family:Helvetica,Futura,Arial,Verdana,sans-serif;  
 }
 
 p { 
-    font: 13px/1.7em 'Open Sans'; 	
+    font-family:Helvetica,Futura,Arial,Verdana,sans-serif;
 }
 
 input,
 button,
 select,
 textarea {
-    font-family: 'Open Sans';
+    font-family:Helvetica,Futura,Arial,Verdana,sans-serif;
 }
 
 .custom-combobox {
@@ -77,7 +78,7 @@ textarea {
 .navbar-inner {
     padding: 20px 0;
     background: url(../images/banner.fw.png)!important;
-   
+
 }
 
 .brand{
@@ -234,7 +235,7 @@ textarea {
 
 
 .subnavbar .container > ul > li.active > a {
-    
+
     color: #383838;
 }
 
@@ -246,7 +247,7 @@ textarea {
 
 .subnavbar .dropdown .dropdown-menu {
     text-align: left;
-    
+
 }
 
 
@@ -1476,19 +1477,19 @@ table.fc-border-separate {
 
 /*validaciones*/
 .invalid {
-  color: red;
+    color: red;
 }
 
 .color_blue {
-  color: blue;
+    color: blue;
 }
 
 code {
-  white-space: pre-wrap;
-  background-color: #eee;
-  display: block;
-  padding: 0 10px;
-  margin: 10px;
+    white-space: pre-wrap;
+    background-color: #eee;
+    display: block;
+    padding: 0 10px;
+    margin: 10px;
 }
 
 
