@@ -23,6 +23,8 @@ session_start();
         $codigo.='<table border=0>';
         $codigo.='<tr>                
             <td style="width:105px;text-align:center;font-size:8px;height:25px;">&nbsp;</td>                
+            <td style="width:300px;font-size:10px;">'.$row[8].'</td>            
+            <td style="width:55px;text-align:center;font-size:10px;height:25px;">DIR:</td>                
             <td style="width:640px;font-size:10px;">'.$row[8].'</td>            
         </tr>';        
         $codigo.='</table>';             
