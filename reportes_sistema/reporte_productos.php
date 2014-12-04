@@ -20,11 +20,11 @@ $codigo = '<html>
     </header>        
     <hr>
     <div id="linea">
-        <h3>LISTA DE PRODUCTOS EN GENERAL</h3>
+        <h3>LISTA DE PRODUCTOS EN EXISTENCIA MÍNIMA</h3>
     </div>';
 include '../procesos/base.php';
-conectarse();
 
+$sql = pg_query("select codigo,cod_barras,articulo,iva_minorista,iva_mayorista,stock from productos");
 $codigo.='<table border=0>';
 $codigo.='<tr style="font-weight:bold;">                
     <td style="width:180px;text-align:center;">Código</td>
@@ -33,10 +33,8 @@ $codigo.='<tr style="font-weight:bold;">
     <td style="width:100px;text-align:center;">Precio Mayorista</td>
     <td style="width:60px;text-align:center;">Stock</td>
     </tr>
-    <tr><td colspan=6><hr></td></tr></table>';
-    $sql = pg_query("select codigo,cod_barras,articulo,iva_minorista,iva_mayorista,stock from productos");    
+    <tr><td colspan=6><hr></td></tr>';
 while ($row = pg_fetch_row($sql)) {
-    $codigo.='<table border=0>';
     $codigo.='<tr style="font-size:10px;">                
         <td style="width:180px;text-align:left;">' . $row[0] . '</td>
         <td style="width:300px;text-align:left;">' . $row[2] . '</td>
@@ -44,8 +42,8 @@ while ($row = pg_fetch_row($sql)) {
         <td style="width:100px;text-align:center;">' . $row[4] . '</td>
         <td style="width:60px;text-align:center;">' . $row[5] . '</td>
         </tr>';
-        $codigo.='</table>';
 }
+$codigo.='</table>';
 $codigo.='</body></html>';
 $codigo = utf8_decode($codigo);
 

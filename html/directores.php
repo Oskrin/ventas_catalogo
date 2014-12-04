@@ -123,7 +123,7 @@ include '../menus/menu.php';
                                                     <div class="control-group">											
                                                         <label class="control-label" for="nombres_cli">Nombres Completos: <font color="red">*</font></label>
                                                         <div class="controls">
-                                                            <input type="text" name="nombres_cli"  id="nombres_cli" placeholder="Nombres y Apellidos" required class="campo"/>
+                                                            <input type="text" name="nombres_cli"  id="nombres_cli" placeholder="Nombres y Apellidos" style="margin-left: " required class="campo"/>
                                                         </div>
                                                     </div>
 
