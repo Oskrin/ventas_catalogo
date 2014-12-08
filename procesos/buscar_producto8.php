@@ -13,6 +13,7 @@ while ($row = pg_fetch_row($consulta)) {
             'value' => $row[3],
             'codigo' => $row[1],
             'p_venta' => $row[9],
+            'descuento' => $row[19],
             'iva_producto' => $row[4],
             'cod_producto' => $row[0]
         );
@@ -22,6 +23,7 @@ while ($row = pg_fetch_row($consulta)) {
                 'value' => $row[3],
                 'codigo' => $row[1],
                 'p_venta' => $row[10],
+                'descuento' => $row[19],
                 'iva_producto' => $row[4],
                 'cod_producto' => $row[0]
             );

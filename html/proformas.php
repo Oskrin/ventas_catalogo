@@ -104,7 +104,7 @@ $cont1++;
                                                     <fieldset>
                                                         <section class="columna_1">
                                                             <div class="control-group">											
-                                                                <label class="control-label" for="nombres_cli">Comprobante:</label>
+                                                                <label class="control-label" for="comprobante">Comprobante:</label>
                                                                 <div class="controls">
                                                                     <input type="text" name="comprobante" id="comprobante" readonly class="campo" value="<?php echo $cont1 ?>" style="width: 80px"/>
                                                                 </div>
@@ -113,7 +113,7 @@ $cont1++;
 
                                                         <section class="columna_2">
                                                             <div class="control-group">											
-                                                                <label class="control-label" for="nombres_cli">Fecha Actual:</label>
+                                                                <label class="control-label" for="fecha_actual">Fecha Actual:</label>
                                                                 <div class="controls">
                                                                     <input type="text" name="fecha_actual" id="fecha_actual" readonly value="<?php echo date("Y-m-d"); ?>" class="campo" style="width: 100px" />
                                                                 </div>
@@ -122,7 +122,7 @@ $cont1++;
 
                                                         <section class="columna_3">
                                                             <div class="control-group">											
-                                                                <label class="control-label" for="nombres_cli">Hora Actual:</label>
+                                                                <label class="control-label" for="hora_actual">Hora Actual:</label>
                                                                 <div class="controls">
                                                                     <input type="text" name="hora_actual" id="hora_actual" readonly class="campo" style="width: 100px"/>
                                                                 </div>
@@ -131,7 +131,7 @@ $cont1++;
 
                                                         <section class="columna_4">
                                                             <div class="control-group">											
-                                                                <label class="control-label" for="nombres_cli"> Digitad@r:</label>
+                                                                <label class="control-label" for="digitador"> Digitad@r:</label>
                                                                 <div class="controls">
                                                                     <input type="text" name="digitador" id="digitador" value="<?php echo $_SESSION['nombres'] ?>" class="campo" style="width: 200px" readonly/>
                                                                 </div>
@@ -197,7 +197,7 @@ $cont1++;
                                                                 <td><input type="text" name="producto" id="producto" class="campo" style="width: 200px"  placeholder="Buscar..."/></td>
                                                                 <td><input type="text" name="cantidad" id="cantidad" class="campo" style="width: 60px" maxlength="10"/></td>
                                                                 <td><input type="text" name="p_venta" id="p_venta" style="width: 60px" class="campo" maxlength="10"/></td>
-                                                                <td><input type="text" name="descuento" id="descuento" class="campo" style="width: 60px" maxlength="10" value="" placeholder="%"/></td>
+                                                                <td><input type="text" name="descuento" id="descuento" class="campo" style="width: 60px" maxlength="10" value="" placeholder="%" readonly/></td>
                                                                 <td><input type="hidden" name="cod_producto" id="cod_producto" class="campo" style="width: 100px"/></td>
                                                                 <td><input type="hidden" name="iva_producto" id="iva_producto" class="campo" style="width: 100px" /></td>
                                                             </tr>
