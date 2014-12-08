@@ -2212,18 +2212,17 @@ function inicio() {
                         var dd = fil[t];
                         if (dd['iva'] === "Si") {
                             subtotal = (subtotal + parseFloat(dd['total']));
-                            var sub = parseFloat(subtotal).toFixed(2);
-
+                            iva = parseFloat((subtotal / 1.12)).toFixed(2);
+                            var sub = (parseFloat(subtotal) - parseFloat(iva)).toFixed(2);                                    
                             mu = (dd['cantidad'] * dd['precio_u']).toFixed(2);
                             des = ((mu * dd['descuento'])/100).toFixed(2);
                             descu = (parseFloat(descu) + parseFloat(des)).toFixed(2);
+                            t_fc = ((parseFloat(sub) + parseFloat(iva)) + parseFloat($("#total_p").val())).toFixed(2);
                             $("#iva_producto").val("");
                         }
                     }
-                    iva = ((subtotal * 12) / 100).toFixed(2);
-                    t_fc = ((parseFloat(subtotal) + parseFloat(iva)) + parseFloat($("#total_p").val())).toFixed(2);
-                    $("#total_p2").val(sub);
-                    $("#iva").val(iva);
+                    $("#total_p2").val(iva);
+                    $("#iva").val(sub);
                     $("#desc").val(descu);
                     $("#tot").val(t_fc);
                }else{
@@ -2269,17 +2268,15 @@ function inicio() {
                         dd = fil[t];
                         if (dd['iva'] === "Si") {
                             subtotal = (subtotal + parseFloat(dd['total']));
-                            sub = parseFloat(subtotal).toFixed(2);
-
+                            iva =  parseFloat((subtotal / 1.12)).toFixed(2);
+                            sub = (parseFloat(subtotal) - parseFloat(iva)).toFixed(2);
                             mu = (dd['cantidad'] * dd['precio_u']).toFixed(2);
                             des = ((mu * dd['descuento'])/100).toFixed(2);
                             descu = (parseFloat(descu) + parseFloat(des)).toFixed(2);
+                            t_fc = ((parseFloat(sub) + parseFloat(iva)) + parseFloat($("#total_p").val())).toFixed(2);
                             $("#iva_producto").val("");
                         }
                     }
-                    
-                    iva = ((subtotal * 12) / 100).toFixed(2);
-                    t_fc = ((parseFloat(subtotal) + parseFloat(iva)) + parseFloat($("#total_p").val())).toFixed(2);
                     $("#total_p2").val(iva);
                     $("#iva").val(sub);
                     $("#desc").val(descu);

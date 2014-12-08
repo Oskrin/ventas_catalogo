@@ -1010,6 +1010,9 @@ function inicio() {
             var mu = 0;
             var des = 0;
             var descu = 0;
+            var cal = 0;
+            var cal2 = 0;
+            var tot = 0;
             
             var id = jQuery("#list").jqGrid('getGridParam', 'selrow');
             jQuery('#list').jqGrid('restoreRow', id);
@@ -1017,8 +1020,13 @@ function inicio() {
             
             if(name == 'cantidad') {
                var precio = jQuery("#list").jqGrid('getCell',rowid,iCol+1);
+               var descuento = jQuery("#list").jqGrid('getCell',rowid,iCol+2);
+               
                var operacion = (parseFloat(val)* parseFloat(precio)).toFixed(2); 
-               jQuery("#list").jqGrid('setRowData',rowid,{total: operacion });
+               cal = ((operacion * descuento)/100).toFixed(2);
+               tot = (operacion - cal).toFixed(2);
+               
+               jQuery("#list").jqGrid('setRowData',rowid,{total: tot });
                
                if (ret.iva === "Si") {
                    var fil = jQuery("#list").jqGrid("getRowData");
@@ -1026,8 +1034,8 @@ function inicio() {
                         var dd = fil[t];
                         if (dd['iva'] === "Si") {
                             subtotal = (subtotal + parseFloat(dd['total']));
-                            iva = parseFloat((subtotal * 0.12)).toFixed(2);
-                            var sub = (parseFloat(subtotal) - parseFloat(iva)).toFixed(2);
+                            var sub = parseFloat(subtotal).toFixed(2);
+                            iva = ((subtotal / 1.12)).toFixed(2);
                             mu = (dd['cantidad'] * dd['precio_u']).toFixed(2);
                             des = ((mu * dd['descuento'])/100).toFixed(2);
                             descu = (parseFloat(descu) + parseFloat(des)).toFixed(2);
@@ -1068,8 +1076,13 @@ function inicio() {
             
             if(name == 'precio_u') {
                var cantidad = jQuery("#list").jqGrid('getCell',rowid,iCol-1);
+               var descuento2 = jQuery("#list").jqGrid('getCell',rowid,iCol+1);
+               
                var operacion2 = (parseFloat(cantidad) * parseFloat(val)).toFixed(2); 
-               jQuery("#list").jqGrid('setRowData',rowid,{total: operacion2});
+               cal2 = ((operacion2 * descuento2)/100).toFixed(2);
+               tot = (operacion2 - cal2).toFixed(2);
+               
+               jQuery("#list").jqGrid('setRowData',rowid,{total: tot});
                
                if (ret.iva === "Si") {
                    fil = jQuery("#list").jqGrid("getRowData");
@@ -1077,8 +1090,8 @@ function inicio() {
                         dd = fil[t];
                         if (dd['iva'] === "Si") {
                             subtotal = (subtotal + parseFloat(dd['total']));
-                            iva = parseFloat((subtotal * 0.12)).toFixed(2);
-                            sub = (parseFloat(subtotal) - parseFloat(iva)).toFixed(2);
+                            sub = parseFloat(subtotal).toFixed(2);
+                            iva = ((subtotal * 12) / 100).toFixed(2);
                             mu = (dd['cantidad'] * dd['precio_u']).toFixed(2);
                             des = ((mu * dd['descuento'])/100).toFixed(2);
                             descu = (parseFloat(descu) + parseFloat(des)).toFixed(2);
