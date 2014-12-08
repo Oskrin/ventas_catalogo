@@ -18,14 +18,16 @@ session_start();
     conectarse();    
     $total=0;
     $repetido=0;    
-    $sql=pg_query("select id_factura_venta,num_factura,nombre_empresa,telefono_empresa,direccion_empresa,email_empresa,pagina_web,ruc_empresa,nombres_cli,identificacion,direccion_cli,telefono,ciudad,fecha_actual,forma_pago,fecha_cancelacion,nombre_usuario,apellido_usuario from factura_venta,clientes,empresa,usuario where factura_venta.id_cliente=clientes.id_cliente and empresa.id_empresa=factura_venta.id_empresa and factura_venta.id_usuario=usuario.id_usuario and factura_venta.id_factura_venta='$_GET[id]'");
+    $sql=pg_query("select id_factura_venta,num_factura,nombre_empresa,telefono_empresa,direccion_empresa,email_empresa,pagina_web,ruc_empresa,nombres_cli,identificacion,direccion_cli,clientes.telefono,clientes.ciudad,fecha_actual,forma_pago,fecha_cancelacion,nombre_usuario,apellido_usuario,directores.nombres from factura_venta,clientes,empresa,usuario,directores where factura_venta.id_cliente=clientes.id_cliente and empresa.id_empresa=factura_venta.id_empresa and factura_venta.id_usuario=usuario.id_usuario and clientes.id_director = directores.id_director and factura_venta.id_factura_venta='$_GET[id]'");    
     while($row=pg_fetch_row($sql)){        
+        $texto = substr($row[8], 0,50);
+        $texto1 = substr($row[18], 0,40);
         $codigo.='<table border=0>';
         $codigo.='<tr>                
             <td style="width:105px;text-align:center;font-size:8px;height:25px;">&nbsp;</td>                
-            <td style="width:300px;font-size:10px;">'.$row[8].'</td>            
+            <td style="width:300px;font-size:10px;">'.$texto.'</td>            
             <td style="width:55px;text-align:center;font-size:10px;height:25px;">DIR:</td>                
-            <td style="width:640px;font-size:10px;">'.$row[8].'</td>            
+            <td style="width:640px;font-size:10px;">'.$texto1.'</td>            
         </tr>';        
         $codigo.='</table>';             
         $codigo.='<table border=0>';
