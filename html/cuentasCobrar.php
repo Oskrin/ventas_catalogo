@@ -105,7 +105,7 @@ $cont1++;
                                                     <fieldset>
                                                         <section class="columna_1">
                                                             <div class="control-group">											
-                                                                <label class="control-label" for="nombres_cli">Comprobante:</label>
+                                                                <label class="control-label" for="comprobante">Comprobante:</label>
                                                                 <div class="controls">
                                                                     <input type="text" name="comprobante" id="comprobante" readonly class="campo" value="<?php echo $cont1 ?>" style="width: 80px"/>
                                                                 </div>
@@ -114,16 +114,16 @@ $cont1++;
 
                                                         <section class="columna_2">
                                                             <div class="control-group">											
-                                                                <label class="control-label" for="nombres_cli">Fecha Actual:</label>
+                                                                <label class="control-label" for="fecha_actual">Fecha Actual:</label>
                                                                 <div class="controls">
-                                                                    <input type="text" name="fecha_actual" id="fecha_actual" readonly value="<?php echo date("Y-m-d"); ?>" class="campo" style="width: 100px" />
+                                                                    <input type="text" name="fecha_actual" id="fecha_actual" readonly value="<?php date_default_timezone_set('America/Guayaquil'); echo date("Y-m-d"); ?>" class="campo" style="width: 100px" />
                                                                 </div>
                                                             </div>
                                                         </section>
 
                                                         <section class="columna_3">
                                                             <div class="control-group">											
-                                                                <label class="control-label" for="nombres_cli">Hora Actual:</label>
+                                                                <label class="control-label" for="hora_actual">Hora Actual:</label>
                                                                 <div class="controls">
                                                                     <input type="text" name="hora_actual" id="hora_actual" readonly class="campo" style="width: 100px"/>
                                                                 </div>
@@ -132,7 +132,7 @@ $cont1++;
 
                                                         <section class="columna_4">
                                                             <div class="control-group">											
-                                                                <label class="control-label" for="nombres_cli"> Digitad@r:</label>
+                                                                <label class="control-label" for="digitador"> Digitad@r:</label>
                                                                 <div class="controls">
                                                                     <input type="text" name="digitador" id="digitador" value="<?php echo $_SESSION['nombres'] ?>" class="campo" style="width: 200px" readonly/>
                                                                     <input type="hidden" name="comprobante2" id="comprobante2" class="campo" style="width: 100px" value="<?php echo $cont1 ?>" />
@@ -158,7 +158,7 @@ $cont1++;
                                                                         <option value="0">........SELECCIONE........</option>
                                                                         <option value="EFECTIVO">EFECTIVO</option>
                                                                         <option value="CHEQUE">CHEQUE</option>
-                                                                        <option value="TARGETA">TARGETA</option>
+                                                                        <option value="TARGETA">TARJETA</option>
                                                                     </select>
                                                                 </div>
                                                             </div> 

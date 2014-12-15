@@ -161,8 +161,7 @@ function guardar_producto(){
                                                 contentType: false,
                                                 cache: false,
                                                 processData:false,
-                                                success: function(data, textStatus, jqXHR)
-                                                {
+                                                success: function(data, textStatus, jqXHR) {
                                                     var res=data;
                                                     if(res == 1){
                                                         alertify.alert("Datos Guardados Correctamente",function(){

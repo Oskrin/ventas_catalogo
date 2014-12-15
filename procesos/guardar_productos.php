@@ -26,11 +26,11 @@ $cont1++;
 $extension = explode(".", $_FILES["archivo"]["name"]);
 
 $extension = end($extension);
-$type = $_FILES["archivo"]["type"];
-$tmp_name = $_FILES["archivo"]["tmp_name"];
-$size = $_FILES["archivo"]["size"];
+//$type = $_FILES["archivo"]["type"];
+//$tmp_name = $_FILES["archivo"]["tmp_name"];
+//$size = $_FILES["archivo"]["size"];
 $nombre = basename($_FILES["archivo"]["name"], "." . $extension);
-$fecha = date("d-m-Y");
+//$fecha = date("d-m-Y");
 //////////////////////////
 
 if ($nombre == "") {
@@ -39,8 +39,8 @@ if ($nombre == "") {
     $valor2 = number_format($_POST['precio_minorista'], 2, '.', '');
     $valor3 = number_format($_POST['precio_mayorista'], 2, '.', '');
     pg_query("insert into productos values('$cont','$_POST[cod_prod]','$_POST[cod_barras]','$_POST[nombre_art]','$_POST[iva]','$_POST[series]','$valor','$_POST[utilidad_minorista]','$_POST[utilidad_mayorista]','$valor2','$valor3','$_POST[categoria]','$_POST[marca]','$_POST[stock]','$_POST[minimo]','$_POST[maximo]','$_POST[fecha_creacion]','$_POST[modelo]','$_POST[aplicacion]','$_POST[descuento]','$_POST[vendible]','$_POST[inventario]','','','')");
-    $cal_entrada = 
-    pg_query("insert into productos values('$cont1','$fecha','Creación producto','$_POST[stock]','$valor2','$valor','$_POST[utilidad_minorista]','$_POST[utilidad_mayorista]','$valor2','$valor3','$_POST[categoria]','$_POST[marca]','$_POST[stock]','$_POST[minimo]','$_POST[maximo]','$_POST[fecha_creacion]','$_POST[modelo]','$_POST[aplicacion]','$_POST[descuento]','$_POST[vendible]','$_POST[inventario]','$_POST[cod_prod]')");
+//    $cal_entrada = 
+//    pg_query("insert into productos values('$cont1','$fecha','Creación producto','$_POST[stock]','$valor2','$valor','$_POST[utilidad_minorista]','$_POST[utilidad_mayorista]','$valor2','$valor3','$_POST[categoria]','$_POST[marca]','$_POST[stock]','$_POST[minimo]','$_POST[maximo]','$_POST[fecha_creacion]','$_POST[modelo]','$_POST[aplicacion]','$_POST[descuento]','$_POST[vendible]','$_POST[inventario]','$_POST[cod_prod]')");
     
 } else {
     /////////////////guardar productos///////

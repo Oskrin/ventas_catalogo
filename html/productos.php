@@ -172,7 +172,8 @@ include '../menus/menu.php';
                                                     <div class="control-group">
                                                         <label class="control-label" for="fecha_creacion">Fecha Creación: <font color="red">*</font></label>
                                                         <div class="controls">
-                                                            <input type="text"  name="fecha_creacion" id="fecha_creacion" required class="campo" value="<?php echo date("Y-m-d"); ?>"/>
+                                                            <input type="text"  name="fecha_creacion" id="fecha_creacion" required class="campo" value="<?php date_default_timezone_set('America/Guayaquil');
+                                                                    echo date("Y-m-d"); ?>"/>
                                                         </div>
                                                     </div>
 
@@ -203,10 +204,10 @@ include '../menus/menu.php';
                                                         </div>			
                                                     </div>
 
-                                                    <div class="control-group">											
+                                                    <div class="control-group" style="display: none">											
                                                         <label class="control-label" for="iva">Iva: <font color="red">*</font></label>
                                                         <div class="controls">
-                                                            <select id="iva" name="iva" class="campo" style="width: 200px">
+                                                            <select id="iva" name="iva" class="campo" style="width: 200px" >
                                                                 <option value="">......Seleccione......</option>
                                                                 <option value="Si" selected>Si</option> 
                                                                 <option value="No">No</option> 
@@ -300,7 +301,6 @@ include '../menus/menu.php';
                                                             <input type="file" name="archivo" id="archivo" onchange='Test.UpdatePreview(this)' accept="image/*" />
                                                         </div>	
                                                     </div> 
-
                                                 </section>
 
                                                 <section class="columna3_empresa">

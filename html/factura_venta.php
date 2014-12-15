@@ -125,9 +125,11 @@ $cont1++;
                                                                 <td><input type="hidden" name="comprobante2" id="comprobante2" class="campo" style="width: 100px" value="<?php echo $cont1 ?>" /></td>
                                                             </tr>  
                                                         </table>  
-
-                                                        <hr style="color: #0056b2;" /> 
-
+                                                    </fieldset>
+                                                    <br />
+                                                    <hr> 
+                                                    
+                                                    <fieldset>
                                                         <table cellpadding="2" border="0" style="margin-left: 10px">
                                                             <tr>
                                                                 <td><label style="width: 100%">Digitador (a): </label></td>
@@ -164,7 +166,7 @@ $cont1++;
                                                         <table cellpadding="2" style="margin-left: 10px">
                                                             <tr>
                                                                 <td><label style="width: 100%">Fecha Cancelación: <font color="red">*</font></label></td>
-                                                                <td><input type="text" name="cancelacion" id="cancelacion" class="campo" style="width: 150px" value="<?php echo date("Y-m-d"); ?>" readonly/></td>
+                                                                <td><input type="text" name="cancelacion" id="cancelacion" class="campo" style="width: 150px" value="<?php date_default_timezone_set('America/Guayaquil'); echo date("Y-m-d"); ?>" readonly/></td>
                                                                 <td><label for="tipo_precio" style="width: 100%">Tipo de Precio: <font color="red">*</font></label></td>  
                                                                 <td><select id="tipo_precio" name="tipo_precio" style="width: 180px">
                                                                         <option value="MINORISTA">MINORISTA</option>
@@ -200,9 +202,10 @@ $cont1++;
                                                                 <td><input type="text" name="fecha_caducidad" id="fecha_caducidad" class="campo" style="width: 120px; margin-left: 5px" value="<?php echo date("Y-m-d"); ?>" readonly /></td>
                                                             </tr>
                                                         </table>
-
-                                                        <hr style="color: #0056b2;" /> 
-                                                        <p>Detalle de la factura</p>
+                                                    </fieldset>
+                                                    <br />
+                                                    <fieldset>  
+                                                        <legend>Detalle Factura</legend>
                                                         <table cellpadding="2" border="0" style="margin-left: 10px">
                                                             <tr>
                                                                 <td><label>Código:</label></td>   

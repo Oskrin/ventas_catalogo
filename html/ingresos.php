@@ -105,7 +105,7 @@ $cont1++;
                                                     <fieldset>
                                                         <section class="columna_1">
                                                             <div class="control-group">											
-                                                                <label class="control-label" for="nombres_cli">Comprobante:</label>
+                                                                <label class="control-label" for="comprobante">Comprobante:</label>
                                                                 <div class="controls">
                                                                     <input type="text" name="comprobante" id="comprobante" readonly class="campo" value="<?php echo $cont1 ?>" style="width: 80px"/>
                                                                 </div>
@@ -114,16 +114,16 @@ $cont1++;
 
                                                         <section class="columna_2">
                                                             <div class="control-group">											
-                                                                <label class="control-label" for="nombres_cli">Fecha Actual:</label>
+                                                                <label class="control-label" for="fecha_actual">Fecha Actual:</label>
                                                                 <div class="controls">
-                                                                    <input type="text" name="fecha_actual" id="fecha_actual" readonly value="<?php echo date("Y-m-d"); ?>" class="campo" style="width: 100px" />
+                                                                    <input type="text" name="fecha_actual" id="fecha_actual" readonly value="<?php date_default_timezone_set('America/Guayaquil'); echo date("Y-m-d"); ?>" class="campo" style="width: 100px" />
                                                                 </div>
                                                             </div>
                                                         </section>
 
                                                         <section class="columna_3">
                                                             <div class="control-group">											
-                                                                <label class="control-label" for="nombres_cli">Hora Actual:</label>
+                                                                <label class="control-label" for="hora_actual">Hora Actual:</label>
                                                                 <div class="controls">
                                                                     <input type="text" name="hora_actual" id="hora_actual" readonly class="campo" style="width: 100px"/>
                                                                 </div>
@@ -132,13 +132,14 @@ $cont1++;
 
                                                         <section class="columna_4">
                                                             <div class="control-group">											
-                                                                <label class="control-label" for="nombres_cli"> Digitad@r:</label>
+                                                                <label class="control-label" for="digitador"> Digitad@r:</label>
                                                                 <div class="controls">
                                                                     <input type="text" name="digitador" id="digitador" value="<?php echo $_SESSION['nombres'] ?>" class="campo" style="width: 200px" readonly/>
                                                                 </div>
                                                             </div>
                                                         </section>
-                                                    </fieldset>                                               
+                                                    </fieldset>   
+
                                                     <fieldset>
                                                         <legend></legend>
                                                         <section class="columna1">
@@ -147,8 +148,14 @@ $cont1++;
                                                                 <div class="controls">
                                                                     <input type="text" name="origen" id="origen" class="campo" placeholder="Ingrese el origen" />
                                                                 </div>
-                                                            </div>   
+                                                            </div>  
 
+                                                            <div class="control-group">											
+                                                                <label class="control-label" for="origen">Observaciones:</label>
+                                                                <div class="controls">
+                                                                    <textarea name="observaciones" id="observaciones" class="campo" style="width: 250px" ></textarea>
+                                                                </div>
+                                                            </div> 
                                                         </section>
 
                                                         <section class="columna2">
@@ -192,16 +199,7 @@ $cont1++;
                                                             <table id="list"></table>
                                                         </div>
 
-                                                        <div style="margin-left: 10px">
-                                                            <table border="0" cellpadding="2">
-                                                                <tr>
-                                                                    <td><label>Observaciones:</label></td>
-                                                                    <td><textarea name="observaciones" id="observaciones" class="campo" style="width: 300px; margin-top: 20px" ></textarea></td>
-                                                                </tr> 
-                                                            </table>
-                                                        </div>
-
-                                                        <div style="margin-left: 665px; margin-top: -70px">
+                                                        <div style="margin-left: 665px">
                                                             <table border="0" cellspacing="2">
                                                                 <tr>
                                                                     <td><label for="total_p" style="width: 100%">Tarifa 0:</label></td>
@@ -221,6 +219,7 @@ $cont1++;
                                                                     <td><label for="desc" style="width: 100%" >Descuentos:</label></td>
                                                                     <td><input type="text" style="width: 80px" name="desc" id="desc" readonly value="0.00" class="campo"/></td>
                                                                 </tr>
+
                                                                 <tr>
                                                                     <td><label for="tot" style="width:100%" >Total:</label></td>
                                                                     <td><input type="text" style="width:80px" name="tot" id="tot" readonly value="0.00" class="campo" /></td>
@@ -251,6 +250,7 @@ $cont1++;
                 </div> 
             </div> 
         </div> 
+
         <script type="text/javascript" src="../js/base.js"></script>
         <script type="text/javascript" src="../js/jquery.ui.datepicker-es.js"></script>
 

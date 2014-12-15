@@ -232,14 +232,15 @@ function entrar3() {
                                 if ($("#descuento").val() !== "") {
                                     desc = $("#descuento").val();
                                     precio = (parseFloat($("#p_venta").val())).toFixed(2);
-                                    multi = ($("#cantidad").val() * precio).toFixed(2);
-                                    descuento = ((multi * parseFloat($("#descuento").val())) / 100);
+                                    multi = (parseFloat($("#cantidad").val()) * parseFloat($("#p_venta").val())).toFixed(2);
+                                    descuento = ((multi * parseFloat($("#descuento").val())) / 100).toFixed(2);
                                     total = (multi - descuento).toFixed(2);
                                 } else {
                                     desc = 0;
                                     precio = (parseFloat($("#p_venta").val())).toFixed(2);
-                                    total = ($("#cantidad").val() * precio).toFixed(2);
+                                    total = (parseFloat($("#cantidad").val()) * precio).toFixed(2);
                                 }
+                                
                                 var datarow = {
                                     cod_producto: $("#cod_producto").val(), 
                                     codigo: $("#codigo").val(), 
@@ -272,16 +273,16 @@ function entrar3() {
                                 
                                 if (repe === 1) {
                                     if ($("#descuento").val() !== "") {
-                                        desc = $("#descuento").val();
-                                        precio = (parseFloat($("#p_venta").val())).toFixed(2);
-                                        multi = ($("#cantidad").val() * precio).toFixed(2);
-                                        descuento = ((multi * parseFloat($("#descuento").val())) / 100);
-                                        total = (multi - descuento).toFixed(2);
-                                    } else {
-                                        desc = 0;
-                                        precio = (parseFloat($("#p_venta").val())).toFixed(2);
-                                        total = ($("#cantidad").val() * precio).toFixed(2);
-                                    }
+                                    desc = $("#descuento").val();
+                                    precio = (parseFloat($("#p_venta").val())).toFixed(2);
+                                    multi = (parseFloat($("#cantidad").val()) * parseFloat($("#p_venta").val())).toFixed(2);
+                                    descuento = ((multi * parseFloat($("#descuento").val())) / 100).toFixed(2);
+                                    total = (multi - descuento).toFixed(2);
+                                } else {
+                                    desc = 0;
+                                    precio = (parseFloat($("#p_venta").val())).toFixed(2);
+                                    total = (parseFloat($("#cantidad").val()) * precio).toFixed(2);
+                                }
                                     
                                     datarow = {
                                         cod_producto: $("#cod_producto").val(), 
@@ -310,13 +311,13 @@ function entrar3() {
                                         if ($("#descuento").val() !== "") {
                                             desc = $("#descuento").val();
                                             precio = (parseFloat($("#p_venta").val())).toFixed(2);
-                                            multi = ($("#cantidad").val() * precio).toFixed(2);
-                                            descuento = ((multi * parseFloat($("#descuento").val())) / 100);
+                                            multi = (parseFloat($("#cantidad").val()) * parseFloat($("#p_venta").val())).toFixed(2);
+                                            descuento = ((multi * parseFloat($("#descuento").val())) / 100).toFixed(2);
                                             total = (multi - descuento).toFixed(2);
                                         } else {
                                             desc = 0;
                                             precio = (parseFloat($("#p_venta").val())).toFixed(2);
-                                            total = ($("#cantidad").val() * precio).toFixed(2);
+                                            total = (parseFloat($("#cantidad").val()) * precio).toFixed(2);
                                         }
                                     
                                         datarow = {
@@ -1737,11 +1738,6 @@ function inicio() {
                 $("#cod_producto").val(ui.item.cod_producto);
                 $("#des").val(ui.item.des);
                 $("#inventar").val(ui.item.inventar);
-                
-//                $("#descuento").spinner({
-//                    min: 0, 
-//                    max: $("#des").val()
-//                    });
                 return false;
                 }
 
@@ -1779,10 +1775,6 @@ function inicio() {
                     $("#cod_producto").val(ui.item.cod_producto);
                     $("#des").val(ui.item.des);
                     $("#inventar").val(ui.item.inventar);
-//                    $("#descuento").spinner({
-//                        min: 0, 
-//                        max: $("#des").val()
-//                        });
                     return false;
                     }
                     }).data("ui-autocomplete")._renderItem = function(ul, item) {
@@ -1826,10 +1818,6 @@ function inicio() {
                 $("#cod_producto").val(ui.item.cod_producto);
                 $("#des").val(ui.item.des);
                 $("#inventar").val(ui.item.inventar);
-//                $("#descuento").spinner({
-//                    min: 0, 
-//                    max: $("#des").val()
-//                    });
                 return false;
                 }
 
@@ -1867,10 +1855,6 @@ function inicio() {
                     $("#cod_producto").val(ui.item.cod_producto);
                     $("#des").val(ui.item.des);
                     $("#inventar").val(ui.item.inventar);
-//                    $("#descuento").spinner({
-//                        min: 0, 
-//                        max: $("#des").val()
-//                        });
                     return false;
                     }
 

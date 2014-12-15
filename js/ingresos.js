@@ -96,7 +96,7 @@ function entrar() {
         } else {
             if ($("#cantidad").val() === "") {
                 $("#cantidad").focus();
-                alertify.alert("Ingrese una cantidad valida");
+//                alertify.alert("Ingrese una cantidad valida");
             } else {
                 $("#precio").focus();
             }
@@ -120,7 +120,7 @@ function comprobar() {
             } else {
                 if ($("#cantidad").val() === "") {
                     $("#cantidad").focus();
-                    alertify.alert("Ingrese una cantidad");
+//                    alertify.alert("Ingrese una cantidad");
                 } else {
                     if ($("#precio").val() === "") {
                         $("#precio").focus();
@@ -149,7 +149,7 @@ function comprobar2() {
             } else {
                 if ($("#cantidad").val() === "") {
                     $("#cantidad").focus();
-                    alertify.alert("Ingrese una cantidad");
+//                    alertify.alert("Ingrese una cantidad");
                 } else {
                     if ($("#precio").val() === "") {
                         $("#precio").focus();
@@ -166,8 +166,7 @@ function comprobar2() {
                             var total = 0;
                             var su = 0;
                             if (filas.length === 0) {
-                                if ($("#descuento").val() !== "")
-                                {
+                                if ($("#descuento").val() !== "") {
                                     descuento = $("#descuento").val();
                                     desc = ((parseFloat($("#precio").val()) * parseFloat($("#descuento").val())) / 100);
                                     cal = (parseFloat($("#precio").val()) - desc).toFixed(2);
@@ -205,9 +204,9 @@ function comprobar2() {
                                         repe = 1;
                                     }
                                 }
+                                
                                 if (repe === 1) {
-                                    if ($("#descuento").val() !== "")
-                                    {
+                                    if ($("#descuento").val() !== "") {
                                         descuento = $("#descuento").val();
                                         desc = ((parseFloat($("#precio").val()) * parseFloat($("#descuento").val())) / 100);
                                         cal = (parseFloat($("#precio").val()) - desc).toFixed(2);
@@ -238,8 +237,7 @@ function comprobar2() {
                                     $("#descuento").val("");
                                 }
                                 else {
-                                    if ($("#descuento").val() !== "")
-                                    {
+                                    if ($("#descuento").val() !== "") {
                                         descuento = $("#descuento").val();
                                         desc = ((parseFloat($("#precio").val()) * parseFloat($("#descuento").val())) / 100);
                                         cal = (parseFloat($("#precio").val()) - desc).toFixed(2);
@@ -281,7 +279,7 @@ function comprobar2() {
                                     if (dd['iva'] === "Si") {
                                         subtotal = (subtotal + parseFloat(dd['total']));
                                         var sub = parseFloat(subtotal).toFixed(2);
-                                        iva = ((subtotal * 12) / 100).toFixed(2);
+                                        iva = ((subtotal / 1.12)).toFixed(2);
                                         t_fc = ((parseFloat(sub) + parseFloat(iva)) + parseFloat($("#total_p").val())).toFixed(2);
                                         $("#iva_producto option[value=" + 'Elija' + "]").attr("selected", true);
                                     }
@@ -426,8 +424,7 @@ function flecha_atras(){
                         var t_fc = 0;
                         var sub;
 
-                        for (var i = 0; i < tama; i = i + 9)
-                        {
+                        for (var i = 0; i < tama; i = i + 9) {
                             var datarow = {cod_producto: data[i],
                                 codigo: data[i + 1],
                                 detalle: data[i + 2],
