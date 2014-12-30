@@ -128,7 +128,7 @@ include '../menus/menu.php';
                                                     </div>
 
                                                     <div class="control-group">
-                                                        <label class="control-label" for="utilidad_minorista">Utilidad Minorista: <font color="red">*</font></label>
+                                                        <label class="control-label" for="utilidad_minorista">Utilidad Minorista: </label>
                                                         <div class="controls">
                                                             <div class="input-prepend input-append">
                                                                 <span class="add-on">%</span>
@@ -166,14 +166,6 @@ include '../menus/menu.php';
                                                         <label class="control-label" for="minimo">Stock Mínimo:</label>
                                                         <div class="controls">
                                                             <input type="number" name="minimo" id="minimo" value="1" required class="campo" min="0" />
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="control-group">
-                                                        <label class="control-label" for="fecha_creacion">Fecha Creación: <font color="red">*</font></label>
-                                                        <div class="controls">
-                                                            <input type="text"  name="fecha_creacion" id="fecha_creacion" required class="campo" value="<?php date_default_timezone_set('America/Guayaquil');
-                                                                    echo date("Y-m-d"); ?>"/>
                                                         </div>
                                                     </div>
 
@@ -216,13 +208,20 @@ include '../menus/menu.php';
                                                     </div>
 
                                                     <div class="control-group">											
-                                                        <label class="control-label" for="series">Series: <font color="red">*</font></label>
+                                                        <label class="control-label" for="series">Series: </label>
                                                         <div class="controls">
                                                             <select id="series" name="series" class="campo" style="width: 200px">
                                                                 <option value="">......Seleccione......</option>
                                                                 <option value="Si">Si</option> 
                                                                 <option value="No" selected>No</option> 
                                                             </select>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="control-group">	
+                                                        <label class="control-label" for="stock">Stock:</label>
+                                                        <div class="controls">
+                                                            <input type="number"  name="stock" id="stock"  value="0" required class="campo" min="0"/>    
                                                         </div>
                                                     </div>
 
@@ -237,7 +236,7 @@ include '../menus/menu.php';
                                                     </div>
 
                                                     <div class="control-group">											
-                                                        <label class="control-label" for="utilidad_mayorista">Utilidad Mayorista: <font color="red">*</font></label>
+                                                        <label class="control-label" for="utilidad_mayorista">Utilidad Mayorista:</label>
                                                         <div class="controls">
                                                             <div class="input-prepend input-append">
                                                                 <span class="add-on">%</span>
@@ -264,10 +263,10 @@ include '../menus/menu.php';
                                                         </div>
                                                     </div>
 
-                                                    <div class="control-group">	
-                                                        <label class="control-label" for="stock">Stock:</label>
+                                                    <div class="control-group">
+                                                        <label class="control-label" for="fecha_creacion">Fecha Creación: </label>
                                                         <div class="controls">
-                                                            <input type="number"  name="stock" id="stock"  value="0" required class="campo" min="0"/>    
+                                                            <input type="text"  name="fecha_creacion" id="fecha_creacion" required class="campo" value="" readonly /> 
                                                         </div>
                                                     </div>
 

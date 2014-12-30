@@ -63,23 +63,23 @@ function guardar_directores() {
 
     if (iden.length < 10) {
         $("#ruc_ci").focus();
-        alertify.alert("Error.. Mínimo 10 digitos ");
+        alertify.error("Error.. Mínimo 10 digitos ");
     } else {
         if ($("#nombres_cli").val() === "") {
             $("#nombres_cli").focus();
-            alertify.alert("Ingrese Nombres completos");
+            alertify.error("Ingrese Nombres completos");
         } else {
             if ($("#pais_cli").val() === "") {
                 $("#pais_cli").focus();
-                alertify.alert("Ingrese un país");
+                alertify.error("Ingrese un país");
             } else {
                 if ($("#ciudad_cli").val() === "") {
                     $("#ciudad_cli").focus();
-                    alertify.alert("Ingrese una ciudad");
+                    alertify.error("Ingrese una ciudad");
                 } else {
                     if ($("#direccion_cli").val() === "") {
                         $("#direccion_cli").focus();
-                        alertify.alert("Ingrese una dirección");
+                        alertify.error("Ingrese una dirección");
                     }else{
                         $.ajax({
                             type: "POST",
@@ -89,9 +89,10 @@ function guardar_directores() {
                             success: function(data) {
                                 var val = data;
                                 if (val == 1) {
-                                    alertify.alert("Datos Guardados Correctamente",function(){
+                                    alertify.success('Datos Agregados Correctamente');						    		
+                                    setTimeout(function() {
                                         location.reload();
-                                    });
+                                    }, 1000);
                                 }
                             }
                         });
@@ -106,27 +107,27 @@ function modificar_directores() {
     var iden = $("#ruc_ci").val();
     
     if ($("#id_director").val() === "") {
-        alertify.alert("Seleccione un director@");
+        alertify.error("Seleccione un director@");
     } else {
         if (iden.length < 10) {
             $("#ruc_ci").focus();
-            alertify.alert("Error.. Mínimo 10 digitos ");
+            alertify.error("Error.. Mínimo 10 digitos ");
         } else {
             if ($("#nombres_cli").val() === "") {
                 $("#nombres_cli").focus();
-                alertify.alert("Ingrese Nombres completos");
+                alertify.error("Ingrese Nombres completos");
             } else {
                 if ($("#pais_cli").val() === "") {
                     $("#pais_cli").focus();
-                    alertify.alert("Ingrese un pais");
+                    alertify.error("Ingrese un pais");
                 } else {
                     if ($("#ciudad_cli").val() === "") {
                         $("#ciudad_cli").focus();
-                        alertify.alert("Ingrese una ciudad");
+                        alertify.error("Ingrese una ciudad");
                     } else {
                         if ($("#direccion_cli").val() === "") {
                             $("#direccion_cli").focus();
-                            alertify.alert("Ingrese una dirección");
+                            alertify.error("Ingrese una dirección");
                         }else{
                             $.ajax({
                                 type: "POST",
@@ -136,10 +137,11 @@ function modificar_directores() {
                                 success: function(data) {
                                     var val = data;
                                     if (val == 1) {
-                                        alertify.alert("Datos Modificados Correctamente",function(){
+                                        alertify.success('Datos Modificados Correctamente');						    		
+                                        setTimeout(function() {
                                             location.reload();
-                                        });
-                                    }
+                                        }, 1000);
+                                     }
                                 }
                             });  
                         }
@@ -152,7 +154,7 @@ function modificar_directores() {
 
 function eliminar_directores() {
     if ($("#id_director").val() === "") {
-        alertify.alert("Seleccione un director@");
+        alertify.error("Seleccione un director@");
     } else {
         $("#clave_permiso").dialog("open");     
     }
@@ -161,7 +163,7 @@ function eliminar_directores() {
 function validar_acceso(){
     if($("#clave").val() == "") {
         $("#clave").focus();
-        alertify.alert("Ingrese la clave");
+        alertify.error("Ingrese la clave");
     }else{
         $.ajax({
             url: '../procesos/validar_acceso.php',
@@ -172,7 +174,7 @@ function validar_acceso(){
                 if (val == 0) {
                     $("#clave").val("");
                     $("#clave").focus();
-                    alertify.alert("Error... La clave es incorrecta ingrese nuevamente");
+                    alertify.error("Error... La clave es incorrecta ingrese nuevamente");
                 } else {
                     if (val == 1) {
                         $("#seguro").dialog("open");   
@@ -191,13 +193,15 @@ function aceptar(){
         success: function(data) {
             var val = data;
             if (val == 1) {
-                alertify.alert("Error... Director@ tiene movimientos en el sistema",function(){
+                alertify.error('Error... Director@ tiene movimientos en el sistema');						    		
+                setTimeout(function() {
                     location.reload();
-                });
+                }, 1000);
             }else{
-              alertify.alert("Director@ Eliminado Correctamente",function(){
+                alertify.success('Director@ Eliminado Correctamente');						    		
+                setTimeout(function() {
                     location.reload();
-                });  
+                }, 1000); 
             }
         }
     });  
@@ -240,7 +244,7 @@ $(function() {
 });
 
 function inicio() {
-
+    alertify.set({ delay: 1000 });
     //////////atributos////////////
     $("#nro_telefono").validCampoFranz("0123456789");
     $("#nro_celular").validCampoFranz("0123456789");
@@ -254,6 +258,7 @@ function inicio() {
    
     /////valida si ya existe/////
     $("#ruc_ci").keyup(function() {
+        alertify.set({ delay: 1000 });
         $.ajax({
             type: "POST",
             url: "../procesos/comparar_cedulas3.php",
@@ -425,6 +430,7 @@ function inicio() {
          var id = jQuery("#list").jqGrid('getGridParam', 'selrow');
          jQuery('#list').jqGrid('restoreRow', id);   
          jQuery("#list").jqGrid('GridToForm', id, "#directores_form");
+         document.getElementById("ruc_ci").readOnly = true;
          $("#btnGuardar").attr("disabled", true);
          $("#directores").dialog("close");    
         }
@@ -465,6 +471,7 @@ function inicio() {
             jQuery('#list').jqGrid('restoreRow', id);
             if (id) {
                 jQuery("#list").jqGrid('GridToForm', id, "#directores_form");
+                document.getElementById("ruc_ci").readOnly = true;
                 $("#btnGuardar").attr("disabled", true);
                 $("#directores").dialog("close");
             } else {

@@ -11,6 +11,7 @@ while ($row = pg_fetch_row($consulta)) {
     if ($tipo == "MINORISTA") {
         $data[] = array(
             'value' => $row[3],
+            'codigo_barras' => $row[2],
             'codigo' => $row[1],
             'p_venta' => $row[9],
             'descuento' => $row[19],
@@ -21,6 +22,7 @@ while ($row = pg_fetch_row($consulta)) {
         if ($tipo == "MAYORISTA") {
             $data[] = array(
                 'value' => $row[3],
+                'codigo_barras' => $row[2],
                 'codigo' => $row[1],
                 'p_venta' => $row[10],
                 'descuento' => $row[19],

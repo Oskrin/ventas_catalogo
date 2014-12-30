@@ -116,7 +116,7 @@ $cont1++;
                                                             <div class="control-group">											
                                                                 <label class="control-label" for="fecha_actual">Fecha Actual:</label>
                                                                 <div class="controls">
-                                                                    <input type="text" name="fecha_actual" id="fecha_actual" readonly value="<?php echo date_default_timezone_set('America/Guayaquil'); date("Y-m-d"); ?>" class="campo" style="width: 100px" />
+                                                                    <input type="text" name="fecha_actual" id="fecha_actual" readonly value="" class="campo" style="width: 100px" />
                                                                 </div>
                                                             </div>
                                                         </section>
@@ -197,6 +197,7 @@ $cont1++;
                                                                 <td><label>Producto:</label></td>   
                                                                 <td><label>Cantidad:</label></td>   
                                                                 <td><label>Precio:</label></td>
+                                                                <td><label>Descuento:</label></td>
                                                                 <td><label>Devolución:</label></td>
                                                             </tr>
 
@@ -205,8 +206,8 @@ $cont1++;
                                                                 <td><input type="text" name="producto" id="producto" class="campo" style="width: 230px"  placeholder="Buscar..."/></td>
                                                                 <td><input type="text" name="cantidad" id="cantidad" class="campo" style="width: 60px" maxlength="10"/></td>
                                                                 <td><input type="text" name="precio" id="precio" class="campo" style="width: 60px" maxlength="10"/></td>
+                                                                <td><input type="text" name="descuento" id="descuento" class="campo" style="width: 60px" maxlength="10" readonly/></td>
                                                                 <td><input type="text" name="canti" id="canti" class="campo" style="width: 60px" readonly maxlength="10" value="" /></td>
-                                                                <td><input type="hidden" name="descuento" id="descuento" class="campo" style="width: 60px" maxlength="10"/></td>
                                                                 <td><input type="hidden" name="iva_producto" id="iva_producto" class="campo" style="width: 60px" maxlength="10" value="" /></td>
                                                                 <td><input type="hidden" name="carga_series" id="carga_series" class="campo" style="width: 100px" maxlength="10"/></td>
                                                                 <td><input type="hidden" name="estado" id="estado" class="campo" style="width: 100px" maxlength="10"/></td>
@@ -235,11 +236,11 @@ $cont1++;
                                                                 </tr>    
                                                                 <tr>
                                                                     <td><label for="total_p2" style="width: 100%" >Tarifa  12:</label></td>
-                                                                    <td><input type="text" style="width: 80px" name="total_p2" id="total_p2" readonly value="0.00" class="campo"/></td>
+                                                                    <td><input type="text" style="width: 80px" name="total_p2" id="total_p2" readonly value="0.000" class="campo"/></td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td><label for="iva" style="width:100%" >12 %Iva:</label></td>
-                                                                    <td><input type="text" style="width:80px" name="iva" id="iva" readonly value="0.00" class="campo"/></td>
+                                                                    <td><input type="text" style="width:80px" name="iva" id="iva" readonly value="0.000" class="campo"/></td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td><label for="desc" style="width: 100%" >Descuentos:</label></td>

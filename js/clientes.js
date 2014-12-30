@@ -62,44 +62,43 @@ function guardar_cliente() {
     
     if ($("#tipo_docu").val() === "") {
         $("#tipo_docu").focus();
-        alertify.alert("Seleccione un tipo de documento ");
+        alertify.error("Seleccione un tipo de documento ");
     } else {
         if ($("#tipo_docu").val() === "Cedula" && iden.length < 10) {
             $("#ruc_ci").focus();
-            alertify.alert("Error.. Minimo 10 digitos ");
+            alertify.error("Error.. Minimo 10 digitos ");
         } else {
             if ($("#tipo_docu").val() === "Ruc" && iden.length < 13) {
                 $("#ruc_ci").focus();
-                alertify.alert("Error.. Minimo 13 digitos ");
+                alertify.error("Error.. Minimo 13 digitos ");
             } else {
                 if ($("#nombres_cli").val() === "") {
                     $("#nombres_cli").focus();
-                    alertify.alert("Ingrese Nombres completos");
+                    alertify.error("Ingrese Nombres completos");
                 } else {
                     if ($("#tipo_cli").val() === "") {
                         $("#tipo_cli").focus();
-                        alertify.alert("Seleccione Tipo cliente");
+                        alertify.error("Seleccione Tipo cliente");
                     } else {
-                        
                         if ($("#pais_cli").val() === "") {
                             $("#pais_cli").focus();
-                            alertify.alert("Ingrese un pais");
+                            alertify.error("Ingrese un pais");
                         } else {
                             if ($("#ciudad_cli").val() === "") {
                                 $("#ciudad_cli").focus();
-                                alertify.alert("Ingrese una ciudad");
+                                alertify.error("Ingrese una ciudad");
                             } else {
                                 if ($("#direccion_cli").val() === "") {
                                     $("#direccion_cli").focus();
-                                    alertify.alert("Ingrese una dirección");
+                                    alertify.error("Ingrese una dirección");
                                 } else {
                                     if ($("#cupo_credito").val() === "") {
                                         $("#cupo_credito").focus();
-                                        alertify.alert("Ingrese cantidad del crédito");
+                                        alertify.error("Ingrese cantidad del crédito");
                                     }else{
                                         if ($("#id_director").val() === "") {
                                             $("#directores").focus();
-                                            alertify.alert("Seleccione un Director@");
+                                            alertify.error("Seleccione un Director@");
                                         }else{
                                             $.ajax({
                                                 type: "POST",
@@ -109,9 +108,10 @@ function guardar_cliente() {
                                                 success: function(data) {
                                                     var val = data;
                                                     if (val == 1) {
-                                                        alertify.alert("Datos Guardados Correctamente",function(){
+                                                        alertify.success('Datos Agregados Correctamente');						    		
+                                                        setTimeout(function() {
                                                             location.reload();
-                                                        });
+                                                        }, 1000);
                                                     }
                                                 }
                                             });
@@ -131,47 +131,47 @@ function modificar_cliente() {
     var iden = $("#ruc_ci").val();
     
     if ($("#id_cliente").val() === "") {
-        alertify.alert("Seleccione un cliente");
+        alertify.error("Seleccione un cliente");
     } else {
         if ($("#tipo_docu").val() === "") {
             $("#tipo_docu").focus();
-            alertify.alert("Seleccione un tipo de documento ");
+            alertify.error("Seleccione un tipo de documento ");
         } else {
             if ($("#tipo_docu").val() === "Cedula" && iden.length < 10) {
                 $("#ruc_ci").focus();
-                alertify.alert("Error.. Minimo 10 digitos ");
+                alertify.error("Error.. Minimo 10 digitos ");
             } else {
                 if ($("#tipo_docu").val() === "Ruc" && iden.length < 13) {
                     $("#ruc_ci").focus();
-                    alertify.alert("Error.. Minimo 13 digitos ");
+                    alertify.error("Error.. Minimo 13 digitos ");
                 } else {
                     if ($("#nombres_cli").val() === "") {
                         $("#nombres_cli").focus();
-                        alertify.alert("Ingrese Nombres completos");
+                        alertify.error("Ingrese Nombres completos");
                     } else {
                         if ($("#tipo_cli").val() === "") {
                             $("#tipo_cli").focus();
-                            alertify.alert("Seleccione Tipo cliente");
+                            alertify.error("Seleccione Tipo cliente");
                         } else {
                             if ($("#direccion_cli").val() === "") {
                                 $("#direccion_cli").focus();
-                                alertify.alert("Ingrese una dirección");
+                                alertify.error("Ingrese una dirección");
                             } else {
                                 if ($("#pais_cli").val() === "") {
                                     $("#pais_cli").focus();
-                                    alertify.alert("Ingrese un pais");
+                                    alertify.error("Ingrese un pais");
                                 } else {
                                     if ($("#ciudad_cli").val() === "") {
                                         $("#ciudad_cli").focus();
-                                        alertify.alert("Ingrese una ciudad");
+                                        alertify.error("Ingrese una ciudad");
                                     } else {
                                         if ($("#cupo_credito").val() === "") {
                                             $("#cupo_credito").focus();
-                                            alertify.alert("Ingrese cantidad del crédito");
+                                            alertify.error("Ingrese cantidad del crédito");
                                         }else{
                                             if ($("#id_director").val() === "") {
                                                 $("#directores").focus();
-                                                alertify.alert("Seleccione un Director@");
+                                                alertify.error("Seleccione un Director@");
                                             }else{
                                                 $.ajax({
                                                     type: "POST",
@@ -181,9 +181,10 @@ function modificar_cliente() {
                                                     success: function(data) {
                                                         var val = data;
                                                         if (val == 1) {
-                                                            alertify.alert("Datos Modificados Correctamente",function(){
+                                                            alertify.success('Datos Modificados Correctamente');						    		
+                                                            setTimeout(function() {
                                                                 location.reload();
-                                                            });
+                                                            }, 1000);
                                                         }
                                                     }
                                                 });  
@@ -202,7 +203,7 @@ function modificar_cliente() {
 
 function eliminar_cliente() {
     if ($("#id_cliente").val() === "") {
-        alertify.alert("Seleccione un cliente");
+        alertify.error("Seleccione un cliente");
     } else {
         $("#clave_permiso").dialog("open");     
     }
@@ -211,7 +212,7 @@ function eliminar_cliente() {
 function validar_acceso(){
     if($("#clave").val() == "") {
         $("#clave").focus();
-        alertify.alert("Ingrese la clave");
+        alertify.error("Ingrese la clave");
     }else{
         $.ajax({
             url: '../procesos/validar_acceso.php',
@@ -222,7 +223,7 @@ function validar_acceso(){
                 if (val == 0) {
                     $("#clave").val("");
                     $("#clave").focus();
-                    alertify.alert("Error... La clave es incorrecta ingrese nuevamente");
+                    alertify.error("Error... La clave es incorrecta ingrese nuevamente");
                 } else {
                     if (val == 1) {
                         $("#seguro").dialog("open");   
@@ -241,13 +242,15 @@ function aceptar(){
         success: function(data) {
             var val = data;
             if (val == 1) {
-                alertify.alert("Error.. El Cliente tiene movimientos en el sistema",function(){
+                alertify.error('Error.. El Cliente tiene movimientos en el sistema');						    		
+                setTimeout(function() {
                     location.reload();
-                });
+                }, 1000);
             }else{
-               alertify.alert("Cliente Eliminado Correctamente",function(){
+                alertify.success('Cliente Eliminado Correctamente');						    		
+                setTimeout(function() {
                     location.reload();
-                }); 
+                }, 1000);
             }
         }
     });  
@@ -316,7 +319,7 @@ function limpiar_campo(){
 }
 
 function inicio() {
-
+    alertify.set({ delay: 1000 });
     //////////atributos////////////
     $("#ruc_ci").attr("disabled", "disabled");
     $("#nro_telefono").validCampoFranz("0123456789");

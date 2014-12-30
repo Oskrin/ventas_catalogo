@@ -54,8 +54,9 @@ session_start();
             <td style="width:90px;text-align:center;height:19px;font-size:10px;">'.$row[0].'</td> 
             <td style="width:400px;height:19px;font-size:10px;">'.$row[4].' '. $row[1].'</td>             
 		<td style="width:40px;height:19px;font-size:10px;">'.$row[2].'</td>             
-            <td style="width:110px;text-align:center;height:19px;font-size:10px;">'.(number_format(($row[3] / 1.12),2,',','.')).'</td> 
-            <td style="width:100px;text-align:center;height:19px;font-size:10px;">'.(number_format(($row[3] / 1.12) * $row[0],2,',','.')) .'</td> 
+                    <td style="width:100px;text-align:center;height:19px;font-size:10px;">'.(number_format(($row[3] / 1.12) / $row[0],2,',','.')) .'</td> 
+            <td style="width:110px;text-align:center;height:19px;font-size:10px;">'.(number_format(($row[3] / 1.12),2,',','.')) .'</td> 
+            
         </tr>';
                                        
     }    

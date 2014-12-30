@@ -117,7 +117,7 @@ $cont1++;
                                                             <div class="control-group">											
                                                                 <label class="control-label" for="fecha_actual">Fecha Actual:</label>
                                                                 <div class="controls">
-                                                                    <input type="text" name="fecha_actual" id="fecha_actual" readonly value="<?php date_default_timezone_set('America/Guayaquil'); echo date("Y-m-d"); ?>" class="campo" style="width: 100px" />
+                                                                    <input type="text" name="fecha_actual" id="fecha_actual" readonly value="" class="campo" style="width: 100px" />
                                                                 </div>
                                                             </div>
                                                         </section>
@@ -174,11 +174,11 @@ $cont1++;
                                                         <table cellpadding="2" border="0" style="margin-left: 10px">
                                                             <tr>
                                                                 <td><label style="width: 100%">Fecha registro: </label></td>  
-                                                                <td><input type="text" name="fecha_registro" id="fecha_registro" class="campo" style="width: 120px" value="<?php date_default_timezone_set('America/Guayaquil'); echo date("Y-m-d"); ?>" readonly /></td>
+                                                                <td><input type="text" name="fecha_registro" id="fecha_registro" class="campo" style="width: 120px" value="" readonly /></td>
                                                                 <td><label style="width: 100%; margin-left: 10px">Fecha emisón: </label></td>  
-                                                                <td><input type="text" name="fecha_emision" id="fecha_emision" class="campo" style="width: 120px; margin-left: 5px" value="<?php date_default_timezone_set('America/Guayaquil'); echo date("Y-m-d"); ?>" readonly /></td>
+                                                                <td><input type="text" name="fecha_emision" id="fecha_emision" class="campo" style="width: 120px; margin-left: 5px" value="" readonly /></td>
                                                                 <td><label style="width: 100%; margin-left: 10px">Fecha caducidad: </label></td>  
-                                                                <td><input type="text" name="fecha_caducidad" id="fecha_caducidad" class="campo" style="width: 120px; margin-left: 5px" value="<?php date_default_timezone_set('America/Guayaquil'); echo date("Y-m-d"); ?>" readonly /></td>
+                                                                <td><input type="text" name="fecha_caducidad" id="fecha_caducidad" class="campo" style="width: 120px; margin-left: 5px" value="" readonly /></td>
                                                             </tr>
                                                         </table>
 
@@ -198,7 +198,7 @@ $cont1++;
                                                                 <td><label style="width: 100%">Nro. de Autorización: <font color="red">*</font></label></td>
                                                                 <td><input type="text" name="autorizacion" id="autorizacion" class="campo" maxlength="45"/></td>
                                                                 <td><label style="width: 100%; margin-left: 10px">Fecha Cancelación: <font color="red">*</font></label></td>
-                                                                <td><input type="text" name="cancelacion" id="cancelacion" class="campo" style="width: 150px" value="<?php date_default_timezone_set('America/Guayaquil'); echo date("Y-m-d"); ?>" readonly/></td>
+                                                                <td><input type="text" name="cancelacion" id="cancelacion" class="campo" style="width: 150px" value="" readonly/></td>
                                                                 <td><label for="formas"  style="width: 100%; margin-left: 10px">Formas de Pago:</label></td>
                                                                 <td><select name="formas" id="formas" id="tipo">
                                                                         <option value="Contado">Contado</option>
@@ -214,6 +214,7 @@ $cont1++;
                                                         <legend>Detalle Factura</legend>
                                                         <table cellpadding="2" border="0" style="margin-left: 10px">
                                                             <tr>
+                                                                <td><label>Código Barras:</label></td>
                                                                 <td><label>Código:</label></td>   
                                                                 <td><label>Producto:</label></td>   
                                                                 <td><label>Cantidad:</label></td>   
@@ -224,6 +225,7 @@ $cont1++;
                                                             </tr>
 
                                                             <tr>
+                                                                <td><input type="text" name="codigo_barras" id="codigo_barras" class="campo" style="width: 170px"  placeholder="Buscar..."/></td>
                                                                 <td><input type="text" name="codigo" id="codigo" class="campo" style="width: 180px"  placeholder="Buscar..."/></td>
                                                                 <td><input type="text" name="producto" id="producto" class="campo" style="width: 200px"  placeholder="Buscar..."/></td>
                                                                 <td><input type="text" name="cantidad" id="cantidad" class="campo" style="width: 60px" maxlength="10"/></td>
@@ -244,7 +246,7 @@ $cont1++;
                                                             <table id="list" align="center"></table>
                                                         </div>
 
-                                                        <table border="0" cellspacing="2" style="margin-left: 625px">
+                                                        <table border="0" cellspacing="2" style="margin-left: 655px">
                                                             <tr>
                                                                 <td><label for="total_p" style="width: 100%">Tarifa 0:</label></td>
                                                                 <td><input type="text" style="width:80px" name="total_p" id="total_p" readonly value="0.00" class="campo"/></td>
