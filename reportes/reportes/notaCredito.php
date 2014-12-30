@@ -36,24 +36,17 @@ session_start();
             <div style="width:100px;height:15px;border:solid 0px;display:inline-block;"></div>
             <div style="width:180px;height:15px;border:solid 0px;display:inline-block;">'.$row[1].'</div>
             <div style="width:40px;height:15px;border:solid 0px;display:inline-block;"></div>
-            <div style="width:180px;height:15px;border:solid 0px;display:inline-block;">&nbsp;&nbsp;&nbsp;'.$row[9].'</div>
-            <div style="width:80px;height:15px;border:solid 0px;display:inline-block;"></div>
-            <div style="width:100px;height:15px;border:solid 0px;display:inline-block;">'.$row[11].'</div>
-            <div style="width:165px;height:15px;border:solid 0px;display:inline-block;"></div>
-            <div style="width:110px;height:15px;border:solid 0px;display:inline-block;">'.$row[2].'</div>
-            <div style="width:65px;height:15px;border:solid 0px;display:inline-block;"></div>
-            <div style="width:340px;height:15px;border:solid 0px;display:inline-block;">&nbsp;&nbsp;&nbsp;'.$row[12].'</div>
-            <div style="width:125px;height:15px;border:solid 0px;display:inline-block;"></div>
-            <div style="width:155px;height:15px;border:solid 0px;display:inline-block;">'.$row[8].'</div>
+            <div style="width:590px;height:15px;border:solid 0px;display:inline-block;">&nbsp;&nbsp;&nbsp;'.$row[9].'</div>
+            <div style="width:120px;height:15px;border:solid 0px;display:inline-block;"></div>
+            <div style="width:380px;height:15px;border:solid 0px;display:inline-block;">&nbsp;&nbsp;&nbsp;Factura # '.$row[2].'</div>                                                
         </div>';
 
         $codigo.='<div style="height:20px;border:solid 0px;display:inline-block;"></div>';
         $sql=pg_query("select id_detalle_deventa,id_devolucion_venta,productos.cod_productos,cantidad,precio_venta,descuento_producto,total_venta,articulo from detalle_devolucion_venta,productos where detalle_devolucion_venta.cod_productos=productos.cod_productos and id_devolucion_venta='$row[0]'");
         while($row1=pg_fetch_row($sql)){            
             $codigo.='<div style="height:240px;border:solid 0px;font-size:11px;text-align:center;">
-                <div style="width:95px;height:15px;border:solid 0px;display:inline-block;">'.$row1[3].'</div>
-                <div style="width:415px;height:15px;border:solid 0px;display:inline-block;">'.$row1[7].'</div>
-                <div style="width:75px;height:15px;border:solid 0px;display:inline-block;">'.$row1[4].'</div>
+                <div style="width:35px;height:15px;border:solid 0px;display:inline-block;">'.$row1[3].'</div>
+                <div style="width:555px;height:15px;border:solid 0px;display:inline-block;text-align:left;">'.$row1[7].'</div>                
                 <div style="width:105px;height:15px;border:solid 0px;display:inline-block;">'.$row1[6].'</div>
             </div>';   
         }        
