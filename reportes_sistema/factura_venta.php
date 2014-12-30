@@ -49,7 +49,9 @@ session_start();
     }
     $sql = pg_query("select detalle_factura_venta.cantidad,productos.articulo,detalle_factura_venta.precio_venta,detalle_factura_venta.total_venta,codigo from factura_venta,detalle_factura_venta,productos where factura_venta.id_factura_venta=detalle_factura_venta.id_factura_venta and detalle_factura_venta.cod_productos=productos.cod_productos and detalle_factura_venta.id_factura_venta='$_GET[id]'");
     $codigo.='<br /><br /><br /> <br /><br /><table border=0>';
+    $total_items = 0;
     while($row=pg_fetch_row($sql)){ 
+        $total_items = $total_items + $row[0];
         $codigo.='<tr>                
             <td style="width:90px;text-align:center;height:19px;font-size:10px;">'.$row[0].'</td> 
             <td style="width:400px;height:19px;font-size:10px;">'.$row[4].' '. $row[1].'</td>             
@@ -61,9 +63,12 @@ session_start();
                                        
     }    
     $codigo.='</table>';
+    $codigo.='<div id="items">
+        Nro. de items: '.$total_items.'
+    </div>';
 
     $sql = pg_query("select factura_venta.descuento_venta,factura_venta.tarifa0,factura_venta.tarifa12,factura_venta.iva_venta,factura_venta.total_venta from factura_venta where factura_venta.id_factura_venta='$_GET[id]'");      
-    $codigo.='<div id="footer">';
+    $codigo.='<div id="footer"> ';    
     $codigo.='<table border=0">';    
     while($row=pg_fetch_row($sql)){ 
         $codigo.='<tr>                
