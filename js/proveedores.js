@@ -316,12 +316,13 @@ function reset () {
 }
 
 function inicio() {
+    $("#ruc_ci").focus();
     alertify.set({ delay: 1000 });
     $("#nro_telefono").validCampoFranz("0123456789");
     $("#nro_celular").validCampoFranz("0123456789");
 
     //////////atributos////////////
-    $("#ruc_ci").attr("disabled", "disabled");
+//    $("#ruc_ci").attr("disabled", "disabled");
     ///////tipo pago//////////////
 
     $("#tipo_docu").change(function() {

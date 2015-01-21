@@ -244,6 +244,7 @@ $(function() {
 });
 
 function inicio() {
+    $("#ruc_ci").focus();
     alertify.set({ delay: 1000 });
     //////////atributos////////////
     $("#nro_telefono").validCampoFranz("0123456789");
