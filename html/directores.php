@@ -114,7 +114,7 @@ include '../menus/menu.php';
                                                         <div class="control-group">
                                                             <label class="control-label" for="direccion_cli">Dirección: <font color="red">*</font></label>
                                                             <div class="controls">
-                                                                <input type="text" name="direccion_cli" id="direccion_cli" placeholder="Direccion cliente" required  class="span4"/>
+                                                                <input type="text" name="direccion_cli" id="direccion_cli" placeholder="Direccion director@" required  class="span4"/>
                                                             </div>
                                                         </div>
 
