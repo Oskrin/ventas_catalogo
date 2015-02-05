@@ -81,18 +81,6 @@ function guardar_directores() {
                         $("#direccion_cli").focus();
                         alertify.error("Ingrese una dirección");
                     }else{
-                        if ($("#clave").val() === "") {
-                        $("#clave").focus();
-                        alertify.error("Ingrese una contraseña");
-                        }else{
-                        if ($("#clave2").val() === "") {
-                        $("#clave2").focus();
-                        alertify.error("Confirme contraseña");
-                        }else{
-                            if ($("#clave2").val() === "") {
-                        $("#clave2").focus();
-                        alertify.error("Confirme contraseña");
-                        }else{
                         $.ajax({
                             type: "POST",
                             url: "../procesos/guardar_directores.php",
@@ -108,9 +96,6 @@ function guardar_directores() {
                                 }
                             }
                         });
-                    }
-                    }
-                    }
                     }
                 }
             }
