@@ -119,7 +119,7 @@ include '../menus/menu.php';
                                                         </div>
 
                                                         <div class="control-group">
-                                                            <label class="control-label" for="direccion_cli">Contraseña: <font color="red">*</font></label>
+                                                            <label class="control-label" for="direccion_cli">Contraseña: </label>
                                                             <div class="controls">
                                                                 <input type="password" name="clave" id="clave" placeholder="" required  class="span4"/>
                                                             </div>
@@ -156,7 +156,7 @@ include '../menus/menu.php';
                                                         </div>
 
                                                         <div class="control-group">
-                                                            <label class="control-label" for="direccion_cli">Repetir Contraseña: <font color="red">*</font></label>
+                                                            <label class="control-label" for="direccion_cli">Repetir Contraseña: </label>
                                                             <div class="controls">
                                                                 <input type="password" name="clave2" id="clave2" placeholder="" required  class="span4"/>
                                                             </div>
