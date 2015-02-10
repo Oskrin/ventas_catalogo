@@ -205,10 +205,11 @@ if ($_POST["tipo_venta"] == "FACTURA") {
             }
         }
     }
+    $data = 1;
     ///////////////////cambio nota venta///////////////////
 } else {
     if ($_POST["tipo_venta"] == "NOTA") {
-
+       
         /////////////////contador factura venta no valida///////////
         $cont1 = 0;
         $consulta = pg_query("select max(id_facturas_novalidas) from facturas_novalidas");
@@ -354,7 +355,7 @@ if ($_POST["tipo_venta"] == "FACTURA") {
             for ($i = 0; $i <= $nelem; $i++) {
                 /////////////////contador detalle_factura_novalidas/////////////
                 $cont4 = 0;
-                $consulta = pg_query("select max(id_detalle_facturas_novalidas) from detalle_factura_novalidas");
+                $consulta = pg_query("select max(id_detalle_facturas_novalidas) from detalle_facturas_novalidas");
                 while ($row = pg_fetch_row($consulta)) {
                     $cont4 = $row[0];
                 }
@@ -362,7 +363,7 @@ if ($_POST["tipo_venta"] == "FACTURA") {
                 //////////////////////////  
                 //
             ///guardar detalle_factura_novalidas/////
-                pg_query("insert into detalle_factura_novalidas values('$cont4','$cont1','$arreglo1[$i]','$arreglo2[$i]','$arreglo3[$i]','$arreglo4[$i]','$arreglo5[$i]','Activo','$arreglo6[$i]')");
+                pg_query("insert into detalle_facturas_novalidas values('$cont4','$cont1','$arreglo1[$i]','$arreglo2[$i]','$arreglo3[$i]','$arreglo4[$i]','$arreglo5[$i]','Activo','$arreglo6[$i]')");
                 ////////////////////////////////
                 //
             //////////////modificar productos///////////
@@ -381,7 +382,7 @@ if ($_POST["tipo_venta"] == "FACTURA") {
 
                     /////////////////contador detalle_factura_novalidas/////////////
                     $cont6 = 0;
-                    $consulta = pg_query("select  max(id_detalle_facturas_novalidas) from detalle_factura_novalidas");
+                    $consulta = pg_query("select  max(id_detalle_facturas_novalidas) from detalle_facturas_novalidas");
                     while ($row = pg_fetch_row($consulta)) {
                         $cont6 = $row[0];
                     }
@@ -389,7 +390,7 @@ if ($_POST["tipo_venta"] == "FACTURA") {
                     //////////////////////////  
                     //
                 //////////////guardar detalle_factura_novalidas////////
-                    pg_query("insert into detalle_factura_novalidas values('$cont6','$cont1','$arreglo1[$i]','$arreglo2[$i]','$arreglo3[$i]','$arreglo4[$i]','$arreglo5[$i]','Activo','$arreglo6[$i]')");
+                    pg_query("insert into detalle_facturas_novalidas values('$cont6','$cont1','$arreglo1[$i]','$arreglo2[$i]','$arreglo3[$i]','$arreglo4[$i]','$arreglo5[$i]','Activo','$arreglo6[$i]')");
                     ////////////////////////////////////////////
                     //
                 //////////////modificar productos///////////
@@ -404,9 +405,10 @@ if ($_POST["tipo_venta"] == "FACTURA") {
                 }
             }
         }
+        $data = 2;
     }
 }
 
-$data = 1;
+
 echo $data;
 ?>
