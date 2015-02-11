@@ -210,7 +210,7 @@ $cont1++;
                                                         <legend>Detalle Factura</legend>
                                                         <table cellpadding="2" border="0" style="margin-left: 10px">
                                                             <tr>
-                                                                <!--<td><label>Código Barras:</label></td>-->
+                                                                <td><label>Código Barras:</label></td>
                                                                 <td><label>Código:</label></td>   
                                                                 <td><label>Producto:</label></td>   
                                                                 <td><label>Cantidad:</label></td>   
@@ -220,9 +220,9 @@ $cont1++;
                                                             </tr>
 
                                                             <tr>
-                                                                <!--<td><input type="text" name="codigo_barras" id="codigo_barras" class="campo" style="width: 170px"  placeholder="Buscar..."/></td>-->
-                                                                <td><input type="text" name="codigo" id="codigo" class="campo" style="width: 280px"  placeholder="Buscar..."/></td>
-                                                                <td><input type="text" name="producto" id="producto" class="campo" style="width: 280px"  placeholder="Buscar..."/></td>
+                                                                <td><input type="text" name="codigo_barras" id="codigo_barras" class="campo" style="width: 170px"  placeholder="Buscar..."/></td>
+                                                                <td><input type="text" name="codigo" id="codigo" class="campo" style="width: 180px"  placeholder="Buscar..."/></td>
+                                                                <td><input type="text" name="producto" id="producto" class="campo" style="width: 200px"  placeholder="Buscar..."/></td>
                                                                 <td><input type="text" name="cantidad" id="cantidad" class="campo" style="width: 60px" maxlength="10"/></td>
                                                                 <td><input type="text" name="p_venta" id="p_venta" style="width: 60px" class="campo" maxlength="10"/></td>
                                                                 <td><input type="text" name="descuento" id="descuento" class="campo" style="width: 60px" maxlength="3" placeholder="%" min="0" readonly/></td>
