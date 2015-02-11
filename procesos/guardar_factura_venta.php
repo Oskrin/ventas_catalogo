@@ -205,7 +205,7 @@ if ($_POST["tipo_venta"] == "FACTURA") {
             }
         }
     }
-    $data = 1;
+    $data = 0;
     ///////////////////cambio nota venta///////////////////
 } else {
     if ($_POST["tipo_venta"] == "NOTA") {
@@ -405,7 +405,7 @@ if ($_POST["tipo_venta"] == "FACTURA") {
                 }
             }
         }
-        $data = 2;
+        $data = $cont1;
     }
 }
 

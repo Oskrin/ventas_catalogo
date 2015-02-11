@@ -1124,14 +1124,14 @@ function guardar_factura() {
                                                     data: "id_cliente=" + $("#id_cliente").val() + "&comprobante=" + $("#comprobante").val() + "&num_factura=" + seriee + "&fecha_actual=" + $("#fecha_actual").val() + "&hora_actual=" + $("#hora_actual").val() + "&proforma=" + $("#proforma").val() + "&cancelacion=" + $("#cancelacion").val() + "&tipo_precio=" + $("#tipo_precio").val() + "&formas=" + $("#formas").val() + "&adelanto=" + $("#adelanto").val() + "&meses=" + $("#meses").val() + "&autorizacion=" + $("#autorizacion").val()+ "&fecha_auto=" + $("#fecha_auto").val()+ "&fecha_caducidad=" + $("#fecha_caducidad").val() + "&tarifa0=" + $("#total_p").val() + "&tarifa12=" + $("#total_p2").val() + "&iva=" + $("#iva").val() + "&desc=" + $("#desc").val() + "&tot=" + $("#tot").val() + "&ruc_ci=" + $("#ruc_ci").val() + "&nombre_cliente=" + $("#nombre_cliente").val() + "&direccion_cliente=" + $("#direccion_cliente").val() + "&telefono_cliente=" + $("#telefono_cliente").val() + "&correo=" + $("#correo").val() + "&campo1=" + string_v1 + "&campo2=" + string_v2 + "&campo3=" + string_v3 + "&campo4=" + string_v4 + "&campo5=" + string_v5+ "&campo6=" + string_v6+ "&tipo_venta=" + $("#tipo_venta").val(),
                                                     success: function(data) {
                                                         var val = data;
-                                                        if (val == 1) {
+                                                        if (val == 0) {
                                                             alertify.alert("Factura Guardada correctamente", function(){
                                                                 window.open("../reportes_sistema/factura_venta.php?hoja=A4&id="+$("#comprobante").val(),'_blank');
                                                                 location.reload();
                                                             });
                                                         }else{
                                                            alertify.alert("Factura Guardada correctamente", function(){
-                                                               // window.open("../reportes_sistema/factura_venta.php?hoja=A4&id="+$("#comprobante").val(),'_blank');
+                                                                window.open("../reportes_sistema/nota_venta.php?hoja=A4&id="+val,'_blank');
                                                                 location.reload();
                                                             });
                                                         }
