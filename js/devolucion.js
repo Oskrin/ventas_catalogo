@@ -581,7 +581,6 @@ function abrirDialogo() {
                             this.wrapper.remove();
                             this.element.show();
                         }
-
                     });
                     $("#combobox" ).combobox();
                 }
@@ -643,8 +642,8 @@ function guardar_devolucion() {
                                 string_v3 = string_v3 + "|" + v3[i];
                                 string_v4 = string_v4 + "|" + v4[i];
                                 string_v5 = string_v5 + "|" + v5[i];
-
                             }
+                            
                             $.ajax({
                                 type: "POST",
                                 url: "../procesos/guardar_devolucion_compra.php",

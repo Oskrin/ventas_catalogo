@@ -87,69 +87,82 @@ include '../menus/menu.php';
                                     <div class="tabbable">
                                         <fieldset>
                                             <form class="form-horizontal" id="directores_form" name="directores_form" method="post">
-                                                <section class="columna1">
-                                                    <div class="control-group">											
-                                                        <label class="control-label" for="ruc_ci">C.I.: <font color="red">*</font></label>
-                                                        <div class="controls">
-                                                            <input type="text" name="ruc_ci"  id="ruc_ci" placeholder="10000000000" required class="campo" maxlength="10">
-                                                            <input type="hidden" name="id_director"  id="id_director" readonly class="campo">
+                                                <div class="row">
+                                                    <div class="span6">
+                                                        <div class="control-group">											
+                                                            <label class="control-label" for="ruc_ci">C.I.: <font color="red">*</font></label>
+                                                            <div class="controls">
+                                                                <input type="text" name="ruc_ci"  id="ruc_ci" placeholder="10000000000" required class="span4" maxlength="10">
+                                                                <input type="hidden" name="id_director"  id="id_director" readonly class="campo">
+                                                            </div>
                                                         </div>
-                                                    </div>
 
-                                                    <div class="control-group">											
-                                                        <label class="control-label" for="nro_telefono">Teléfono:</label>
-                                                        <div class="controls">
-                                                            <input type="text" name="nro_telefono" id="nro_telefono" placeholder="062-999-999" maxlength="10" class="campo"/>
+                                                        <div class="control-group">											
+                                                            <label class="control-label" for="nro_telefono">Teléfono:</label>
+                                                            <div class="controls">
+                                                                <input type="text" name="nro_telefono" id="nro_telefono" placeholder="062-999-999" maxlength="10" class="span4"/>
+                                                            </div>
                                                         </div>
-                                                    </div>
 
-                                                    <div class="control-group">											
-                                                        <label class="control-label" for="pais_cli">País: <font color="red">*</font></label>
-                                                        <div class="controls">
-                                                            <input type="text" name="pais_cli" id="pais_cli" placeholder="Ingrese un pais" required  class="campo"/>
+                                                        <div class="control-group">											
+                                                            <label class="control-label" for="pais_cli">País: <font color="red">*</font></label>
+                                                            <div class="controls">
+                                                                <input type="text" name="pais_cli" id="pais_cli" placeholder="Ingrese un pais" required  class="span4"/>
+                                                            </div>
                                                         </div>
-                                                    </div>
 
-                                                    <div class="control-group">
-                                                        <label class="control-label" for="direccion_cli">Dirección: <font color="red">*</font></label>
-                                                        <div class="controls">
-                                                            <input type="text" name="direccion_cli" id="direccion_cli" placeholder="Direccion cliente" required  class="campo"/>
+                                                        <div class="control-group">
+                                                            <label class="control-label" for="direccion_cli">Dirección: <font color="red">*</font></label>
+                                                            <div class="controls">
+                                                                <input type="text" name="direccion_cli" id="direccion_cli" placeholder="Direccion director@" required  class="span4"/>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                </section>
 
-                                                <section class="columna2">
-                                                    <div class="control-group">											
-                                                        <label class="control-label" for="nombres_cli">Nombres Completos: <font color="red">*</font></label>
-                                                        <div class="controls">
-                                                            <input type="text" name="nombres_cli"  id="nombres_cli" placeholder="Nombres y Apellidos" style="margin-left: " required class="campo"/>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="control-group">
-                                                        <label class="control-label" for="nro_celular">Celular:</label>
-                                                        <div class="controls">
-                                                            <input type="tel" name="nro_celular" id="nro_celular" maxlength="10" placeholder="09-9999-999" class="campo" />
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="control-group">
-                                                        <label class="control-label" for="ciudad_cli">Ciudad: <font color="red">*</font></label>
-                                                        <div class="controls">
-                                                            <input type="text" name="ciudad_cli" id="ciudad_cli" required class="campo" />
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="control-group">
-                                                        <label class="control-label" for="email">E-mail: </label>
-                                                        <div class="controls">
-                                                            <div class="input-prepend input-append">
-                                                                <span class="add-on">@</span>
-                                                                <input type="text" name="email" id="email" placeholder="xxxx@example.com" class="campo" style="width: 165px"/>
+                                                        <div class="control-group">
+                                                            <label class="control-label" for="direccion_cli">Contraseña: </label>
+                                                            <div class="controls">
+                                                                <input type="password" name="clave" id="clave" placeholder="" required  class="span4"/>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </section>
+
+                                                    <div class="span6">
+                                                        <div class="control-group">											
+                                                            <label class="control-label" for="nombres_cli">Nombres Completos: <font color="red">*</font></label>
+                                                            <div class="controls">
+                                                                <input type="text" name="nombres_cli"  id="nombres_cli" placeholder="Nombres y Apellidos" required class="span4"/>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="control-group">
+                                                            <label class="control-label" for="nro_celular">Celular:</label>
+                                                            <div class="controls">
+                                                                <input type="tel" name="nro_celular" id="nro_celular" maxlength="10" placeholder="09-9999-999" class="span4" />
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="control-group">
+                                                            <label class="control-label" for="ciudad_cli">Ciudad: <font color="red">*</font></label>
+                                                            <div class="controls">
+                                                                <input type="text" name="ciudad_cli" id="ciudad_cli" required class="span4" />
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="control-group">
+                                                            <label class="control-label" for="email">E-mail: </label>
+                                                            <div class="controls">
+                                                                <input type="text" name="email" id="email" placeholder="xxxx@example.com" class="span4"/>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="control-group">
+                                                            <label class="control-label" for="direccion_cli">Repetir Contraseña: </label>
+                                                            <div class="controls">
+                                                                <input type="password" name="clave2" id="clave2" placeholder="" required  class="span4"/>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>     
                                             </form>
                                         </fieldset>
 
@@ -160,7 +173,6 @@ include '../menus/menu.php';
                                             <button class="btn btn-primary" id='btnBuscar'><i class="icon-search"></i> Buscar</button>
                                             <button class="btn btn-primary" id='btnNuevo'><i class="icon-pencil"></i> Nuevo</button>
                                         </div>
-
 
                                         <div id="directores" title="Búsqueda de Directores" class="">
                                             <table id="list"><tr><td></td></tr></table>

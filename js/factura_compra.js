@@ -226,6 +226,7 @@ function comprobar2() {
                             $("#precio").focus();
                             alertify.error("Ingrese un precio");
                         } else {
+                            
                             var filas = jQuery("#list").jqGrid("getRowData");
                             var descuento = 0;
                             var cal = 0;

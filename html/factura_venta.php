@@ -128,7 +128,7 @@ $cont1++;
                                                     </fieldset>
                                                     <br />
                                                     <hr> 
-                                                    
+
                                                     <fieldset>
                                                         <table cellpadding="2" border="0" style="margin-left: 10px">
                                                             <tr>
@@ -138,6 +138,11 @@ $cont1++;
                                                                 <td><label style="width: 100%; margin-left: 10px">001  - </label></td>
                                                                 <td><label style="width: 100%; margin-left: 10px">001  - </label></td>
                                                                 <td><input type="text" name="num_factura" id="num_factura" class="campo" style="width: 100px" /></td>
+                                                                <td><label for="tipo_venta" style="width: 100%;margin-left: 10px">Tipo de Venta: </label></td>  
+                                                                <td><select id="tipo_venta" name="tipo_venta" style="width: 180px">
+                                                                        <option value="FACTURA">FACTURA</option>
+                                                                        <option value="NOTA">NOTA VENTA</option>
+                                                                    </select></td>
                                                                 <td><input type="hidden" name="num_oculto" id="num_oculto" class="campo" style="width: 150px" value="<?php echo $num_factura ?>" /></td>
                                                                 <td><div id="estado"><h3></h3></div></td>
                                                             </tr>  
