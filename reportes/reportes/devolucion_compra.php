@@ -1,101 +1,126 @@
 <?php
-require('../dompdf/dompdf_config.inc.php');
-session_start();
-    $codigo='<html> 
-    <head> 
-        <link rel="stylesheet" href="../../css/estilosAgrupados.css" type="text/css" /> 
-    </head> 
-    <body>
-        <header>
-            <img src="../../images/logo_empresa.jpg" />
-            <div id="me">
-                <h2 style="text-align:center;border:solid 0px;width:100%;">'.$_SESSION['empresa'].'</h2>
-                <h4 style="text-align:center;border:solid 0px;width:100%;">'.$_SESSION['slogan'].'</h4>
-                <h4 style="text-align:center;border:solid 0px;width:100%;">'.$_SESSION['propietario'].'</h4>
-                <h4 style="text-align:center;border:solid 0px;width:100%;">'.$_SESSION['direccion'].'</h4>
-                <h4 style="text-align:center;border:solid 0px;width:100%;">Telf: '.$_SESSION['telefono'].' Cel:  '.$_SESSION['celular'].' '.$_SESSION['pais_ciudad'].'</h4>
-            </div>      
-    </header>        
-    <hr>
-    <div id="linea">
-        <h3>DEVOLUCIÓN COMPRA </h3>
-    </div>';
+    require('../../fpdf/fpdf.php');
     include '../../procesos/base.php';
+    include '../../procesos/funciones.php';
     conectarse();    
-    $sql=pg_query("select * from devolucion_compra,proveedores,usuario,empresa where devolucion_compra.id_proveedor=proveedores.id_proveedor and devolucion_compra.id_usuario=usuario.id_usuario and devolucion_compra.id_empresa=empresa.id_empresa and id_devolucion_compra='$_GET[id]'");
-    while($row=pg_fetch_row($sql)){
-        $temp1=$row[10];
-        $temp2=$row[11];
-        $temp3=$row[12];
-        $temp4=$row[13];
-        $temp5=$row[14];
-        $codigo.='<table border=0><tr>
-        <td style="width:80px;text-align:left;">Proveedor:</td>
-        <td style="width:470px;text-align:left;">'.$row[20].'</td>
-        <td style="width:80px;text-align:left;">C.I.:</td>
-        <td style="width:100px;text-align:left;">'.$row[19].'</td>';
-        $codigo.='</tr></table>';
-        $codigo.='<table border=0><tr>
-        <td style="width:80px;text-align:left;">Representante:</td>
-        <td style="width:200px;text-align:left;">'.$row[21].'</td>
-        <td style="width:80px;text-align:left;">Dirección:</td>
-        <td style="width:175px;text-align:left;">'.' '.$row[23].'</td>
-        <td style="width:80px;text-align:left;">Celular:</td>
-        <td style="width:102px;text-align:left;">'.' '.$row[25].'</td>
-        </tr></table>';           
-
-        $codigo.='<br><table border=0><tr>
-        <td style="width:80px;text-align:left;">Responsable:</td>
-        <td style="width:460px;text-align:left;">'.$row[35].' '.$row[36].'</td>
-        <td style="width:80px;text-align:left;">Celular:</td>
-        <td style="width:100px;text-align:left;">'.$row[39].'</td>
-       </tr></table>';          
-    }   
-    $sql=pg_query("select * from detalle_devolucion_compra,productos where detalle_devolucion_compra.cod_productos=productos.cod_productos and id_devolucion_compra='$_GET[id]' order by id_devolucion_compra asc;");
-    $codigo.='<br/><table border=0><tr>
-    <td style="width:130px;text-align:center;border:solid 1px;">Código</td>
-    <td style="width:260px;text-align:center;border:solid 1px;">Producto</td>
-    <td style="width:80px;text-align:center;border:solid 1px;">Cantidad</td>
-    <td style="width:80px;text-align:center;border:solid 1px;">PVP</td>
-    <td style="width:80px;text-align:center;border:solid 1px;">Descuento</td>
-    <td style="width:80px;text-align:center;border:solid 1px;">Total</td></tr>';
-      
-    while($row=pg_fetch_row($sql)){
-        
-        $codigo.='<tr><td style="width:130px;text-align:center;border:solid 1px;">'.$row[9].'</td>
-        <td style="width:260px;text-align:center;border:solid 1px;">'.$row[11].'</td>
-        <td style="width:80px;text-align:center;border:solid 1px;">'.$row[3].'</td>
-        <td style="width:80px;text-align:center;border:solid 1px;">'.$row[4].'</td>
-        <td style="width:80px;text-align:center;border:solid 1px;">'.$row[5].'</td>
-        <td style="width:80px;text-align:center;border:solid 1px;">'.$row[6].'</td>
-        </tr>';    
+    date_default_timezone_set('America/Guayaquil'); 
+    session_start()   ;
+    class PDF extends FPDF{   
+        var $widths;
+        var $aligns;
+        var $temp1;
+        var $temp2;
+        var $temp3;
+        var $temp4;
+        var $temp5;
+        function SetWidths($w){            
+            $this->widths=$w;
+        }                       
+        function Header(){                         
+            $this->AddFont('Amble-Regular');
+            $this->SetFont('Amble-Regular','',10);        
+            $fecha = date('Y-m-d', time());
+            $this->SetX(1);
+            $this->SetY(1);
+            $this->Cell(20, 5, $fecha, 0,0, 'C', 0);                         
+            $this->Cell(150, 5, "CLIENTE", 0,1, 'R', 0);      
+            $this->SetFont('Arial','B',16);                                                    
+            $this->Cell(190, 8, "EMPRESA: ".$_SESSION['empresa'], 0,1, 'C',0);                                
+            $this->Image('../../images/logo_empresa.jpg',1,8,40,30);
+            $this->SetFont('Amble-Regular','',10);        
+            $this->Cell(180, 5, "PROPIETARIO: ".utf8_decode($_SESSION['propietario']),0,1, 'C',0);                                
+            $this->Cell(70, 5, "TEL.: ".utf8_decode($_SESSION['telefono']),0,0, 'R',0);                                
+            $this->Cell(60, 5, "CEL.: ".utf8_decode($_SESSION['celular']),0,1, 'C',0);                                
+            $this->Cell(170, 5, "DIR.: ".utf8_decode($_SESSION['direccion']),0,1, 'C',0);                                
+            $this->Cell(170, 5, "SLOGAN.: ".utf8_decode($_SESSION['slogan']),0,1, 'C',0);                                
+            $this->Cell(170, 5, utf8_decode( $_SESSION['pais_ciudad']),0,1, 'C',0);                                                                                        
+            $this->SetDrawColor(0,0,0);
+            $this->SetLineWidth(0.4);
+            $this->SetFillColor(120,120,120);
+            $this->Line(1,75,210,75);            
+            $this->Line(1,45,210,45);            
+            $this->SetFont('Arial','B',12);                                                                
+            $this->Cell(190, 5, utf8_decode("DEVOLUCIÓN COMPRA"),0,1, 'C',0);                                                                                                                
+            $this->SetFont('Amble-Regular','',10);        
+            $this->Ln(6);
+            $this->SetFillColor(255,255,225);
+            $sql=pg_query("select * from devolucion_compra,proveedores,usuario,empresa where devolucion_compra.id_proveedor=proveedores.id_proveedor and devolucion_compra.id_usuario=usuario.id_usuario and devolucion_compra.id_empresa=empresa.id_empresa and id_devolucion_compra='$_GET[id]'");
+            $this->SetLineWidth(0.2);
+            while($row=pg_fetch_row($sql)){                                                                                    
+                $this->SetX(1);                                  
+                $this->Cell(100, 6, utf8_decode('CI/Ruc: '.$row[19]),0,0, 'L',1);                
+                $this->Cell(105, 6, utf8_decode('Proveedor: '.$row[20]),0,1, 'L',1);                
+                $this->SetX(1);                                  
+                $this->Cell(100, 6, utf8_decode('Representante: '.$row[21]),0,0, 'L',1);                
+                $this->Cell(105, 6, utf8_decode('Dirección: '.$row[23]),0,1, 'L',1);                
+                $this->SetX(1);                                  
+                $this->Cell(205, 6, utf8_decode('Dirección: '.$row[39]),0,1, 'L',1);                
+                $this->SetX(1);                                                  
+                $this->Cell(100, 6, utf8_decode('Celular: '.$row[25]),0,0, 'L',1);                                                
+                $this->Cell(105, 6, utf8_decode('Responsable: '.$row[35].' '.$row[36]),0,0, 'L',1);                         
+                $this->temp1 = $row[10];                
+                $this->temp2 = $row[11];
+                $this->temp3 = $row[12];
+                $this->temp4 = $row[13];
+                $this->temp5 = $row[14];                
+            }            
+            $this->Ln(8);                        
+            $this->SetX(1);
+            $this->SetFont('Amble-Regular','',10);        
+            $this->Cell(40, 5, utf8_decode("Código"),1,0, 'C',0);
+            $this->Cell(80, 5, utf8_decode("Producto"),1,0, 'C',0);
+            $this->Cell(20, 5, utf8_decode("Cantidad"),1,0, 'C',0);
+            $this->Cell(20, 5, utf8_decode("PVP"),1,0, 'C',0);
+            $this->Cell(20, 5, utf8_decode("Descuento"),1,0, 'C',0);        
+            $this->Cell(25, 5, utf8_decode("Total"),1,1, 'C',0);                
+            $this->Ln(1);                
+        }
+        function Footer(){            
+            $this->SetY(-15);            
+            $this->SetFont('Arial','I',8);            
+            $this->Cell(0,10,'Pag. '.$this->PageNo().'/{nb}',0,0,'C');
+        }               
     }
-    
-    $codigo.='</table>';
-    $codigo.='<table border=0 style="margin-left:430px;"><tr>
-    <td style="width:80px;text-align:left;border:solid 1px;height:20px">Tarifa 0:</td>    
-    <td style="width:80px;text-align:center;border:solid 1px;height:20px">'.$temp1.'</td>    
-    </tr><tr>
-    <td style="width:80px;text-align:left;border:solid 1px;height:20px">Tarifa 12:</td>    
-    <td style="width:80px;text-align:center;border:solid 1px;height:20px">'.$temp2.'</td>    
-    </tr><tr>
-    <td style="width:80px;text-align:left;border:solid 1px;height:20px">12% Iva:</td>    
-    <td style="width:80px;text-align:center;border:solid 1px;height:20px">'.$temp3.'</td>    
-    </tr><tr>
-    <td style="width:80px;text-align:left;border:solid 1px;height:20px">Descuento:</td>    
-    <td style="width:80px;text-align:center;border:solid 1px;height:20px">'.$temp4.'</td>    
-    </tr><tr>
-    <td style="width:80px;text-align:left;border:solid 1px;height:20px">Total:</td>    
-    <td style="width:80px;text-align:center;border:solid 1px;height:20px">'.$temp5.'</td>    
-    </tr>
-    </table>';          
-    $codigo=utf8_decode($codigo);
-
-    $dompdf= new DOMPDF();
-    $dompdf->load_html($codigo);
-    ini_set("memory_limit","100M");
-    $dompdf->set_paper("A4","portrait");
-    $dompdf->render();
-    //$dompdf->stream("reporteRegistro.pdf");
-    $dompdf->stream('devolucion_compra.pdf',array('Attachment'=>0));
+    $pdf = new PDF('P','mm','a4');
+    $pdf->AddPage();
+    $pdf->SetMargins(0,0,0,0);
+    $pdf->AliasNbPages();
+    $pdf->AddFont('Amble-Regular');                    
+    $pdf->SetFont('Amble-Regular','',10);       
+    $pdf->SetFont('Arial','B',9);   
+    $pdf->SetX(5);    
+    $pdf->SetFont('Amble-Regular','',9); 
+    $total = 0;      
+    $temp1 = $pdf->temp1;
+    $temp2 = $pdf->temp2;
+    $temp3 = $pdf->temp3;
+    $temp4 = $pdf->temp4;
+    $temp5 = $pdf->temp5;    
+    $sql=pg_query("select * from detalle_devolucion_compra,productos where detalle_devolucion_compra.cod_productos=productos.cod_productos and id_devolucion_compra='$_GET[id]' order by id_devolucion_compra asc;");
+    while($row=pg_fetch_row($sql)){                
+        $pdf->SetX(1);                  
+        $pdf->Cell(40, 5, maxCaracter(utf8_decode($row[9]),20),0,0, 'L',0);
+        $pdf->Cell(80, 5, maxCaracter(utf8_decode($row[11]),20),0,0, 'L',0);
+        $pdf->Cell(20, 5, maxCaracter(utf8_decode($row[3]),80),0,0, 'C',0);
+        $pdf->Cell(20, 5, maxCaracter(utf8_decode($row[4]),20),0,0, 'C',0);        
+        $pdf->Cell(20, 5, maxCaracter(utf8_decode($row[5]),20),0,0, 'C',0);                                     
+        $pdf->Cell(25, 5, maxCaracter(utf8_decode($row[6]),20),0,0, 'C',0);                                     
+        $pdf->Ln(5);                                                                
+    }
+    $pdf->SetX(1);                  
+    $pdf->Ln(5);   
+    $sql=pg_query("select factura_compra.descuento_compra,factura_compra.tarifa0,factura_compra.tarifa12,factura_compra.iva_compra,factura_compra.total_compra from factura_compra,detalle_factura_compra,productos where factura_compra.id_factura_compra=detalle_factura_compra.id_factura_compra and detalle_factura_compra.cod_productos=productos.cod_productos and detalle_factura_compra.id_factura_compra='$_GET[id]'");    
+    while($row=pg_fetch_row($sql)){        
+        $pdf->Cell(173, 6, utf8_decode("Tarifa 0"),0,0, 'R',0);
+        $pdf->Cell(35, 6, maxCaracter(utf8_decode($temp1),20),0,1, 'C',0);
+        $pdf->Cell(173, 6, utf8_decode("Tarifa 12"),0,0, 'R',0);
+        $pdf->Cell(35, 6, maxCaracter(utf8_decode($temp2),20),0,1, 'C',0);
+        $pdf->Cell(173, 6, utf8_decode("Iva 12%"),0,0, 'R',0);
+        $pdf->Cell(35, 6, maxCaracter(utf8_decode($temp3),20),0,1, 'C',0);
+        $pdf->Cell(173, 6, utf8_decode("Descuento"),0,0, 'R',0);
+        $pdf->Cell(35, 6, maxCaracter(utf8_decode($temp4),20),0,1, 'C',0);
+        $pdf->Cell(173, 6, utf8_decode("Total"),0,0, 'R',0);
+        $pdf->Cell(35, 6, maxCaracter(utf8_decode($temp5),20),0,1, 'C',0);
+    } 
+    $pdf->Output();
 ?>

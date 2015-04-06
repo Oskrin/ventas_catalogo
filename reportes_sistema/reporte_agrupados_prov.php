@@ -1,78 +1,94 @@
 <?php
-require('../reportes/dompdf/dompdf_config.inc.php');
-session_start();
-    $codigo='<html> 
-    <head> 
-        <link rel="stylesheet" href="../css/estilosAgrupados.css" type="text/css" /> 
-    </head> 
-    <body>
-        <header>
-            <img src="../images/logo_empresa.jpg" />
-            <div id="me">
-                <h2 style="text-align:center;border:solid 0px;width:100%;">'.$_SESSION['empresa'].'</h2>
-                <h4 style="text-align:center;border:solid 0px;width:100%;">'.$_SESSION['slogan'].'</h4>
-                <h4 style="text-align:center;border:solid 0px;width:100%;">'.$_SESSION['propietario'].'</h4>
-                <h4 style="text-align:center;border:solid 0px;width:100%;">'.$_SESSION['direccion'].'</h4>
-                <h4 style="text-align:center;border:solid 0px;width:100%;">Telf: '.$_SESSION['telefono'].' Cel:  '.$_SESSION['celular'].' '.$_SESSION['pais_ciudad'].'</h4>
-            </div>        
-    </header>        
-    <hr>
-    <div id="linea">
-        <h3>PRODUCTOS AGRUPADOS POR PROVEEDOR </h3>
-    </div>';
+    require('../fpdf/fpdf.php');
     include '../procesos/base.php';
+    include '../procesos/funciones.php';
     conectarse();    
-    $total=0;
-    $repetido=0;    
-    $sql=pg_query("select proveedores.id_proveedor, identificacion_pro,empresa_pro from proveedores,factura_compra where proveedores.id_proveedor='$_GET[id]' LIMIT 1");
-    while($row=pg_fetch_row($sql)){          
-        $codigo.='<h2 style="font-weight: bold;font-size:12px;padding:5;margin:0px;border:solid 1px #000;color:blue;background:beige">RUC/CI: '.$row[1].'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'.$row[2].'</h2><br />';                    
-    }
-    $sql=pg_query("select proveedores.id_proveedor, identificacion_pro,factura_compra.id_factura_compra,num_serie from proveedores,factura_compra where proveedores.id_proveedor='$_GET[id]' and factura_compra.id_proveedor=proveedores.id_proveedor");
-    while($row=pg_fetch_row($sql)){
-        $sql1=pg_query("select detalle_factura_compra.id_detalle_compra,productos.codigo,productos.articulo,productos.iva_minorista,productos.iva_mayorista,productos.stock,detalle_factura_compra.precio_compra,total_compra,cantidad from detalle_factura_compra,productos where detalle_factura_compra.cod_productos=productos.cod_productos and detalle_factura_compra.id_factura_compra='$row[2]' order by id_detalle_compra asc");
-        $codigo.='<div id="cuerpo">';
-        $codigo.='<table border=0>';                      
-        while($row1=pg_fetch_row($sql1)){
-            if($repetido==0){     
-                $codigo.='<tr>                
-                <td style="width:150px;text-align:center;">Nro Factura</td>    
-                <td style="width:100px;text-align:center;">Código</td>
-                <td style="width:150px;text-align:center;">Producto</td>
-                <td style="width:100px;text-align:center;">Precio Compra</td>
-                <td style="width:100px;text-align:center;">Total Compra</td>
-                <td style="width:100px;text-align:center;">Cantidad</td>
-                </tr>
-                <tr><td colspan=6><hr></td></tr>';
-                $repetido=1;   
-            }
-            $codigo.='<tr>
-                <td style="width:150px;text-align:center;">'.$row[3].'</td>    
-                <td style="width:100px;text-align:center;">'.$row1[1].'</td>
-                <td style="width:150px;text-align:center;">'.$row1[2].'</td>
-                <td style="width:100px;text-align:center;">'.$row1[6].'</td>
-                <td style="width:100px;text-align:center;">'.$row1[7].'</td>
-                <td style="width:100px;text-align:center;">'.$row1[8].'</td>
-            ';      
-            $total=$total+$row1[7];          
+    date_default_timezone_set('America/Guayaquil'); 
+    session_start()   ;
+    class PDF extends FPDF
+    {   
+        var $widths;
+        var $aligns;
+        function SetWidths($w){            
+            $this->widths=$w;
+        }                       
+        function Header(){             
+            $this->AddFont('Amble-Regular');
+            $this->SetFont('Amble-Regular','',10);        
+            $fecha = date('Y-m-d', time());
+            $this->SetX(1);
+            $this->SetY(1);
+            $this->Cell(20, 5, $fecha, 0,0, 'C', 0);                         
+            $this->Cell(150, 5, "CLIENTE", 0,1, 'R', 0);      
+            $this->SetFont('Arial','B',16);                                                    
+            $this->Cell(190, 8, "EMPRESA: ".$_SESSION['empresa'], 0,1, 'C',0);                                
+            $this->Image('../images/logo_empresa.jpg',1,8,40,30);
+            $this->SetFont('Amble-Regular','',10);        
+            $this->Cell(180, 5, "PROPIETARIO: ".utf8_decode($_SESSION['propietario']),0,1, 'C',0);                                
+            $this->Cell(70, 5, "TEL.: ".utf8_decode($_SESSION['telefono']),0,0, 'R',0);                                
+            $this->Cell(60, 5, "CEL.: ".utf8_decode($_SESSION['celular']),0,1, 'C',0);                                
+            $this->Cell(170, 5, "DIR.: ".utf8_decode($_SESSION['direccion']),0,1, 'C',0);                                
+            $this->Cell(170, 5, "SLOGAN.: ".utf8_decode($_SESSION['slogan']),0,1, 'C',0);                                
+            $this->Cell(170, 5, utf8_decode( $_SESSION['pais_ciudad']),0,1, 'C',0);                                                                                        
+            $this->SetDrawColor(0,0,0);
+            $this->SetLineWidth(0.5);
+            $this->SetFillColor(120,120,120);
+            $this->Line(1,55,210,55);            
+            $this->SetFont('Arial','B',12);                                                                
+            $this->Cell(190, 5, utf8_decode("PRODUCTOS AGRUPADOS POR PROVEEDOR"),0,1, 'C',0);                                                                                                                
+            $this->SetFont('Amble-Regular','',10);        
+            $this->Ln(2);
+            $sql=pg_query("select proveedores.id_proveedor, identificacion_pro,empresa_pro from proveedores,factura_compra where proveedores.id_proveedor='$_GET[id]' LIMIT 1");                        
+            $this->SetLineWidth(0.2);
+            while($row=pg_fetch_row($sql)){          
+                $this->SetX(1);                  
+                $this->Cell(80, 8, utf8_decode('RUC/CI: '.$row[1]),1,0, 'L',1);                                                                                                        
+                $this->Cell(125, 8, utf8_decode('NOMBRE: '.$row[2]),1,1, 'L',1);                                                                                                        
+            }                        
+            $this->Ln(2);
+            $this->SetX(1);
+            $this->SetFont('Amble-Regular','',10);        
+            $this->Cell(35, 5, utf8_decode("Nro Factura"),1,0, 'C',0);
+            $this->Cell(30, 5, utf8_decode("Código"),1,0, 'C',0);
+            $this->Cell(60, 5, utf8_decode("Producto"),1,0, 'C',0);        
+            $this->Cell(30, 5, utf8_decode("Precio Compra"),1,0, 'C',0);    
+            $this->Cell(30, 5, utf8_decode("Total Compra"),1,0, 'C',0);    
+            $this->Cell(20, 5, utf8_decode("Cantidad"),1,1, 'C',0);               
         }
-        $codigo.='</table>';    
-        $codigo.='<hr>';
-         $codigo.='<table>';                                                
-        $codigo.='<tr>
-        <td style="width:200px;text-align:left;font-weight:bold">'."Totales".'</td>
-        <td style="width:80px;text-align:center;font-weight:bold">'.(number_format($total,2,',','.')).'</td>';
-        $codigo.='</tr>';                           
-        $codigo.='</table>';      
+        function Footer(){            
+            $this->SetY(-15);            
+            $this->SetFont('Arial','I',8);            
+            $this->Cell(0,10,'Pag. '.$this->PageNo().'/{nb}',0,0,'C');
+        }               
     }
-    $codigo.='</body></html>';                           
-    $codigo=utf8_decode($codigo);
-
-    $dompdf= new DOMPDF();
-    $dompdf->load_html($codigo);
-    ini_set("memory_limit","100M");
-    $dompdf->set_paper("A4","portrait");
-    $dompdf->render();
-    //$dompdf->stream("reporteRegistro.pdf");
-    $dompdf->stream('reporte_agrupados_prov.pdf',array('Attachment'=>0));
+    $pdf = new PDF('P','mm','a4');
+    $pdf->AddPage();
+    $pdf->SetMargins(0,0,0,0);
+    $pdf->AliasNbPages();
+    $pdf->AddFont('Amble-Regular');                    
+    $pdf->SetFont('Amble-Regular','',10);       
+    $pdf->SetFont('Arial','B',9);   
+    $pdf->SetX(5);    
+    $pdf->SetFont('Amble-Regular','',9); 
+    $total = 0;      
+    $sql=pg_query("select proveedores.id_proveedor, identificacion_pro,factura_compra.id_factura_compra,num_serie from proveedores,factura_compra where proveedores.id_proveedor='$_GET[id]' and factura_compra.id_proveedor=proveedores.id_proveedor");
+    while($row=pg_fetch_row($sql)){        
+        $sql1=pg_query("select detalle_factura_compra.id_detalle_compra,productos.codigo,productos.articulo,productos.iva_minorista,productos.iva_mayorista,productos.stock,detalle_factura_compra.precio_compra,total_compra,cantidad from detalle_factura_compra,productos where detalle_factura_compra.cod_productos=productos.cod_productos and detalle_factura_compra.id_factura_compra='$row[2]' order by id_detalle_compra asc");
+        while($row1=pg_fetch_row($sql1)){            
+            $pdf->SetX(1);                  
+            $pdf->Cell(35, 5, maxCaracter(utf8_decode($row[3]),20),0,0, 'L',0);
+            $pdf->Cell(30, 5, maxCaracter(utf8_decode($row1[1]),12),0,0, 'L',0);
+            $pdf->Cell(60, 5, maxCaracter(utf8_decode($row1[2]),40),0,0, 'L',0);        
+            $pdf->Cell(30, 5, maxCaracter(utf8_decode($row1[6]),10),0,0, 'C',0);                         
+            $pdf->Cell(30, 5, maxCaracter( utf8_decode($row1[7]),10),0,0, 'C',0);                         
+            $pdf->Cell(20, 5, maxCaracter( utf8_decode($row1[8]),10),0,0, 'C',0);                         
+            $pdf->Ln(5);        
+        }    
+        $total=$total+$row1[7];                                                            
+    }
+    $pdf->SetX(1);                  
+    $pdf->Ln(5);   
+    $pdf->Cell(185, 5, "Totales:",0,0, 'R',0);                         
+    $pdf->Cell(20, 5, number_format($total,2,',','.'),0,1, 'C',0);                                 
+    $pdf->Output();
 ?>
