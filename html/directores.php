@@ -117,13 +117,6 @@ include '../menus/menu.php';
                                                                 <input type="text" name="direccion_cli" id="direccion_cli" placeholder="Direccion director@" required  class="span4"/>
                                                             </div>
                                                         </div>
-
-                                                        <div class="control-group">
-                                                            <label class="control-label" for="direccion_cli">Contraseña: </label>
-                                                            <div class="controls">
-                                                                <input type="password" name="clave" id="clave" placeholder="" required  class="span4"/>
-                                                            </div>
-                                                        </div>
                                                     </div>
 
                                                     <div class="span6">
@@ -155,12 +148,6 @@ include '../menus/menu.php';
                                                             </div>
                                                         </div>
 
-                                                        <div class="control-group">
-                                                            <label class="control-label" for="direccion_cli">Repetir Contraseña: </label>
-                                                            <div class="controls">
-                                                                <input type="password" name="clave2" id="clave2" placeholder="" required  class="span4"/>
-                                                            </div>
-                                                        </div>
                                                     </div>
                                                 </div>     
                                             </form>

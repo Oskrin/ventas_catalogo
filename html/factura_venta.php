@@ -120,8 +120,8 @@ $cont1++;
                                                                 <td><input type="text" name="fecha_actual" id="fecha_actual" class="campo" readonly style="margin-left: 5px; width: 100px" value="" /></td>
                                                                 <td><label style="width: 100%; margin-left: 10px">Hora:</label></td>
                                                                 <td><input type="text" name="hora_actual" id="hora_actual" class="campo" readonly style="margin-left: 5px; width: 100px"/></td>
-                                                                <td><label for="proforma" style="width: 100%; margin-left: 10px">Proforma Nro:</label></td>   
-                                                                <td><input type="text" name="proforma" id="proforma" class="campo" style="margin-left: 5px; width: 100px"  readonly/></td>
+                                                                
+                                                                <td><input type="hidden" name="proforma" id="proforma" class="campo" style="margin-left: 5px; width: 100px"  /></td>
                                                                 <td><input type="hidden" name="comprobante2" id="comprobante2" class="campo" style="width: 100px" value="<?php echo $cont1 ?>" /></td>
                                                             </tr>  
                                                         </table>  
@@ -291,7 +291,6 @@ $cont1++;
                                                 </div>
 
                                                 <div id="buscar_facturas_venta" title="BUSCAR FACTURAS VENTAS">
-
                                                     <table id="list2"><tr><td></td></tr></table>
                                                     <div id="pager2"></div>
                                                 </div> 
@@ -312,9 +311,13 @@ $cont1++;
                                                 <div id="seguro">
                                                     <label>Esta seguro de Anular la factura</label>  
                                                     <br />
-
                                                     <button class="btn btn-primary" id='btnAceptar'><i class="icon-ok"></i> Aceptar</button>
                                                     <button class="btn btn-primary" id='btnSalir'><i class="icon-remove-sign"></i> Cancelar</button>
+                                                </div>
+
+                                                <div id="buscar_proformas" title="BUSCAR PROFORMAS">
+                                                    <table id="list4"><tr><td></td></tr></table>
+                                                    <div id="pager4"></div>
                                                 </div>
 
                                                 <div class="form-actions">
@@ -326,6 +329,7 @@ $cont1++;
                                                     <button class="btn btn-primary" id='btnImprimir'><i class="icon-print"></i> Imprimir</button>
                                                     <button class="btn btn-primary" id='btnAtras'><i class="icon-step-backward"></i> Atras</button>
                                                     <button class="btn btn-primary" id='btnAdelante'>Adelante <i class="icon-step-forward"></i></button>
+                                                    <button class="btn btn-primary" id='btnProforma'>Proformas </button>
                                                 </div>
                                             </div>
                                         </div>
