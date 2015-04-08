@@ -1,30 +1,62 @@
 <?php
-require('../dompdf/dompdf_config.inc.php');
-session_start();
-    $codigo='<html> 
-    <head> 
-        <link rel="stylesheet" href="../../css/estilosAgrupados.css" type="text/css" /> 
-    </head> 
-    <body>
-        <header>
-            <img src="../../images/logo_empresa.jpg" />
-            <div id="me">
-                <h2 style="text-align:center;border:solid 0px;width:100%;">'.$_SESSION['empresa'].'</h2>
-                <h4 style="text-align:center;border:solid 0px;width:100%;">'.$_SESSION['slogan'].'</h4>
-                <h4 style="text-align:center;border:solid 0px;width:100%;">'.$_SESSION['propietario'].'</h4>
-                <h4 style="text-align:center;border:solid 0px;width:100%;">'.$_SESSION['direccion'].'</h4>
-                <h4 style="text-align:center;border:solid 0px;width:100%;">Telf: '.$_SESSION['telefono'].' Cel:  '.$_SESSION['celular'].' '.$_SESSION['pais_ciudad'].'</h4>
-                <h4 style="text-align: center;width:50%;display: inline-block;">Desde el : '.$_GET['inicio'].'</h4>
-                <h4 style="text-align: center;width:45%;display: inline-block;">Hasta el : '.$_GET['fin'].'</h4>
-        
-            </div>
-    </header>        
-    <hr>
-    <div id="linea">
-        <h3>DIARIO  DE CAJA </h3>
-    </div>';
+    require('../../fpdf/fpdf.php');
     include '../../procesos/base.php';
+    include '../../procesos/funciones.php';
     conectarse();    
+    date_default_timezone_set('America/Guayaquil'); 
+    session_start()   ;
+    class PDF extends FPDF{   
+        var $widths;
+        var $aligns;       
+        function SetWidths($w){            
+            $this->widths=$w;
+        }                       
+        function Header(){                         
+            $this->AddFont('Amble-Regular');
+            $this->SetFont('Amble-Regular','',10);        
+            $fecha = date('Y-m-d', time());
+            $this->SetX(1);
+            $this->SetY(1);
+            $this->Cell(20, 5, $fecha, 0,0, 'C', 0);                         
+            $this->Cell(150, 5, "CLIENTE", 0,1, 'R', 0);      
+            $this->SetFont('Arial','B',16);                                                    
+            $this->Cell(190, 8, "EMPRESA: ".$_SESSION['empresa'], 0,1, 'C',0);                                
+            $this->Image('../../images/logo_empresa.jpg',1,8,40,30);
+            $this->SetFont('Amble-Regular','',10);        
+            $this->Cell(180, 5, "PROPIETARIO: ".utf8_decode($_SESSION['propietario']),0,1, 'C',0);                                
+            $this->Cell(70, 5, "TEL.: ".utf8_decode($_SESSION['telefono']),0,0, 'R',0);                                
+            $this->Cell(60, 5, "CEL.: ".utf8_decode($_SESSION['celular']),0,1, 'C',0);                                
+            $this->Cell(170, 5, "DIR.: ".utf8_decode($_SESSION['direccion']),0,1, 'C',0);                                
+            $this->Cell(170, 5, "SLOGAN.: ".utf8_decode($_SESSION['slogan']),0,1, 'C',0);                                
+            $this->Cell(170, 5, utf8_decode( $_SESSION['pais_ciudad']),0,1, 'C',0);                                                                                                    
+            $this->SetDrawColor(0,0,0);
+            $this->SetLineWidth(0.4);            
+            $this->Line(1,50,210,50);            
+            $this->SetFont('Arial','B',12);                                                                
+            $this->Cell(90, 5, utf8_decode($_GET['inicio']),0,0, 'R',0);                                                                                        
+            $this->Cell(40, 5, utf8_decode($_GET['fin']),0,1, 'C',0);                                                                                                    
+            $this->Cell(190, 5, utf8_decode("DIARIO DE CAJA"),0,1, 'C',0);                                                                                                                            
+            $this->SetFont('Amble-Regular','',10);        
+            $this->Ln(3);
+            $this->SetFillColor(255,255,225);            
+            $this->SetLineWidth(0.2);                                        
+        }
+        function Footer(){            
+            $this->SetY(-15);            
+            $this->SetFont('Arial','I',8);            
+            $this->Cell(0,10,'Pag. '.$this->PageNo().'/{nb}',0,0,'C');
+        }               
+    }
+    $pdf = new PDF('P','mm','a4');
+    $pdf->AddPage();
+    $pdf->SetMargins(0,0,0,0);
+    $pdf->AliasNbPages();
+    $pdf->AddFont('Amble-Regular');                    
+    $pdf->SetFont('Amble-Regular','',10);       
+    $pdf->SetFont('Arial','B',9);   
+    $pdf->SetX(5);    
+    $pdf->SetFont('Amble-Regular','',9);     
+    $pdf->SetX(1);                       
     $total=0;
     $contado=0;
     $credito=0;
@@ -51,51 +83,38 @@ session_start();
     while($row=pg_fetch_row($sql)){
         $cxc=$row[0];
     }
-    $codigo.="<table style='font-size:12px;' border=0>";
-    $codigo.="<tr style='font-weight:bold;'>
-    <td style='width:650px;'>Ingresos</td>
-    <td style='width:100px;'>Total</td>
-    </tr>
-    <tr>
-    <td>Ventas Efectivo</td>
-    <td>".$contado."</td>
-    </tr>
-    <tr>
-    <td>Ventas Crédito</td>
-    <td>".$credito."</td>
-    </tr>
-    <tr>
-    <td>Ventas Cheque</td>
-    <td>".$cheque."</td>
-    </tr>
+    $pdf->SetX(10);   
+    $pdf->Cell(170, 6, "INGRESOS",0,0, 'L',0);                                     
+    $pdf->Cell(20, 6, "TOTAL",0,1, 'C',0);       
+    
+    $pdf->SetX(10);
+    $pdf->Cell(170, 6, "Ventas Efectivo",0,0, 'L',0);                                     
+    $pdf->Cell(20, 6, $contado,0,1, 'C',0);                                                                      
 
-    <tr>
-    <td>Cuentas Cobrar</td>
-    <td>".$cxc."</td>
-    </tr>
-    <tr>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    </tr>
-    <tr style=''>
-    <td style='width:650px;'>Gastos</td>
-    <td style='width:100px;'>".$gastos."</td>
-    </tr>
-    <tr style='font-weight:bold;'>
-    <td style='width:650px;'>Resultados Ventas</td>
-    <td style='width:100px;'>".($contado+$cheque+$credito+$cxc)."</td>
-    </tr>
-    <tr style='font-weight:bold;'>
-    <td style='width:650px;'>Total Dinero en caja</td>
-    <td style='width:100px;'>".(($contado+$cxc)-$gastos)."</td>
-    </tr>";
-    $codigo.="</table>";
-    $codigo=utf8_decode($codigo);
-    $dompdf= new DOMPDF();
-    $dompdf->load_html($codigo);
-    ini_set("memory_limit","1000M");
-    $dompdf->set_paper("A4","portrait");
-    $dompdf->render();
-    //$dompdf->stream("reporteRegistro.pdf");
-    $dompdf->stream('diario_caja.pdf',array('Attachment'=>0));
+    $pdf->SetX(10);
+    $pdf->Cell(170, 6, utf8_decode("Ventas Crédito"),0,0, 'L',0);                                     
+    $pdf->Cell(20, 6, $credito,0,1, 'C',0);                                                                      
+    
+    $pdf->SetX(10);
+    $pdf->Cell(170, 6, "Ventas Cheque",0,0, 'L',0);                                     
+    $pdf->Cell(20, 6, $cheque,0,1, 'C',0);                                                                          
+    
+    $pdf->SetX(10);
+    $pdf->Cell(170, 6, "Cuentas Cobrar",0,0, 'L',0);                                     
+    $pdf->Cell(20, 6, $cxc,0,1, 'C',0);                                                                      
+    $pdf->Ln(5);
+    $pdf->SetX(10);
+    $pdf->Cell(170, 6, "GASTOS",0,0, 'L',0);                                     
+    $pdf->Cell(20, 6, $gastos,0,1, 'C',0);                                                                      
+
+    $pdf->SetX(10);
+    $pdf->Cell(170, 6, "RESULTADOS VENTAS",0,0, 'L',0);                                     
+    $pdf->Cell(20, 6, ($contado + $cheque + $credito + $cxc),0,1, 'C',0);                                                                      
+    
+    $pdf->SetX(10);
+    $pdf->Cell(170, 6, "TOTAL DINEO EN CAJA",0,0, 'L',0);                                     
+    $pdf->Cell(20, 6, (($contado + $cxc ) - $gastos),0,1, 'C',0);                                                                                               
+
+    $pdf->Ln(6);                                                  
+    $pdf->Output();
 ?>

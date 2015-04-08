@@ -1,27 +1,61 @@
 <?php
-require('../dompdf/dompdf_config.inc.php');
-session_start();
-    $codigo='<html> 
-    <head> 
-        <link rel="stylesheet" href="../../css/estilosAgrupados.css" type="text/css" /> 
-    </head> 
-    <body>
-        <header>
-             <img src="../../images/logo_empresa.jpg" />
-            <div id="me">
-                <h2 style="text-align:center;border:solid 0px;width:100%;">'.$_SESSION['empresa'].'</h2>
-                <h4 style="text-align:center;border:solid 0px;width:100%;">'.$_SESSION['slogan'].'</h4>
-                <h4 style="text-align:center;border:solid 0px;width:100%;">'.$_SESSION['propietario'].'</h4>
-                <h4 style="text-align:center;border:solid 0px;width:100%;">'.$_SESSION['direccion'].'</h4>
-                <h4 style="text-align:center;border:solid 0px;width:100%;">Telf: '.$_SESSION['telefono'].' Cel:  '.$_SESSION['celular'].' '.$_SESSION['pais_ciudad'].'</h4>
-            </div>       
-    </header>        
-    <hr>
-    <div id="linea">
-        <h3>PROFORMA </h3>
-    </div>';
+    require('../../fpdf/fpdf.php');
     include '../../procesos/base.php';
+    include '../../procesos/funciones.php';
     conectarse();    
+    date_default_timezone_set('America/Guayaquil'); 
+    session_start()   ;
+    class PDF extends FPDF{   
+        var $widths;
+        var $aligns;       
+        function SetWidths($w){            
+            $this->widths=$w;
+        }                       
+        function Header(){                         
+            $this->AddFont('Amble-Regular');
+            $this->SetFont('Amble-Regular','',10);        
+            $fecha = date('Y-m-d', time());
+            $this->SetX(1);
+            $this->SetY(1);
+            $this->Cell(20, 5, $fecha, 0,0, 'C', 0);                         
+            $this->Cell(150, 5, "CLIENTE", 0,1, 'R', 0);      
+            $this->SetFont('Arial','B',16);                                                    
+            $this->Cell(190, 8, $_SESSION['empresa'], 0,1, 'C',0);                                
+            $this->Image('../../images/logo_empresa.jpg',5,8,35,28);
+            $this->SetFont('Amble-Regular','',10);        
+            $this->Cell(190, 5, "PROPIETARIO: ".utf8_decode($_SESSION['propietario']),0,1, 'C',0);                                
+            $this->Cell(80, 5, "TEL.: ".utf8_decode($_SESSION['telefono']),0,0, 'R',0);                                
+            $this->Cell(80, 5, "CEL.: ".utf8_decode($_SESSION['celular']),0,1, 'C',0);                                
+            $this->Cell(180, 5, "DIR.: ".utf8_decode($_SESSION['direccion']),0,1, 'C',0);                                
+            $this->Cell(180, 5, "SLOGAN.: ".utf8_decode($_SESSION['slogan']),0,1, 'C',0);                                
+            $this->Cell(180, 5, utf8_decode( $_SESSION['pais_ciudad']),0,1, 'C',0);                                                                                                    
+            $this->SetDrawColor(0,0,0);
+            $this->SetLineWidth(0.4);            
+            $this->Line(1,45,210,45);            
+            $this->SetFont('Arial','B',12);                                                                            
+            $this->Cell(190, 5, utf8_decode("PROFORMA"),0,1, 'C',0);                                                                                                                            
+            $this->SetFont('Amble-Regular','',10);        
+            $this->Ln(3);
+            $this->SetFillColor(255,255,225);            
+            $this->SetLineWidth(0.2);                                        
+        }
+        function Footer(){            
+            $this->SetY(-15);            
+            $this->SetFont('Arial','I',8);            
+            $this->Cell(0,10,'Pag. '.$this->PageNo().'/{nb}',0,0,'C');
+        }               
+    }
+    $pdf = new PDF('P','mm','a4');
+    $pdf->AddPage();
+    $pdf->SetMargins(0,0,0,0);
+    $pdf->AliasNbPages();
+    $pdf->AddFont('Amble-Regular');                    
+    $pdf->SetFont('Amble-Regular','',10);       
+    $pdf->SetFont('Arial','B',9);   
+    $pdf->SetX(5);    
+    $pdf->SetFont('Amble-Regular','',9); 
+    
+
     $sql=pg_query("select * from proforma,clientes,usuario,empresa where proforma.id_cliente=clientes.id_cliente and proforma.id_usuario=usuario.id_usuario and proforma.id_empresa=empresa.id_empresa and id_proforma='$_GET[id]'");
     while($row=pg_fetch_row($sql)){
         $temp1=$row[8];
@@ -29,72 +63,66 @@ session_start();
         $temp3=$row[10];
         $temp4=$row[11];
         $temp5=$row[12];
-        $codigo.='<table border=0><tr>
-        <td style="width:80px;text-align:left;">Cliente:</td>
-        <td style="width:470px;text-align:left;">'.$row[18].'</td>
-        <td style="width:80px;text-align:left;">C.I.:</td>
-        <td style="width:100px;text-align:left;">'.$row[17].'</td>';
-        $codigo.='</tr></table>';
-        $codigo.='<table border=0><tr>
-        <td style="width:80px;text-align:left;">Dirección:</td>
-        <td style="width:200px;text-align:left;">'.$row[20].'</td>
-        <td style="width:80px;text-align:left;">Email:</td>
-        <td style="width:175px;text-align:left;">'.' '.$row[21].'</td>
-        <td style="width:80px;text-align:left;">Celular:</td>
-        <td style="width:102px;text-align:left;">'.' '.$row[22].'</td>
-        </tr></table>';           
-
-        $codigo.='<br><table border=0><tr>
-        <td style="width:80px;text-align:left;">Responsable:</td>
-        <td style="width:460px;text-align:left;">'.$row[30].' '.$row[31].'</td>
-        <td style="width:80px;text-align:left;">Celular:</td>
-        <td style="width:100px;text-align:left;">'.$row[34].'</td>
-       </tr></table>';          
-    }   
+        $pdf->SetX(1);
+        $pdf->Cell(20, 6, utf8_decode('Cliente: '),0,0, 'L',0);    
+        $pdf->Cell(85, 6, maxCaracter(utf8_decode($row[18]),40),0,0, 'L',0);                                                                      
+        $pdf->Cell(20, 6, utf8_decode('CI/RUC: '),0,0, 'L',0);                                     
+        $pdf->Cell(25, 6, utf8_decode($row[17]),0,0, 'L',0);                                     
+        $pdf->Cell(25, 6, utf8_decode('Nro Factura: '),0,0, 'L',0);  
+        $pdf->Cell(30, 6, utf8_decode($row[0]),0,1, 'L',0);                                                                                                        
+        $pdf->Ln(1);
+        $pdf->SetX(1);
+        $pdf->Cell(20, 6, utf8_decode('Dirección:'),0,0, 'L',0);                                     
+        $pdf->Cell(60, 6, maxCaracter(utf8_decode($row[20]),30),0,0, 'L',0);                                             
+        $pdf->Cell(20, 6, utf8_decode('Email:'),0,0, 'L',0);                                     
+        $pdf->Cell(60, 6, maxCaracter(utf8_decode($row[25]),30),0,0, 'L',0);  
+        $pdf->Cell(20, 6, utf8_decode('Celular:'),0,0, 'L',0);    
+        $pdf->Cell(25, 6, utf8_decode($row[22]),0,1, 'L',0);                                                                             
+        $pdf->Ln(1);
+        $pdf->SetX(1);
+        $pdf->Cell(20, 6, utf8_decode('Responsable:'),0,0, 'L',0);    
+        $pdf->Cell(130, 6, maxCaracter(utf8_decode($row[31].' '.$row[32]),80),0,0, 'L',0); 
+        $pdf->Cell(25, 6, utf8_decode('Celular:'),0,0, 'L',0);    
+        $pdf->Cell(30, 6, utf8_decode($row[35]),0,1, 'L',0);                                                                                         
+    }       
+    $pdf->Ln(3);        
     $sql=pg_query("select * from detalle_proforma,productos where id_proforma='$_GET[id]'  and detalle_proforma.cod_productos=productos.cod_productos order by id_detalle_proforma asc;");
-    $codigo.='<br/><table border=0><tr>
-    <td style="width:130px;text-align:center;border:solid 1px;">Código</td>
-    <td style="width:260px;text-align:center;border:solid 1px;">Producto</td>
-    <td style="width:80px;text-align:center;border:solid 1px;">Cantidad</td>
-    <td style="width:80px;text-align:center;border:solid 1px;">PVP</td>
-    <td style="width:80px;text-align:center;border:solid 1px;">Descuento</td>
-    <td style="width:80px;text-align:center;border:solid 1px;">Total</td></tr>';
-      
-    while($row=pg_fetch_row($sql)){
-        
-        $codigo.='<tr><td style="width:130px;text-align:center;border:solid 1px;">'.$row[9].'</td>
-        <td style="width:260px;text-align:center;border:solid 1px;">'.$row[11].'</td>
-        <td style="width:80px;text-align:center;border:solid 1px;">'.$row[3].'</td>
-        <td style="width:80px;text-align:center;border:solid 1px;">'.$row[4].'</td>
-        <td style="width:80px;text-align:center;border:solid 1px;">'.$row[5].'</td>
-        <td style="width:80px;text-align:center;border:solid 1px;">'.$row[6].'</td>
-        </tr>';    
+    $pdf->SetX(1);
+    $pdf->Cell(40, 6, utf8_decode('Código'),1,0, 'C',0);                                     
+    $pdf->Cell(65, 6, utf8_decode('Producto'),1,0, 'C',0);                                     
+    $pdf->Cell(25, 6, utf8_decode('Cantidad'),1,0, 'C',0);                                                             
+    $pdf->Cell(25, 6, utf8_decode('PVP'),1,0, 'C',0);                                     
+    $pdf->Cell(25, 6, utf8_decode('Descuento'),1,0, 'C',0);                                         
+    $pdf->Cell(25, 6, utf8_decode('Total'),1,1, 'C',0);    
+          
+    while($row=pg_fetch_row($sql)){        
+        $pdf->SetX(1);
+        $pdf->Cell(40, 6, maxCaracter(utf8_decode($row[9]),15),0,0, 'L',0);                                     
+        $pdf->Cell(65, 6, maxCaracter(utf8_decode($row[11]),30),0,0, 'L',0);                                     
+        $pdf->Cell(25, 6, utf8_decode($row[3]),0,0, 'C',0);                                     
+        $pdf->Cell(25, 6, utf8_decode($row[4]),0,0, 'C',0);                                     
+        $pdf->Cell(25, 6, utf8_decode($row[5]),0,0, 'C',0);                                     
+        $pdf->Cell(25, 6, utf8_decode($row[6]),0,1, 'C',0);                                            
     }
-    $codigo.='</table>';
-    $codigo.='<table border=0 style="margin-left:430px;"><tr>
-    <td style="width:80px;text-align:left;border:solid 1px;height:20px">Tarifa 0:</td>    
-    <td style="width:80px;text-align:center;border:solid 1px;height:20px">'.$temp1.'</td>    
-    </tr><tr>
-    <td style="width:80px;text-align:left;border:solid 1px;height:20px">Tarifa 12:</td>    
-    <td style="width:80px;text-align:center;border:solid 1px;height:20px">'.$temp2.'</td>    
-    </tr><tr>
-    <td style="width:80px;text-align:left;border:solid 1px;height:20px">12% Iva:</td>    
-    <td style="width:80px;text-align:center;border:solid 1px;height:20px">'.$temp3.'</td>    
-    </tr><tr>
-    <td style="width:80px;text-align:left;border:solid 1px;height:20px">Descuento:</td>    
-    <td style="width:80px;text-align:center;border:solid 1px;height:20px">'.$temp4.'</td>    
-    </tr><tr>
-    <td style="width:80px;text-align:left;border:solid 1px;height:20px">Total:</td>    
-    <td style="width:80px;text-align:center;border:solid 1px;height:20px">'.$temp5.'</td>    
-    </tr>
-    </table>';          
-    $codigo=utf8_decode($codigo);
 
-    $dompdf= new DOMPDF();
-    $dompdf->load_html($codigo);
-    ini_set("memory_limit","100M");
-    $dompdf->set_paper("A4","portrait");
-    $dompdf->render();
-    //$dompdf->stream("reporteRegistro.pdf");
-    $dompdf->stream('proforma.pdf',array('Attachment'=>0));
+    $pdf->SetX(1);   
+    $pdf->Ln(5);
+    $pdf->Cell(207, 0, utf8_decode(""),1,1, 'R',0);
+    $pdf->Cell(181, 6, utf8_decode("Tarifa 0%"),0,0, 'R',0);
+    $pdf->Cell(25, 6, maxCaracter((number_format($temp1,2,',','.')),20),0,1, 'C',0);                                                    
+    $pdf->SetX(1);       
+    $pdf->Cell(181, 6, utf8_decode("Tarifa 12%"),0,0, 'R',0);
+    $pdf->Cell(25, 6, maxCaracter((number_format($temp2,2,',','.')),20),0,1, 'C',0);                                                    
+    $pdf->SetX(1);       
+    $pdf->Cell(181, 6, utf8_decode("Iva 12%"),0,0, 'R',0);
+    $pdf->Cell(25, 6, maxCaracter((number_format($temp3,2,',','.')),20),0,1, 'C',0);    
+    $pdf->SetX(1);                                                       
+    $pdf->Cell(181, 6, utf8_decode("Descuento"),0,0, 'R',0);
+    $pdf->Cell(25, 6, maxCaracter((number_format($temp4,2,',','.')),20),0,1, 'C',0);                                                    
+    $pdf->SetX(1);       
+    $pdf->Cell(181, 6, utf8_decode("Totales"),0,0, 'R',0);
+    $pdf->Cell(25, 6, maxCaracter((number_format($temp5,2,',','.')),20),0,1, 'C',0);                                                    
+    
+    $pdf->Ln(3);              
+    $pdf->Output();
 ?>

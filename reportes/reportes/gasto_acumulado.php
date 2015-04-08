@@ -1,29 +1,60 @@
 <?php
-require('../dompdf/dompdf_config.inc.php');
-session_start();
-    $codigo='<html> 
-    <head> 
-        <link rel="stylesheet" href="../../css/estilosAgrupados.css" type="text/css" /> 
-    </head> 
-    <body>
-        <header>
-            <img src="../../images/logo_empresa.jpg" />
-            <div id="me">
-                <h2 style="text-align:center;border:solid 0px;width:100%;">'.$_SESSION['empresa'].'</h2>
-                <h4 style="text-align:center;border:solid 0px;width:100%;">'.$_SESSION['slogan'].'</h4>
-                <h4 style="text-align:center;border:solid 0px;width:100%;">'.$_SESSION['propietario'].'</h4>
-                <h4 style="text-align:center;border:solid 0px;width:100%;">'.$_SESSION['direccion'].'</h4>
-                <h4 style="text-align:center;border:solid 0px;width:100%;">Telf: '.$_SESSION['telefono'].' Cel:  '.$_SESSION['celular'].' '.$_SESSION['pais_ciudad'].'</h4>
-                <h4 style="text-align: center;width:50%;display: inline-block;">Desde el : '.$_GET['inicio'].'</h4>
-                <h4 style="text-align: center;width:45%;display: inline-block;">Hasta el : '.$_GET['fin'].'</h4>
-            </div>      
-    </header>        
-    <hr>
-    <div id="linea">
-        <h3>REPORTES DE GASTOS </h3>
-    </div>';
+    require('../../fpdf/fpdf.php');
     include '../../procesos/base.php';
+    include '../../procesos/funciones.php';
     conectarse();    
+    date_default_timezone_set('America/Guayaquil'); 
+    session_start()   ;
+    class PDF extends FPDF{   
+        var $widths;
+        var $aligns;       
+        function SetWidths($w){            
+            $this->widths=$w;
+        }                       
+        function Header(){                         
+            $this->AddFont('Amble-Regular');
+            $this->SetFont('Amble-Regular','',10);        
+            $fecha = date('Y-m-d', time());
+            $this->SetX(1);
+            $this->SetY(1);
+            $this->Cell(20, 5, $fecha, 0,0, 'C', 0);                         
+            $this->Cell(150, 5, "CLIENTE", 0,1, 'R', 0);      
+            $this->SetFont('Arial','B',16);                                                    
+            $this->Cell(190, 8, "EMPRESA: ".$_SESSION['empresa'], 0,1, 'C',0);                                
+            $this->Image('../../images/logo_empresa.jpg',1,8,40,30);
+            $this->SetFont('Amble-Regular','',10);        
+            $this->Cell(180, 5, "PROPIETARIO: ".utf8_decode($_SESSION['propietario']),0,1, 'C',0);                                
+            $this->Cell(70, 5, "TEL.: ".utf8_decode($_SESSION['telefono']),0,0, 'R',0);                                
+            $this->Cell(60, 5, "CEL.: ".utf8_decode($_SESSION['celular']),0,1, 'C',0);                                
+            $this->Cell(170, 5, "DIR.: ".utf8_decode($_SESSION['direccion']),0,1, 'C',0);                                
+            $this->Cell(170, 5, "SLOGAN.: ".utf8_decode($_SESSION['slogan']),0,1, 'C',0);                                
+            $this->Cell(170, 5, utf8_decode( $_SESSION['pais_ciudad']),0,1, 'C',0);                                                                                                    
+            $this->SetDrawColor(0,0,0);
+            $this->SetLineWidth(0.4);            
+            $this->Line(1,45,210,45);            
+            $this->SetFont('Arial','B',12);                                                                            
+            $this->Cell(190, 5, utf8_decode("REPORTES DE GASTOS "),0,1, 'C',0);                                                                                                                            
+            $this->SetFont('Amble-Regular','',10);        
+            $this->Ln(3);
+            $this->SetFillColor(255,255,225);            
+            $this->SetLineWidth(0.2);                                        
+        }
+        function Footer(){            
+            $this->SetY(-15);            
+            $this->SetFont('Arial','I',8);            
+            $this->Cell(0,10,'Pag. '.$this->PageNo().'/{nb}',0,0,'C');
+        }               
+    }
+    $pdf = new PDF('P','mm','a4');
+    $pdf->AddPage();
+    $pdf->SetMargins(0,0,0,0);
+    $pdf->AliasNbPages();
+    $pdf->AddFont('Amble-Regular');                    
+    $pdf->SetFont('Amble-Regular','',10);       
+    $pdf->SetFont('Arial','B',9);   
+    $pdf->SetX(5);    
+    $pdf->SetFont('Amble-Regular','',9); 
+    
     $total=0;
     $id_fac=0;
     $fecha=0;
@@ -33,17 +64,17 @@ session_start();
     $acumlado=0;
     $tot=0;
     $sql=pg_query("SELECT DISTINCT(id_factura_venta) FROM gastos where fecha_actual between '$_GET[inicio]' and '$_GET[fin]' order by id_factura_venta asc;");
-        $codigo.='<table border=0 style="font-size:10px;">';                      
-        $codigo.='<tr>                
-        <td style="width:80px;text-align:center;">N. Factura</td>    
-        <td style="width:70px;text-align:center;">F. Factura</td>
-        <td style="width:120px;text-align:center;">Cliente</td>
-        <td style="width:50px;text-align:center;">T. Venta</td>    
-        <td style="width:170px;text-align:center;">Descripción</td>
-        <td style="width:60px;text-align:center;">Fecha Pago</td>
-        <td style="width:60px;text-align:center;">Valor Pago</td>
-        <td style="width:50px;text-align:center;">Saldo</td>
-        <td style="width:60px;text-align:center;">Acumulado</td></tr><tr><td colspan=9><hr></td></tr>';
+    $pdf->SetX(1);
+    $pdf->Cell(20, 6, utf8_decode('Nro. Factura'),1,0, 'C',0);                                     
+    $pdf->Cell(22, 6, utf8_decode('F. Factura'),1,0, 'C',0);                                     
+    $pdf->Cell(40, 6, utf8_decode('Cliente'),1,0, 'C',0);                                     
+    $pdf->Cell(15, 6, utf8_decode('T. Venta'),1,0, 'C',0);                                                             
+    $pdf->Cell(40, 6, utf8_decode('Descripción'),1,0, 'C',0);                                     
+    $pdf->Cell(20, 6, utf8_decode('F. Pago'),1,0, 'C',0);                                     
+    $pdf->Cell(15, 6, utf8_decode('V. Pago'),1,0, 'C',0);                                     
+    $pdf->Cell(15, 6, utf8_decode('Saldo'),1,0, 'C',0);                                                                                                                                    
+    $pdf->Cell(20, 6, utf8_decode('Acumulado'),1,1, 'C',0);                                   
+
     while($row=pg_fetch_row($sql)){
         $sql1=pg_query("select id_factura_venta,num_factura,nombres_cli,total_venta,fecha_actual from factura_venta,clientes where factura_venta.id_cliente=clientes.id_cliente and id_factura_venta='$row[0]'");
         while($row1=pg_fetch_row($sql1)){
@@ -54,37 +85,27 @@ session_start();
             $cliente=$row1[2];
         }
         $sql2=pg_query("SELECT * FROM gastos where fecha_actual between '$_GET[inicio]' and '$_GET[fin]' and id_factura_venta='$id_fac' order by id_factura_venta asc");
-            
-            while($row2=pg_fetch_row($sql2)){
-                $codigo.='<tr>                
-                <td style="width:80px;text-align:left;">'.substr($num_fac,8,30).'</td>    
-                <td style="width:70px;text-align:left;">'.$fecha.'</td>
-                <td style="width:120px;text-align:left;">'.$cliente.'</td>   
-                <td style="width:50px;text-align:center;">'.$total.'</td>    
-                <td style="width:170px;text-align:left;">'.$row2[6].'</td>
-                <td style="width:60px;text-align:left;">'.$row2[4].'</td>
-                <td style="width:60px;text-align:center;">'.$row2[7].'</td> 
-                <td style="width:50px;text-align:center;">'.$row2[8].'</td>
-                <td style="width:60px;text-align:center;">'.$row2[9].'</td></tr>';
-                $tot=$tot+$total;
-                $acumlado=$acumlado+$row2[7];
-            }   
+        while($row2=pg_fetch_row($sql2)){
+            $pdf->SetX(1);
+            $pdf->Cell(20, 6, substr($num_fac,8,30),0,0, 'C',0);                                     
+            $pdf->Cell(22, 6, utf8_decode($fecha),0,0, 'C',0);                                                     
+            $pdf->Cell(40, 6, maxCaracter(utf8_decode($cliente),18),0,0, 'L',0);                                                     
+            $pdf->Cell(15, 6, utf8_decode($total),0,0, 'C',0);                                         
+            $pdf->Cell(40, 6, maxCaracter(utf8_decode($row2[6]),20),0,0, 'L',0);                                     
+            $pdf->Cell(20, 6, utf8_decode($row2[4]),0,0, 'C',0);                                         
+            $pdf->Cell(15, 6, utf8_decode($row2[7]),0,0, 'C',0);                                         
+            $pdf->Cell(15, 6, utf8_decode($row2[8]),0,0, 'C',0);                                         
+            $pdf->Cell(20, 6, utf8_decode($row2[9]),0,1, 'C',0);
+            $tot=$tot+$total;
+            $acumlado=$acumlado+$row2[7];
+        }   
     }
-     $codigo.='<tr><td colspan=9><hr></td></tr>
-            <tr style="font-weight:bold">                
-                <td style="width:150px;text-align:left;" colspan=2>Totales Venta:</td>    
-                <td style="width:80px;text-align:right;" colspan=2>'.($tot).'</td>
-                <td style="width:150px;text-align:right;" colspan=2>Totales Gastos:</td>    
-                <td style="width:80px;text-align:right;" colspan=3>'.($acumlado).'</td><tr>
-            </table><br />'; 
-   
-
-    $codigo=utf8_decode($codigo);
-    $dompdf= new DOMPDF();
-    $dompdf->load_html($codigo);
-    ini_set("memory_limit","1000M");
-    $dompdf->set_paper("A4","portrait");
-    $dompdf->render();
-    //$dompdf->stream("reporteRegistro.pdf");
-    $dompdf->stream('gasto_acumulado.pdf',array('Attachment'=>0));
+    $pdf->SetX(1);                                             
+    $pdf->Cell(207, 0, utf8_decode(""),1,1, 'R',0);
+    $pdf->Cell(83, 6, utf8_decode("Totales Venta"),0,0, 'R',0);
+    $pdf->Cell(20, 6, maxCaracter((number_format(($tot),2,',','.')),20),0,0, 'C',0);                                                    
+    $pdf->Cell(85, 6, utf8_decode("Totales Gastos"),0,0, 'R',0);
+    $pdf->Cell(20, 6, maxCaracter((number_format(($acumlado),2,',','.')),20),0,1, 'C',0);                                                    
+    $pdf->Ln(3);                                               
+    $pdf->Output();
 ?>

@@ -120,8 +120,13 @@ $cont1++;
                                                                 <td><input type="text" name="fecha_actual" id="fecha_actual" class="campo" readonly style="margin-left: 5px; width: 100px" value="" /></td>
                                                                 <td><label style="width: 100%; margin-left: 10px">Hora:</label></td>
                                                                 <td><input type="text" name="hora_actual" id="hora_actual" class="campo" readonly style="margin-left: 5px; width: 100px"/></td>
+<<<<<<< HEAD
                                                                 
                                                                 <td><input type="hidden" name="proforma" id="proforma" class="campo" style="margin-left: 5px; width: 100px"  /></td>
+=======
+                                                                <td><label for="proforma" style="width: 100%; margin-left: 10px">Proforma Nro:</label></td>   
+                                                                <td><input type="text" name="proforma" id="proforma" class="campo" style="margin-left: 5px; width: 100px"  /></td>
+>>>>>>> origin/master
                                                                 <td><input type="hidden" name="comprobante2" id="comprobante2" class="campo" style="width: 100px" value="<?php echo $cont1 ?>" /></td>
                                                             </tr>  
                                                         </table>  

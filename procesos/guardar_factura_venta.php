@@ -5,8 +5,6 @@ include 'base.php';
 conectarse();
 error_reporting(0);
 
-
-
 //////////////////compaprar tipo venta///////////
 if ($_POST["tipo_venta"] == "FACTURA") {
 

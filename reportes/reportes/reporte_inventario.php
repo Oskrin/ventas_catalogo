@@ -1,86 +1,101 @@
 <?php
-
-require('../dompdf/dompdf_config.inc.php');
-session_start();
-$codigo = '<html> 
-    <head> 
-        <link rel="stylesheet" href="../../css/estilosAgrupados.css" type="text/css" /> 
-    </head> 
-    <body>
-        <header>
-            <img src="../../images/logo_empresa.jpg" />
-            <div id="me">
-                <h2 style="text-align:center;border:solid 0px;width:100%;">' . $_SESSION['empresa'] . '</h2>
-                <h4 style="text-align:center;border:solid 0px;width:100%;">' . $_SESSION['slogan'] . '</h4>
-                <h4 style="text-align:center;border:solid 0px;width:100%;">' . $_SESSION['propietario'] . '</h4>
-                <h4 style="text-align:center;border:solid 0px;width:100%;">' . $_SESSION['direccion'] . '</h4>
-                <h4 style="text-align:center;border:solid 0px;width:100%;">Telf: ' . $_SESSION['telefono'] . ' Cel:  ' . $_SESSION['celular'] . ' ' . $_SESSION['pais_ciudad'] . '</h4>
-            </div>            
-    </header>        
-    <hr>
-    <div id="linea">
-        <h3>INVENTARIO</h3>
-    </div>';
-include '../../procesos/base.php';
-conectarse();
-$sql = pg_query("select  I.comprobante, I.fecha_actual, I.hora_actual, U.nombre_usuario, U.apellido_usuario  from inventario I, usuario U where I.id_usuario = U.id_usuario and I.comprobante='$_GET[id]'");
-while ($row = pg_fetch_row($sql)) {
-    $codigo.='<table border=0>';
-    $codigo.='<tr>
-        <td style="width:80px;text-align:left;">Comprobante:</td>   
-        <td style="width:100px;text-align:left;">' . $row[0] . '</td>   
-        <td style="width:60px;text-align:left;">Fecha:</td>
-        <td style="width:100px;text-align:left;">' . $row[1] . '</td>   
-        <td style="width:60px;text-align:left;">Hora:</td>
-        <td style="width:100px;text-align:left;">' . $row[2] . '</td></tr>
-        <tr><td style="width:100px;text-align:left;">Usuario:</td>   
-        <td style="width:130px;text-align:left;">' . $row[3] . ' ' . $row[4] . '</td>';
-    $codigo.='</tr>';
-    $codigo.='</table>';
-}
-
-$sql2 = pg_query("select D.cod_productos, P.codigo, P.articulo, D.p_costo, D.p_venta, D.disponibles, D.existencia, D.diferencia from inventario I, detalle_inventario D, productos P where D.cod_productos = P.cod_productos and I.id_inventario = D.id_inventario and D.id_inventario='$_GET[id]'");
-$codigo.='<br/><table border=0><tr>';
-$codigo.='<td style="width:100px;text-align:center;border:solid 1px;">Código</td>
-    <td style="width:200px;text-align:center;border:solid 1px;">Producto</td>   
-    <td style="width:90px;text-align:center;border:solid 1px;">P.Costo</td>   
-    <td style="width:90px;text-align:center;border:solid 1px;">P.venta</td>
-    <td style="width:80px;text-align:center;border:solid 1px;">Stock</td>
-    <td style="width:80px;text-align:center;border:solid 1px;">Existencia</td>
-    <td style="width:80px;text-align:center;border:solid 1px;">Diferencia</td>';
-$total1 = 0;
-$total2 = 0;
-while ($row = pg_fetch_row($sql2)) {
-    $total1 = $total1 + $row[3];
-    $total2 = $total2 + $row[4];
-    $codigo.='<tr>
-        <td style="width:100px;text-align:center;">' . $row[1] . '</td>   
-        <td style="width:200px;text-align:left;">' . $row[2] . '</td>   
-        <td style="width:90px;text-align:center;">' . $row[3] . '</td> 
-        <td style="width:90px;text-align:center;">' . $row[4] . '</td>
-        <td style="width:80px;text-align:center;">' . $row[5] . '</td>
-        <td style="width:80px;text-align:center;">' . $row[6] . '</td>
-        <td style="width:80px;text-align:center;">' . $row[7] . '</td>    
-        </tr>';
-}
-$codigo.='<tr><hr></tr>';
-$codigo.='</table>';
-$codigo.='<table><tr>
-    <td style="width:280px;text-align:center;">Totales:</td>   
-    <td style="width:140px;text-align:center;">'.$total1.'</td>    
-    <td style="width:60px;text-align:center;">'.$total2.'</td>    
-</tr>';
-$codigo.='</table>';
-
-
-
-$codigo.='</body></html>';
-$codigo = utf8_decode($codigo);
-
-$dompdf = new DOMPDF();
-$dompdf->load_html($codigo);
-ini_set("memory_limit", "100M");
-$dompdf->set_paper("A4", "portrait");
-$dompdf->render();
-$dompdf->stream('factura_compra.pdf', array('Attachment' => 0));
+    require('../../fpdf/fpdf.php');
+    include '../../procesos/base.php';
+    include '../../procesos/funciones.php';
+    conectarse();    
+    date_default_timezone_set('America/Guayaquil'); 
+    session_start()   ;
+    class PDF extends FPDF{   
+        var $widths;
+        var $aligns;       
+        function SetWidths($w){            
+            $this->widths=$w;
+        }                       
+        function Header(){                         
+            $this->AddFont('Amble-Regular');
+            $this->SetFont('Amble-Regular','',10);        
+            $fecha = date('Y-m-d', time());
+            $this->SetX(1);
+            $this->SetY(1);
+            $this->Cell(20, 5, $fecha, 0,0, 'C', 0);                         
+            $this->Cell(150, 5, "CLIENTE", 0,1, 'R', 0);      
+            $this->SetFont('Arial','B',16);                                                    
+            $this->Cell(190, 8, "EMPRESA: ".$_SESSION['empresa'], 0,1, 'C',0);                                
+            $this->Image('../../images/logo_empresa.jpg',1,8,40,30);
+            $this->SetFont('Amble-Regular','',10);        
+            $this->Cell(180, 5, "PROPIETARIO: ".utf8_decode($_SESSION['propietario']),0,1, 'C',0);                                
+            $this->Cell(70, 5, "TEL.: ".utf8_decode($_SESSION['telefono']),0,0, 'R',0);                                
+            $this->Cell(60, 5, "CEL.: ".utf8_decode($_SESSION['celular']),0,1, 'C',0);                                
+            $this->Cell(170, 5, "DIR.: ".utf8_decode($_SESSION['direccion']),0,1, 'C',0);                                
+            $this->Cell(170, 5, "SLOGAN.: ".utf8_decode($_SESSION['slogan']),0,1, 'C',0);                                
+            $this->Cell(170, 5, utf8_decode( $_SESSION['pais_ciudad']),0,1, 'C',0);                                                                                                    
+            $this->SetDrawColor(0,0,0);
+            $this->SetLineWidth(0.4);            
+            $this->Line(1,46,210,46);            
+            $this->SetFont('Arial','B',12);                                                                            
+            $this->Cell(190, 5, utf8_decode("INVENTARIO "),0,1, 'C',0);                                                                                                                            
+            $this->SetFont('Amble-Regular','',10);        
+            $this->Ln(3);
+            $this->SetFillColor(255,255,225);            
+            $this->SetLineWidth(0.2);                                        
+        }
+        function Footer(){            
+            $this->SetY(-15);            
+            $this->SetFont('Arial','I',8);            
+            $this->Cell(0,10,'Pag. '.$this->PageNo().'/{nb}',0,0,'C');
+        }               
+    }
+    $pdf = new PDF('P','mm','a4');
+    $pdf->AddPage();
+    $pdf->SetMargins(0,0,0,0);
+    $pdf->AliasNbPages();
+    $pdf->AddFont('Amble-Regular');                    
+    $pdf->SetFont('Amble-Regular','',10);       
+    $pdf->SetFont('Arial','B',9);   
+    $pdf->SetX(5);    
+    $pdf->SetFont('Amble-Regular','',9);     
+    
+    $sql = pg_query("select  I.comprobante, I.fecha_actual, I.hora_actual, U.nombre_usuario, U.apellido_usuario  from inventario I, usuario U where I.id_usuario = U.id_usuario and I.comprobante='$_GET[id]'");
+    while ($row = pg_fetch_row($sql)) {
+        $pdf->SetX(1);                                                
+        $pdf->Cell(50, 6, utf8_decode('Comprobante: '),0,0, 'C',0);                                         
+        $pdf->Cell(55, 6, utf8_decode($row[0]),0,0, 'L',0);                                     
+        $pdf->Cell(50, 6, utf8_decode('Fecha: '),0,0, 'C',0);                                         
+        $pdf->Cell(50, 6, utf8_decode($row[1]),0,1, 'L',0);                                     
+        $pdf->SetX(1);                                                
+        $pdf->Cell(50, 6, utf8_decode('Hora:'),0,0, 'C',0);                                         
+        $pdf->Cell(55, 6, utf8_decode($row[2]),0,0, 'L',0);                                     
+        $pdf->Cell(50, 6, utf8_decode('Usuario:'),0,0, 'C',0);                                         
+        $pdf->Cell(50, 6, utf8_decode($row[3]),0,1, 'L',0);                                             
+        $pdf->Ln(3);
+    }
+    $sql2 = pg_query("select D.cod_productos, P.codigo, P.articulo, D.p_costo, D.p_venta, D.disponibles, D.existencia, D.diferencia from inventario I, detalle_inventario D, productos P where D.cod_productos = P.cod_productos and I.id_inventario = D.id_inventario and D.id_inventario='$_GET[id]'");
+    $pdf->SetX(1);
+    $pdf->Cell(30, 6, utf8_decode('Código'),1,0, 'C',0);                                         
+    $pdf->Cell(55, 6, utf8_decode('Producto'),1,0, 'C',0);                                         
+    $pdf->Cell(25, 6, utf8_decode('Precio Costo'),1,0, 'C',0);                                         
+    $pdf->Cell(25, 6, utf8_decode('Precio Venta'),1,0, 'C',0);                                         
+    $pdf->Cell(20, 6, utf8_decode('Stock'),1,0, 'C',0);                                         
+    $pdf->Cell(25, 6, utf8_decode('Existencia'),1,0, 'C',0);                                         
+    $pdf->Cell(25, 6, utf8_decode('Diferencia'),1,1, 'C',0);                                             
+    $total1 = 0;
+    $total2 = 0;
+    while ($row = pg_fetch_row($sql2)) {
+        $pdf->SetX(1);
+        $total1 = $total1 + $row[3];
+        $total2 = $total2 + $row[4];
+        $pdf->Cell(30, 6, maxCaracter(utf8_decode($row[1]),15),0,0, 'C',0);                                             
+        $pdf->Cell(55, 6, maxCaracter(utf8_decode($row[2]),30),0,0, 'L',0);                                             
+        $pdf->Cell(25, 6, utf8_decode($row[3]),0,0, 'C',0);                                             
+        $pdf->Cell(25, 6, utf8_decode($row[4]),0,0, 'C',0);                                             
+        $pdf->Cell(20, 6, utf8_decode($row[5]),0,0, 'C',0);                                             
+        $pdf->Cell(25, 6, utf8_decode($row[6]),0,0, 'C',0);                                             
+        $pdf->Cell(25, 6, utf8_decode($row[7]),0,1, 'C',0);                                                     
+    }
+    $pdf->SetX(1);
+    $pdf->Cell(205, 0, utf8_decode(''),1,1, 'R',1);                                     
+    $pdf->Cell(86, 6, utf8_decode('Totales:'),0,0, 'R',0);                                     
+    $pdf->Cell(25, 6,(number_format($total1,2,',','.')) ,0,0, 'C',0);                                                                                         
+    $pdf->Cell(25, 6,(number_format($total2,2,',','.')) ,0,1, 'C',0);                                                                                         
+    $pdf->Output();
 ?>
