@@ -7,8 +7,6 @@ error_reporting(0);
 
 //////////////////compaprar tipo venta///////////
 if ($_POST["tipo_venta"] == "FACTURA") {
-
-
 /////////////////contador factura venta///////////
     $cont1 = 0;
     $consulta = pg_query("select max(id_factura_venta) from factura_venta");

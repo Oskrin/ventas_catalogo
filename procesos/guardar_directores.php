@@ -22,11 +22,7 @@ $consulta2 = pg_query("select max(id_usuario) from usuario");
     }
     $cont2++;
 /////////////////////////////////////////////////////////    
-<<<<<<< HEAD
 $contrasena = md5($_POST['ruc_ci']);
-=======
-$contrasena = md5($_POST['clave2']);
->>>>>>> origin/master
 if (pg_query("insert into directores values('$cont','$_POST[ruc_ci]','" . strtoupper($_POST[nombres_cli]) . "','$_POST[direccion_cli]','$_POST[nro_telefono]','$_POST[nro_celular]','" . strtoupper($_POST[pais_cli]) . "','" . strtoupper($_POST[ciudad_cli]) . "','$_POST[email]','Activo')")) {
     
     ///////////guardar usuarios///////////

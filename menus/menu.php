@@ -130,12 +130,14 @@ function menu_1() {
                             </li>
                         </ul>
                    </li>
+
                    <li><a href="" target="_parent">Proformas</a>
                         <ul>
                             <li><a href="" target="_parent" id="proformas">Proformas</a></li>
                             <li><a href="" id="lista_proformas">Lista de Proformas</a></li>
                         </ul>
-                  </li>  
+                  </li> 
+                   
                   <li><a href="" target="_parent">Gastos</a>
                       <ul>
                         <li><a href="" id="gastos">Gastos por factura</a></li> 
@@ -161,7 +163,7 @@ function menu_2() {
             <li><a href="../html/principal.php" target="_parent" class="inicio"><i class="icon-home"></i> Inicio</a></li>
             <li><a href="" target="_parent"> <i class="icon-th-large"></i> Ingresos</a>
                 <ul>
-                    <li><a href="">Clientes</a></li>
+                    <li><a href="../html/registro_clientes.php">Clientes</a></li>
                     <li><a href="">Proveedores</a></li>
                     <li><a href="">Productos</a></li>
                     <li><a href="">Clasificacion</a>
