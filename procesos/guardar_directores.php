@@ -22,11 +22,11 @@ $consulta2 = pg_query("select max(id_usuario) from usuario");
     }
     $cont2++;
 /////////////////////////////////////////////////////////    
-
+$contrasena = md5($_POST['clave2']);
 if (pg_query("insert into directores values('$cont','$_POST[ruc_ci]','" . strtoupper($_POST[nombres_cli]) . "','$_POST[direccion_cli]','$_POST[nro_telefono]','$_POST[nro_celular]','" . strtoupper($_POST[pais_cli]) . "','" . strtoupper($_POST[ciudad_cli]) . "','$_POST[email]','Activo')")) {
     
     ///////////guardar usuarios///////////
-    pg_query("insert into usuario values('$cont2','$_POST[nombres_cli]','','$_POST[ruc_ci]','$_POST[nro_telefono]','$_POST[nro_celular]','Vendedor','$_POST[clave2]','$_POST[email]','$_POST[direccion_cli]','$_POST[ruc_ci]','Activo')");
+    pg_query("insert into usuario values('$cont2','$_POST[nombres_cli]','','$_POST[ruc_ci]','$_POST[nro_telefono]','$_POST[nro_celular]','2','$contrasena','$_POST[email]','$_POST[direccion_cli]','$_POST[ruc_ci]','Activo')");
     //////////
     $data = 1;
 }

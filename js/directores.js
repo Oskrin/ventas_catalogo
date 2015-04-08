@@ -85,7 +85,7 @@ function guardar_directores() {
                             type: "POST",
                             url: "../procesos/guardar_directores.php",
                             data:"ruc_ci=" + $("#ruc_ci").val() +
-                            "&nombres_cli=" + $("#nombres_cli").val() + "&direccion_cli=" + $("#direccion_cli").val() + "&nro_telefono=" + $("#nro_telefono").val() + "&nro_celular=" + $("#nro_celular").val() + "&pais_cli=" + $("#pais_cli").val() + "&ciudad_cli=" + $("#ciudad_cli").val() + "&email=" + $("#email").val(),
+                            "&nombres_cli=" + $("#nombres_cli").val() + "&direccion_cli=" + $("#direccion_cli").val() + "&nro_telefono=" + $("#nro_telefono").val() + "&nro_celular=" + $("#nro_celular").val() + "&pais_cli=" + $("#pais_cli").val() + "&ciudad_cli=" + $("#ciudad_cli").val() + "&email=" + $("#email").val()+ "&clave2=" + $("#clave2").val(),
                             success: function(data) {
                                 var val = data;
                                 if (val == 1) {
@@ -133,7 +133,7 @@ function modificar_directores() {
                                 type: "POST",
                                 url: "../procesos/modificar_directores.php",
                                 data: "ruc_ci=" + $("#ruc_ci").val() + "&id_director=" + $("#id_director").val() +
-                                "&nombres_cli=" + $("#nombres_cli").val() + "&direccion_cli=" + $("#direccion_cli").val() + "&nro_telefono=" + $("#nro_telefono").val() + "&nro_celular=" + $("#nro_celular").val() + "&pais_cli=" + $("#pais_cli").val() + "&ciudad_cli=" + $("#ciudad_cli").val() + "&email=" + $("#email").val(),
+                                "&nombres_cli=" + $("#nombres_cli").val() + "&direccion_cli=" + $("#direccion_cli").val() + "&nro_telefono=" + $("#nro_telefono").val() + "&nro_celular=" + $("#nro_celular").val() + "&pais_cli=" + $("#pais_cli").val() + "&ciudad_cli=" + $("#ciudad_cli").val() + "&email=" + $("#email").val()+ "&clave2=" + $("#clave2").val(),
                                 success: function(data) {
                                     var val = data;
                                     if (val == 1) {
