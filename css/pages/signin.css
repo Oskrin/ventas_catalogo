@@ -62,6 +62,7 @@ body{ background: url(../../img/body-bg.png); color:#838383; font: 13px/1.7em 'O
 	height: 40px;
 	display: block;
 	margin: 0;
+	text-align: right;
 	box-shadow: inset 2px 2px 4px #f1f1f1;
 }
 
