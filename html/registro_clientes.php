@@ -1,6 +1,6 @@
 <?php
 session_start();
-include '../menus/menu.php';
+include '../menus/menu_director.php';
 ?>
 <!DOCTYPE html>
 <html lang="es">

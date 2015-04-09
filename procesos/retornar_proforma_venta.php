@@ -7,7 +7,7 @@ error_reporting(0);
 $id = $_GET['com'];
 $arr_data = array();
 
-$consulta = pg_query("select  P.fecha_actual, P.hora_actual, U.nombre_usuario, U.apellido_usuario, C.id_cliente, C.identificacion, C.nombres_cli, C.credito_cupo, P.tipo_precio, P.tarifa0, P.tarifa12, P.iva_proforma, descuento_proforma, P.total_proforma, P.observaciones  from proforma P, clientes C, usuario U where P.id_usuario = U.id_usuario and P.id_cliente = C.id_cliente and P.comprobante='" . $id . "'");
+$consulta = pg_query("select  P.fecha_actual, P.hora_actual, D.nombres, C.id_cliente, C.identificacion, C.nombres_cli, C.credito_cupo, P.tipo_precio, P.tarifa0, P.tarifa12, P.iva_proforma, descuento_proforma, P.total_proforma, P.observaciones  from proforma P, clientes C, directores D where P.id_director = D.id_director and P.id_cliente = C.id_cliente and P.id_director='$_SESSION[id]' and P.comprobante='" . $id . "'");
 while ($row = pg_fetch_row($consulta)) {
     $arr_data[] = $row[0];
     $arr_data[] = $row[1];
@@ -23,7 +23,6 @@ while ($row = pg_fetch_row($consulta)) {
     $arr_data[] = $row[11];
     $arr_data[] = $row[12];
     $arr_data[] = $row[13];
-    $arr_data[] = $row[14];
 }
 echo json_encode($arr_data);
 ?>

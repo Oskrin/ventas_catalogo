@@ -410,7 +410,7 @@ function guardar_proforma() {
 function flecha_atras(){
     $.ajax({
        type: "POST",
-       url: "../procesos/flechas.php",
+       url: "../procesos/flechas2.php",
        data: "comprobante=" + $("#comprobante").val() + "&tabla=" + "proforma" + "&id_tabla=" + "id_proforma" + "&tipo=" + 1,
        success: function(data) {
            var val = data;
@@ -442,22 +442,21 @@ function flecha_atras(){
                 $.getJSON('../procesos/retornar_proforma_venta.php?com=' + valor, function(data) {
                     var tama = data.length;
                     if (tama !== 0) {
-                        for (var i = 0; i < tama; i = i + 15)
-                        {
+                        for (var i = 0; i < tama; i = i + 14) {
                             $("#fecha_actual").val(data[i]);
                             $("#hora_actual").val(data[i + 1 ]);
-                            $("#digitador").val(data[i + 2 ] + " " + data[i + 3 ]);
-                            $("#id_cliente").val(data[i + 4]);
-                            $("#ruc_ci").val(data[i + 5]);
-                            $("#nombres_completos").val(data[i + 6]);
-                            $("#saldo").val(data[i + 7]);
-                            $("#tipo_precio").val(data[i + 8]);
-                            $("#total_p").val(data[i + 9]);
-                            $("#total_p2").val(data[i + 10]);
-                            $("#iva").val(data[i + 11]);
-                            $("#desc").val(data[i + 12]);
-                            $("#tot").val(data[i + 13]);
-                            $("#observaciones").val(data[i + 14]);
+                            $("#digitador").val(data[i + 2 ]);
+                            $("#id_cliente").val(data[i + 3]);
+                            $("#ruc_ci").val(data[i + 4]);
+                            $("#nombres_completos").val(data[i + 5]);
+                            $("#saldo").val(data[i + 6]);
+                            $("#tipo_precio").val(data[i + 7]);
+                            $("#total_p").val(data[i + 8]);
+                            $("#total_p2").val(data[i + 9]);
+                            $("#iva").val(data[i + 10]);
+                            $("#desc").val(data[i + 11]);
+                            $("#tot").val(data[i + 12]);
+                            $("#observaciones").val(data[i + 13]);
                         }
                     }
                 });
@@ -467,8 +466,7 @@ function flecha_atras(){
                 $.getJSON('../procesos/retornar_proforma_venta2.php?com=' + valor, function(data) {
                     var tama = data.length;
                     if (tama !== 0) {
-                        for (var i = 0; i < tama; i = i + 8)
-                        {
+                        for (var i = 0; i < tama; i = i + 8) {
                             var datarow = {
                                 cod_producto: data[i], 
                                 codigo: data[i + 1], 
@@ -493,7 +491,7 @@ function flecha_atras(){
 function flecha_siguiente(){
    $.ajax({
        type: "POST",
-       url: "../procesos/flechas.php",
+       url: "../procesos/flechas2.php",
        data: "comprobante=" + $("#comprobante").val() + "&tabla=" + "proforma" + "&id_tabla=" + "id_proforma" + "&tipo=" + 2,
        success: function(data) {
            var val = data;
@@ -524,22 +522,21 @@ function flecha_siguiente(){
             $.getJSON('../procesos/retornar_proforma_venta.php?com=' + valor, function(data) {
                 var tama = data.length;
                 if (tama !== 0) {
-                    for (var i = 0; i < tama; i = i + 15)
-                    {
+                    for (var i = 0; i < tama; i = i + 14) {
                         $("#fecha_actual").val(data[i]);
                         $("#hora_actual").val(data[i + 1 ]);
-                        $("#digitador").val(data[i + 2 ] + " " + data[i + 3 ] );
-                        $("#id_cliente").val(data[i + 4]);
-                        $("#ruc_ci").val(data[i + 5]);
-                        $("#nombres_completos").val(data[i + 6]);
-                        $("#saldo").val(data[i + 7]);
-                        $("#tipo_precio").val(data[i + 8]);
-                        $("#total_p").val(data[i + 9]);
-                        $("#total_p2").val(data[i + 10]);
-                        $("#iva").val(data[i + 11]);
-                        $("#desc").val(data[i + 12]);
-                        $("#tot").val(data[i + 13]);
-                        $("#observaciones").val(data[i + 14]);
+                        $("#digitador").val(data[i + 2 ]);
+                        $("#id_cliente").val(data[i + 3]);
+                        $("#ruc_ci").val(data[i + 4]);
+                        $("#nombres_completos").val(data[i + 5]);
+                        $("#saldo").val(data[i + 6]);
+                        $("#tipo_precio").val(data[i + 7]);
+                        $("#total_p").val(data[i + 8]);
+                        $("#total_p2").val(data[i + 9]);
+                        $("#iva").val(data[i + 10]);
+                        $("#desc").val(data[i + 11]);
+                        $("#tot").val(data[i + 12]);
+                        $("#observaciones").val(data[i + 13]);
                     }
                 }
             });
@@ -549,8 +546,7 @@ function flecha_siguiente(){
             $.getJSON('../procesos/retornar_proforma_venta2.php?com=' + valor, function(data) {
                 var tama = data.length;
                 if (tama !== 0) {
-                    for (var i = 0; i < tama; i = i + 8)
-                    {
+                    for (var i = 0; i < tama; i = i + 8) {
                         var datarow = {
                             cod_producto: data[i], 
                             codigo: data[i + 1], 
@@ -1251,22 +1247,21 @@ function inicio() {
         $.getJSON('../procesos/retornar_proforma_venta.php?com=' + valor, function(data) {
             var tama = data.length;
             if (tama !== 0) {
-                for (var i = 0; i < tama; i = i + 15)
-                {
+                for (var i = 0; i < tama; i = i + 14) {
                     $("#fecha_actual").val(data[i]);
                     $("#hora_actual").val(data[i + 1 ]);
-                    $("#digitador").val(data[i + 2 ] + " " + data[i + 3 ] );
-                    $("#id_cliente").val(data[i + 4]);
-                    $("#ruc_ci").val(data[i + 5]);
-                    $("#nombres_completos").val(data[i + 6]);
-                    $("#saldo").val(data[i + 7]);
-                    $("#tipo_precio").val(data[i + 8]);
-                    $("#total_p").val(data[i + 9]);
-                    $("#total_p2").val(data[i + 10]);
-                    $("#iva").val(data[i + 11]);
-                    $("#desc").val(data[i + 12]);
-                    $("#tot").val(data[i + 13]);
-                    $("#observaciones").val(data[i + 14]);
+                    $("#digitador").val(data[i + 2 ]);
+                    $("#id_cliente").val(data[i + 3]);
+                    $("#ruc_ci").val(data[i + 4]);
+                    $("#nombres_completos").val(data[i + 5]);
+                    $("#saldo").val(data[i + 6]);
+                    $("#tipo_precio").val(data[i + 7]);
+                    $("#total_p").val(data[i + 8]);
+                    $("#total_p2").val(data[i + 9]);
+                    $("#iva").val(data[i + 10]);
+                    $("#desc").val(data[i + 11]);
+                    $("#tot").val(data[i + 12]);
+                    $("#observaciones").val(data[i + 13]);
                 }
             }
         });
@@ -1276,8 +1271,7 @@ function inicio() {
         $.getJSON('../procesos/retornar_proforma_venta2.php?com=' + valor, function(data) {
             var tama = data.length;
             if (tama !== 0) {
-                 for (var i = 0; i < tama; i = i + 8)
-                {
+                 for (var i = 0; i < tama; i = i + 8) {
                     var datarow = {
                         cod_producto: data[i], 
                         codigo: data[i + 1], 
@@ -1359,22 +1353,21 @@ function inicio() {
         $.getJSON('../procesos/retornar_proforma_venta.php?com=' + valor, function(data) {
             var tama = data.length;
             if (tama !== 0) {
-                for (var i = 0; i < tama; i = i + 15)
-                {
+                for (var i = 0; i < tama; i = i + 14) {
                     $("#fecha_actual").val(data[i]);
                     $("#hora_actual").val(data[i + 1 ]);
-                    $("#digitador").val(data[i + 2 ] + " " + data[i + 3 ] );
-                    $("#id_cliente").val(data[i + 4]);
-                    $("#ruc_ci").val(data[i + 5]);
-                    $("#nombres_completos").val(data[i + 6]);
-                    $("#saldo").val(data[i + 7]);
-                    $("#tipo_precio").val(data[i + 8]);
-                    $("#total_p").val(data[i + 9]);
-                    $("#total_p2").val(data[i + 10]);
-                    $("#iva").val(data[i + 11]);
-                    $("#desc").val(data[i + 12]);
-                    $("#tot").val(data[i + 13]);
-                    $("#observaciones").val(data[i + 14]);
+                    $("#digitador").val(data[i + 2 ]);
+                    $("#id_cliente").val(data[i + 3]);
+                    $("#ruc_ci").val(data[i + 4]);
+                    $("#nombres_completos").val(data[i + 5]);
+                    $("#saldo").val(data[i + 6]);
+                    $("#tipo_precio").val(data[i + 7]);
+                    $("#total_p").val(data[i + 8]);
+                    $("#total_p2").val(data[i + 9]);
+                    $("#iva").val(data[i + 10]);
+                    $("#desc").val(data[i + 11]);
+                    $("#tot").val(data[i + 12]);
+                    $("#observaciones").val(data[i + 13]);
                 }
             }
         });
@@ -1384,8 +1377,7 @@ function inicio() {
         $.getJSON('../procesos/retornar_proforma_venta2.php?com=' + valor, function(data) {
             var tama = data.length;
             if (tama !== 0) {
-                for (var i = 0; i < tama; i = i + 8)
-                {
+                for (var i = 0; i < tama; i = i + 8) {
                     var datarow = {
                         cod_producto: data[i], 
                         codigo: data[i + 1], 

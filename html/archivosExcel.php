@@ -67,8 +67,6 @@ include '../menus/menu.php';
         <div class="subnavbar">
             <?Php
             // Cabecera Menu 
-
-
             if ($_SESSION['cargo'] == '1') {
                 print menu_1();
             }

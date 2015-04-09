@@ -33,7 +33,7 @@
             $this->SetLineWidth(0.4);            
             $this->Line(1,50,210,50);            
             $this->SetFont('Arial','B',12);                                                                            
-            $this->Cell(190, 5, utf8_decode("LISTA DE PROFORMAS"),0,1, 'C',0);                                                                                                                                        
+            $this->Cell(190, 5, utf8_decode("LISTA DE PEDIDOS"),0,1, 'C',0);                                                                                                                                        
             $this->SetFont('Arial','B',10);                                                                
             $this->Cell(90, 5, utf8_decode("Desde: ".$_GET['inicio']),0,0, 'R',0);                                                                                        
             $this->Cell(40, 5, utf8_decode("Hasta: ".$_GET['fin']),0,1, 'C',0);                                                                                                                

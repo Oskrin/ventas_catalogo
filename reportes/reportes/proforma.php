@@ -33,7 +33,7 @@
             $this->SetLineWidth(0.4);            
             $this->Line(1,45,210,45);            
             $this->SetFont('Arial','B',12);                                                                            
-            $this->Cell(190, 5, utf8_decode("PROFORMA"),0,1, 'C',0);                                                                                                                            
+            $this->Cell(190, 5, utf8_decode("PEDIDO"),0,1, 'C',0);                                                                                                                            
             $this->SetFont('Amble-Regular','',10);        
             $this->Ln(3);
             $this->SetFillColor(255,255,225);            
@@ -56,7 +56,7 @@
     $pdf->SetFont('Amble-Regular','',9); 
     
 
-    $sql=pg_query("select * from proforma,clientes,usuario,empresa where proforma.id_cliente=clientes.id_cliente and proforma.id_usuario=usuario.id_usuario and proforma.id_empresa=empresa.id_empresa and id_proforma='$_GET[id]'");
+    $sql=pg_query("select * from proforma,clientes,directores where proforma.id_cliente=clientes.id_cliente and proforma.id_director=directores.id_director and id_proforma='$_GET[id]'");
     while($row=pg_fetch_row($sql)){
         $temp1=$row[8];
         $temp2=$row[9];
@@ -68,7 +68,7 @@
         $pdf->Cell(85, 6, maxCaracter(utf8_decode($row[18]),40),0,0, 'L',0);                                                                      
         $pdf->Cell(20, 6, utf8_decode('CI/RUC: '),0,0, 'L',0);                                     
         $pdf->Cell(25, 6, utf8_decode($row[17]),0,0, 'L',0);                                     
-        $pdf->Cell(25, 6, utf8_decode('Nro Factura: '),0,0, 'L',0);  
+        $pdf->Cell(25, 6, utf8_decode('Num. Pedido: '),0,0, 'L',0);  
         $pdf->Cell(30, 6, utf8_decode($row[0]),0,1, 'L',0);                                                                                                        
         $pdf->Ln(1);
         $pdf->SetX(1);
@@ -81,9 +81,9 @@
         $pdf->Ln(1);
         $pdf->SetX(1);
         $pdf->Cell(20, 6, utf8_decode('Responsable:'),0,0, 'L',0);    
-        $pdf->Cell(130, 6, maxCaracter(utf8_decode($row[31].' '.$row[32]),80),0,0, 'L',0); 
-        $pdf->Cell(25, 6, utf8_decode('Celular:'),0,0, 'L',0);    
-        $pdf->Cell(30, 6, utf8_decode($row[35]),0,1, 'L',0);                                                                                         
+        $pdf->Cell(130, 6, maxCaracter(utf8_decode($row[32]),80),0,1, 'L',0); 
+        // $pdf->Cell(25, 6, utf8_decode('Celular:'),0,0, 'L',0);    
+        // $pdf->Cell(30, 6, utf8_decode($row[35]),0,1, 'L',0);                                                                                         
     }       
     $pdf->Ln(3);        
     $sql=pg_query("select * from detalle_proforma,productos where id_proforma='$_GET[id]'  and detalle_proforma.cod_productos=productos.cod_productos order by id_detalle_proforma asc;");

@@ -9,7 +9,7 @@ function menu_1() {
             <li><a href="" target="_parent"> <i class="icon-th-large"></i> Ingresos</a>
                 <ul>
                     <li><a href="../html/registro_clientes.php">Clientes</a></li>
-                    <li><a href="../html/proformas.php">Subir Proforma</a></li>
+                    <li><a href="../html/proformas.php">Pedido</a></li>
                 </ul>
             </li>
                       
