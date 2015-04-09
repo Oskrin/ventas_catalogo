@@ -44,6 +44,14 @@ session_destroy();
                         <p>Por favor, proporcione sus datos</p>
                         <div class="field">
                             <label for="username">Usuario:</label>
+                            <select class="username-field" >
+                                <option value="a">seleccionar</option>
+                                <option value="a">en procesos</option>
+                                <option value="a">en procesos</option>
+                            </select>
+                        </div> <!-- /field -->
+                        <div class="field">
+                            <label for="username">Usuario:</label>
                             <input type="text" id="txt_usuario" name="txt_usuario" placeholder="Usuario" class="login username-field" />
                         </div> <!-- /field -->
 

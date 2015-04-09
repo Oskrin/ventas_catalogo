@@ -43,11 +43,23 @@ body{ background: url(../../img/body-bg.png); color:#838383; font: 13px/1.7em 'O
 
 .login-fields input {
 	font-family: 'Open Sans';
-	font-size: 13px;
+	font-size: 16px;
 	color: #8e8d8d;
 	padding: 11px 15px 10px 50px;
 	background-color: #fdfdfd;
 	width: 255px;
+	display: block;
+	margin: 0;
+	box-shadow: inset 2px 2px 4px #f1f1f1;
+}
+.login-fields select {
+	font-family: 'Open Sans';
+	font-size: 16px;
+	color: #8e8d8d;
+	padding: 11px 15px 10px 50px;
+	background-color: #fdfdfd;
+	width: 320px;
+	height: 40px;
 	display: block;
 	margin: 0;
 	box-shadow: inset 2px 2px 4px #f1f1f1;
