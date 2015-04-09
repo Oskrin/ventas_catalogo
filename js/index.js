@@ -70,8 +70,7 @@ function guardar_empresa(){
     }
 }
 
-function inicio()
-{
+function inicio() {
     $("#ruc_empresa").validCampoFranz("0123456789");
     $("#telefono_empresa").validCampoFranz("0123456789");
     $("#celular_empresa").validCampoFranz("0123456789");
@@ -114,37 +113,19 @@ function ingresarSistema() {
             $.ajax({
                 url: '../procesos/index.php',
                 type: 'POST',
-                data: "usuario=" + $("#txt_usuario").val() + "&clave=" + $("#txt_contra").val() + "&id_empresa=" + $("#empresa").val(),
+                data: "usuario=" + $("#txt_usuario").val() + "&clave=" + $("#txt_contra").val() + "&tipo=" + $("#tipo").val(),
                 success: function(data) {
                     var val = data;
                     if (val == 1) {
-                        if($("#empresa").val() === null){
-                            alertify.confirm("Desea crear una nueva empresa", function (e) {
-                                if (e) {
-                                    $("#crear_empresa").dialog("open"); 
-                                }else{
-                                    $("#txt_usuario").val("");
-                                    $("#txt_contra").val(""); 
-                                }
-                            });
-                        }else{
-                            window.location.href = "principal.php";
-                        }
+                        window.location.href = "principal.php";
                     } else {
-                        if (val == 2) {
-                            if($("#empresa").val() === "" || $("#empresa").val() === null){
-                                $("#txt_usuario").val("");
-                                $("#txt_contra").val("");
-                                $("#txt_usuario").focus();
-                                alertify.alert("Imposible acceder al sistema"); 
-                            }else{
-                                window.location.href = "principal.php";  
-                            }
+                        if (val == 0) {
+                            $("#txt_contra").val("")
+                            $("#txt_contra").focus();
+                            alertify.alert("Error... Los datos son incorrectos ingrese nuevamente");
                         }else{
-                            if (val == 0) {
-                                $("#txt_contra").val("")
-                                $("#txt_contra").focus();
-                                alertify.alert("Error... Los datos son incorrectos ingrese nuevamente");
+                          if (val == 2) {
+                             window.location.href = "principal2.php";
                             }
                         }
                     }
