@@ -1,9 +1,6 @@
 <?php
 session_start();
-if (empty($_SESSION['id'])) {
-    header('Location: index.php');
-}
-include '../menus/menu.php';
+include '../menus/menu_director.php';
 ////////////////numero factura//////////////////
 include '../procesos/base.php';
 conectarse();
@@ -72,16 +69,8 @@ $cont1++;
             <div class="subnavbar-inner">
                 <?Php
                 // Cabecera Menu 
-                if ($_SESSION['cargo'] == '1') {
-                    print menu_1();
-                }
-                if ($_SESSION['cargo'] == '2') {
-                    print menu_2();
-                }
-                if ($_SESSION['cargo'] == '3') {
-                    print menu_3();
-                }
-                ?> 
+                print menu_1();
+                ?>
             </div> 
         </div> 
         <!-- /Fin  Menu Principal -->

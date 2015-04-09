@@ -8,8 +8,8 @@ function menu_1() {
             <li><a href="../html/principal.php" target="_parent" class="inicio"><i class="icon-home"></i> Inicio</a></li>
             <li><a href="" target="_parent"> <i class="icon-th-large"></i> Ingresos</a>
                 <ul>
-                    <li><a href="../html/registro_clientes.php" target="_blank">Clientes</a></li>
-                    <li><a href="../html/proformas.php"target="_blank">Subir Proforma</a></li>
+                    <li><a href="../html/registro_clientes.php">Clientes</a></li>
+                    <li><a href="../html/proformas.php">Subir Proforma</a></li>
                 </ul>
             </li>
                       

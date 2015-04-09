@@ -1,6 +1,5 @@
 <?php
 session_start();
-
 include '../menus/menu_director.php';
 ?>
 <!DOCTYPE html>
@@ -53,17 +52,8 @@ include '../menus/menu_director.php';
         <div class="subnavbar">
             <div class="subnavbar-inner">
                 <?Php
-                print menu_1();
                 // Cabecera Menu 
-                // if ($_SESSION['cargo'] == '1') {
-                //     print menu_1();
-                // }
-                // if ($_SESSION['cargo'] == '2') {
-                //     print menu_2();
-                // }
-                // if ($_SESSION['cargo'] == '3') {
-                //     print menu_3();
-                // }
+                print menu_1();
                 ?> 
             </div> 
         </div> 

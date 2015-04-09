@@ -1,8 +1,5 @@
 <?php
 session_start();
-if (empty($_SESSION['id'])) {
-    header('Location: index.php');
-}
 include '../menus/menu.php';
 ?>
 <!DOCTYPE html>
@@ -29,7 +26,6 @@ include '../menus/menu.php';
         <script type="text/javascript"src="../js/jquery-1.7.2.min.js"></script>
         <script type="text/javascript" src="../js/bootstrap.js"></script>
         <script type="text/javascript" src="../js/jquery-loader.js"></script>
-        <!--<script type="text/javascript" src="../js/jquery-1.10.2.js"></script>-->
         <script type="text/javascript" src="../js/jquery-ui-1.10.4.custom.min.js"></script>
         <script type="text/javascript" src="../js/grid.locale-es.js"></script>
         <script type="text/javascript" src="../js/jquery.jqGrid.src.js"></script>
@@ -59,15 +55,7 @@ include '../menus/menu.php';
             <div class="subnavbar-inner">
                 <?Php
                 // Cabecera Menu 
-                if ($_SESSION['cargo'] == '1') {
-                    print menu_1();
-                }
-                if ($_SESSION['cargo'] == '2') {
-                    print menu_2();
-                }
-                if ($_SESSION['cargo'] == '3') {
-                    print menu_3();
-                }
+                print menu_1();
                 ?> 
             </div> 
         </div> 
