@@ -68,6 +68,6 @@ for ($i = 0; $i <= $nelem; $i++) {
     }
 }
 
-$data = 1;
+$data = $cont1;
 echo $data;
 ?>

@@ -146,7 +146,7 @@ $cont1++;
                                                         <legend>Productos</legend>   
                                                         <table cellpadding="2" border="0" style="margin-left: 10px">
                                                             <tr>
-                                                                <td><label>Código Barras:</label></td>
+                                                                <!-- <td><label>Código Barras:</label></td> -->
                                                                 <td><label>Código:</label></td>   
                                                                 <td><label>Producto:</label></td>   
                                                                 <td><label>Cantidad:</label></td>   
@@ -155,9 +155,9 @@ $cont1++;
                                                             </tr>
 
                                                             <tr>
-                                                                <td><input type="text" name="codigo_barras" id="codigo_barras" class="campo" style="width: 170px"  placeholder="Buscar..."/></td>
-                                                                <td><input type="text" name="codigo" id="codigo" class="campo" style="width: 200px"  placeholder="Buscar..."/></td>
-                                                                <td><input type="text" name="producto" id="producto" class="campo" style="width: 200px"  placeholder="Buscar..."/></td>
+                                                                <!-- <td><input type="hidden" name="codigo_barras" id="codigo_barras" class="campo" style="width: 170px"  placeholder="Buscar..."/></td> -->
+                                                                <td><input type="text" name="codigo" id="codigo" class="campo" style="width: 250px"  placeholder="Buscar..."/></td>
+                                                                <td><input type="text" name="producto" id="producto" class="campo" style="width: 250px"  placeholder="Buscar..."/></td>
                                                                 <td><input type="text" name="cantidad" id="cantidad" class="campo" style="width: 60px" maxlength="10"/></td>
                                                                 <td><input type="text" name="precio" id="precio" style="width: 60px" readonly class="campo"/></td>
                                                                 <td><input type="text" name="stock" id="stock" class="campo" style="width: 60px" maxlength="10" value="" readonly/></td>

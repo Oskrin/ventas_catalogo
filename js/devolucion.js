@@ -650,9 +650,9 @@ function guardar_devolucion() {
                                 data: "id_proveedor=" + $("#id_proveedor").val() + "&comprobante=" + $("#comprobante").val() + "&id_factura_compra=" + $("#id_factura_compra").val() + "&fecha_actual=" + $("#fecha_actual").val() + "&hora_actual=" + $("#hora_actual").val() + "&tipo_comprobante=" + $("#tipo_comprobante").val() + "&serie=" + $("#serie").val() + "&autorizacion=" + $("#autorizacion").val() + "&tarifa0=" + $("#total_p").val() + "&tarifa12=" + $("#total_p2").val() + "&iva=" + $("#iva").val() + "&desc=" + $("#desc").val() + "&tot=" + $("#tot").val() + "&observaciones=" + $("#observaciones").val() + "&campo1=" + string_v1 + "&campo2=" + string_v2 + "&campo3=" + string_v3 + "&campo4=" + string_v4 + "&campo5=" + string_v5,
                                 success: function(data) {
                                     var val = data;
-                                    if (val == 1) {
+                                    if (val != 0) {
                                         alertify.alert("Devolución Guardada correctamente",function(){
-                                        window.open("../reportes/reportes/devolucion_compra.php?id="+$("#comprobante").val(),'_blank');    
+                                        window.open("../reportes/reportes/devolucion_compra.php?id="+val,'_blank');    
                                         location.reload();
                                         });
                                     }

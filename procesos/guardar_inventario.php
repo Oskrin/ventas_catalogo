@@ -55,6 +55,6 @@ for ($i = 0; $i <= $nelem; $i++) {
     pg_query("Update productos Set stock='" . $arreglo4[$i] . "' ,existencia='" . $arreglo4[$i] . "', diferencia='" . $arreglo6[$i] . "' where cod_productos='" . $arreglo1[$i] . "'");
     ///////////////////////////////////////////
 }
-$data = 1;
+$data = $cont1;
 echo $data;
 ?>

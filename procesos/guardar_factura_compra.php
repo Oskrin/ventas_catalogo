@@ -108,6 +108,6 @@ if ($forma === "Credito") {
     }
 }
 
-$data = 1;
+$data = $cont1;
 echo $data;
 ?>

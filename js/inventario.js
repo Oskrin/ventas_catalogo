@@ -269,7 +269,7 @@ function guardar_inventario() {
             data: "comprobante=" + $("#comprobante").val() + "&fecha_actual=" + $("#fecha_actual").val() + "&hora_actual=" + $("#hora_actual").val() + "&campo1=" + string_v1 + "&campo2=" + string_v2 + "&campo3=" + string_v3 + "&campo4=" + string_v4 + "&campo5=" + string_v5 + "&campo6=" + string_v6,
             success: function(data) {
                 var val = data;
-                if (val == 1) {
+                if (val != 0) {
                     alertify.alert("Inventario Guardado correctamente",function(){location.reload();});
                 }
             }

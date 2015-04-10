@@ -27,7 +27,7 @@ function menu_1() {
             <li><a href="" target="_parent"><i class="icon-book"></i> Procesos</a>
                 <ul>
                     <li><a href="../html/inventario.php" target="_blank">Inventario</a></li>
-                    <li><a href="../html/proformas.php" target="_blank">Proformas</a></li>
+                    <!--<li><a href="../html/proformas.php" target="_blank">Proformas</a></li>-->
                     <li><a href="" target="_parent">Compras</a>
                         <ul>
                             <li><a href="../html/factura_compra.php" target="_blank">Productos Bodega</a></li>
@@ -62,6 +62,7 @@ function menu_1() {
                  <li><a href="" target="_parent">Directores</a>
                         <ul>
                             <li><a href="" id="total_director">Total Por Director</a></li>                            
+                            <li><a href="" id="faltante_pedido">Faltante de Pedidos</a></li>                            
                         </ul>
                    </li>
                     <li><a href="" target="_parent">Productos</a>
@@ -107,6 +108,7 @@ function menu_1() {
                             <li><a href="" id="reporte_utilidad_factura">Utilidad por factura</a></li>
                             <li><a href="" id="reporte_utilidad_factura_general">Utilidad General de facturas</a></li>
                             <li><a href="" id="buscar_serie">Buscar por nro de serie</a></li>
+                            <li><a href="" id="notas_de_venta">Buscar Notas de venta</a></li>
                         </ul>
                    </li>
                    <li><a href="" target="_parent">Cartera</a>

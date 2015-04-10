@@ -101,6 +101,10 @@ function inicio(){
     $("#diario_caja").on("click",diario_caja);
     $("#ordenes_produccion_fechas").on("click",ordenes_produccion_fechas);
     $("#total_director").on("click",total_director);
+
+    $("#faltante_pedido").on("click",faltante_pedido);
+    $("#notas_de_venta").on("click",notas_de_venta);
+
     
 }
 function Defecto(e){
@@ -128,9 +132,14 @@ function fn_reporte(e){
 function ventana_mar_cat(e){	
     modal.open({
         content: "<input type='radio' name='group1' id='excel' value='Reporte en Excel' > <label for='excel'>Reporte en Excel</label> <br><input type='radio' name='group1' id='pdf' value='Reporte Pdf' checked> <label for='pdf'>Reporte Pdf</label> <br><label>Categorías</label><select id='sel_categoria' style='width:150px;float:right'></select><br><label>Marcas</label><select id='sel_marcas' style='width:150px;float:right'></select><br><a 'id='generar' style='cursor:pointer;font-size:12px;margin-left:40px' class='generarReporte_mar_cat' onclick='return fn_reporte_mar_cat(event)' href='#'>Generar Reporte</a>"
-    });
-    $("#sel_marcas").load("../procesos/marcas_combos.php");   
-    $("#sel_categoria").load("../procesos/categorias_combos.php"); 
+    });    
+    $("#sel_marcas").load("../procesos/marcas_combos.php",function(){
+        $("#sel_marcas").append("<option value=''>Todas</option>")
+    });           
+
+    $("#sel_categoria").load("../procesos/categorias_combos.php",function(){
+        $("#sel_categoria").append("<option value=''>Todas</option>")
+    }); 
     $('.generarReporte_mar_cat').button();	
     e.preventDefault();  
 }
@@ -1581,4 +1590,86 @@ function total_director(e){
 function fn_total_director(e){
     window.open('../reportes/reportes/reporte_director.php?id='+$("#idDir").val()+"&inicio="+$("#inicio").val()+"&fin="+$("#fin").val(), '_blank');      
        
+}
+
+////////////////////////////
+function faltante_pedido(e){ 
+    modal.open({
+        content: "<label style='padding:6px;'>Fecha Inicio</label> <input type='text' id='inicio' style='padding:2px;'><br> <label style='padding:6px;'>Fecha Fin</label> <input type='text' id='fin' style='float: right;padding:2px;'><br><input type='radio' name='group1' id='pdf' value='Reporte Pdf' checked> <label for='pdf'>Reporte Pdf</label> <br><a 'id='generar' style='cursor:pointer;font-size:12px;margin-left:40px' class='generarReporte_faltantePedido' onclick='return fn_faltante_pedido(event)' href='#'>Generar Reporte</a>"
+    });    
+    $('.generarReporte_faltantePedido').button();   
+    $( "#inicio" ).datepicker({
+     
+        changeMonth: true,
+        dateFormat: 'yy-mm-dd',
+        changeYear: true,   
+        showButtonPanel: true,
+        showOtherMonths: true,
+        selectOtherMonths: true,   
+        numberOfMonths: 2,
+        onClose: function( selectedDate ) {
+            $( "#fin" ).datepicker( "option", "minDate", selectedDate );
+        }
+    });
+    $( "#fin" ).datepicker({
+    
+        changeMonth: true,
+        dateFormat: 'yy-mm-dd',
+        changeYear: true,   
+        showButtonPanel: true,
+        showOtherMonths: true,
+        selectOtherMonths: true,   
+        numberOfMonths: 2,
+        onClose: function( selectedDate ) {
+            $( "#inicio" ).datepicker( "option", "maxDate", selectedDate );
+        }
+    });
+    e.preventDefault();  
+}
+
+function fn_faltante_pedido(e){
+    window.open('../reportes_sistema/faltante_pedidos.php?&inicio='+$("#inicio").val()+"&fin="+$("#fin").val(), '_blank');      
+       
+}
+
+
+////////////////////////////
+function notas_de_venta(e){ 
+    modal.open({
+        content: "<label for='buscarCli' style='padding:6px;'>Buscar </label><input type='text' name='buscarCli' id='buscarCli' style='float: right;padding:2px;' /><input type='hidden' id='idCli' /><br><label style='padding:6px;'>Facturas</label> <select id='select_notas_ventas' style='padding:2px;'><option>Busque un cliente</option></select><br> <input type='radio' name='group1' id='pdf' value='Reporte Pdf' checked> <label for='pdf'>Reporte Pdf</label> <br><a 'id='generar' style='cursor:pointer;font-size:12px;margin-left:40px' class='generarReporte_notas_de_venta' onclick='return fn_notas_de_venta(event)' href='#'>Generar Reporte</a>"
+    });
+    $("#buscarCli").autocomplete({
+        source: "../procesos/busquedaCliente.php",
+        minLength: 1,
+        focus: function(event, ui) {
+        $("#buscarCli").val(ui.item.value);            
+        $("#idCli").val(ui.item.label);
+        return false;
+        },
+        select: function(event, ui) {
+        $("#buscarCli").val(ui.item.value);            
+        $("#idCli").val(ui.item.label);
+        cargar_notas_ventas(ui.item.label);
+        return false;
+        }
+        }).data("ui-autocomplete")._renderItem = function(ul, item) {
+        return $("<li>")
+        .append("<a>" + item.value + "</a>")
+        .appendTo(ul);
+    };
+    $('.generarReporte_notas_de_venta').button();       
+    e.preventDefault();  
+}
+
+function fn_notas_de_venta(e){    
+    if($("#select_notas_ventas").val() != ''){
+        window.open('../reportes_sistema/nota_venta.php?id='+$("#select_notas_ventas").val(), '_blank');          
+    }else{
+        alert("Sleeccione una factura antes de continuar");
+    }
+    
+       
+}
+function cargar_notas_ventas(id){
+    $("#select_notas_ventas").load("../procesos/cargar_notas_ventas.php?id="+id)
 }
