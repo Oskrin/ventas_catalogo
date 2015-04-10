@@ -394,9 +394,9 @@ function guardar_proforma() {
                     data: "id_cliente=" + $("#id_cliente").val() + "&comprobante=" + $("#comprobante").val() + "&fecha_actual=" + $("#fecha_actual").val() + "&hora_actual=" + $("#hora_actual").val() + "&tipo_precio=" + $("#tipo_precio").val() + "&tarifa0=" + $("#total_p").val() + "&tarifa12=" + $("#total_p2").val() + "&iva=" + $("#iva").val() + "&desc=" + $("#desc").val() + "&tot=" + $("#tot").val() + "&campo1=" + string_v1 + "&campo2=" + string_v2 + "&campo3=" + string_v3 + "&campo4=" + string_v4 + "&campo5=" + string_v5 + "&observaciones=" + $("#observaciones").val(),
                     success: function(data) {
                         var val = data;
-                        if (val == 1) {
+                        if (val != 0) {
                             alertify.alert("Proforma Guardada correctamente",function(){
-                            window.open("../reportes/reportes/proforma.php?id="+$("#comprobante").val(),'_blank');    
+                            window.open("../reportes/reportes/proforma.php?id="+val,'_blank');    
                             location.reload();
                             });   
                         }
