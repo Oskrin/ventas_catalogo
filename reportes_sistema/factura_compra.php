@@ -2,6 +2,7 @@
     require('../../fpdf/fpdf.php');
     include '../../procesos/base.php';
     include '../../procesos/funciones.php';
+
     conectarse();    
     date_default_timezone_set('America/Guayaquil'); 
     session_start()   ;
@@ -13,7 +14,7 @@
             $this->widths=$w;
         }                       
         function Header(){             
-            $this->AddFont('Amble-Regular');
+            $this->AddFont('Amble-Regular','','../fpdf/amable.php');
             $this->SetFont('Amble-Regular','',10);        
             $fecha = date('Y-m-d', time());
             $this->SetX(1);

@@ -13,6 +13,7 @@
             $this->widths=$w;
         }                       
         function Header(){             
+            $this->AddFont('Amble-Regular','','../fpdf/amable.php');
             $this->AddFont('Amble-Regular');
             $this->SetFont('Amble-Regular','',10);        
             $fecha = date('Y-m-d', time());
