@@ -125,7 +125,7 @@ function ingresarSistema() {
                             alertify.alert("Error... Los datos son incorrectos ingrese nuevamente");
                         }else{
                           if (val == 2) {
-                             window.location.href = "principal2.php";
+                             window.location.href = "director.php";
                             }
                         }
                     }
