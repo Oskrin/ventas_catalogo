@@ -87,6 +87,7 @@
     $valor_tot = 0;
     $desc_tot = 0;
     $total_final = 0;
+    $temp2 = 0;
     while ($row = pg_fetch_row($sql)) {                
         $temp = 0;
         $desc = 0;
@@ -111,29 +112,28 @@
             $pdf->Cell(20, 6, utf8_decode("CANT"),1,0, 'C',0);       
             $pdf->Cell(20, 6, utf8_decode("VALOR UNI"),1,0, 'C',0);       
             $pdf->Cell(20, 6, utf8_decode("VALOR TOT"),1,0, 'C',0);       
-            $pdf->Cell(20, 6, utf8_decode("30%"),1,1, 'C',0);       
-        }
-        while ($row1 = pg_fetch_row($sql1)) {            
-            $temp = $row1[0];
-            $desc = 0;
-            $pdf->SetX(1);  
-            $pdf->Cell(25, 6, maxCaracter(utf8_decode($row1[1]),15),0,0, 'L',0);
-            $pdf->Cell(60, 6, maxCaracter(utf8_decode($row1[2]),30),0,0, 'L',0);
-            $pdf->Cell(20, 6, maxCaracter(utf8_decode($row1[3]),10),0,0, 'L',0);
-            $pdf->Cell(20, 6, maxCaracter(utf8_decode($row1[4]),10),0,0, 'L',0);
-            $pdf->Cell(20, 6, maxCaracter(utf8_decode($row1[5]),50),0,0, 'C',0);
-            $pdf->Cell(20, 6, maxCaracter(utf8_decode($row1[6]),50),0,0, 'C',0);
-            $pdf->Cell(20, 6, maxCaracter(utf8_decode($row1[6] * $row1[5]),50),0,0, 'C',0);
-            $desc = ($row1[6] * $row1[5]) * 0.30;
-            $desc = ($row1[6] * $row1[5]) - $desc;
-            $pdf->Cell(20, 6, maxCaracter(number_format($desc,3,',','.'),10),0,1, 'C',0);
-            $cant = $cant + $row1[5];
-            $valor_uni = $valor_uni + $row1[6];
-            $valor_tot = $valor_tot + ($row1[6] * $row1[5]);
-            $desc_tot = $desc_tot + $desc;
-            $total_final = $total_final + $desc;
-        }   
-        if(pg_num_rows($sql1)){    
+            $pdf->Cell(20, 6, utf8_decode("30%"),1,1, 'C',0);      
+
+            while ($row1 = pg_fetch_row($sql1)) {            
+                $temp = $row1[0];
+                $desc = 0;
+                $pdf->SetX(1);  
+                $pdf->Cell(25, 6, maxCaracter(utf8_decode($row1[1]),15),0,0, 'L',0);
+                $pdf->Cell(60, 6, maxCaracter(utf8_decode($row1[2]),30),0,0, 'L',0);
+                $pdf->Cell(20, 6, maxCaracter(utf8_decode($row1[3]),10),0,0, 'L',0);
+                $pdf->Cell(20, 6, maxCaracter(utf8_decode($row1[4]),10),0,0, 'L',0);
+                $pdf->Cell(20, 6, maxCaracter(utf8_decode($row1[5]),50),0,0, 'C',0);
+                $pdf->Cell(20, 6, maxCaracter(utf8_decode($row1[6]),50),0,0, 'C',0);
+                $pdf->Cell(20, 6, maxCaracter(utf8_decode($row1[6] * $row1[5]),50),0,0, 'C',0);
+                $desc = ($row1[6] * $row1[5]) * 0.30;
+                $desc = ($row1[6] * $row1[5]) - $desc;
+                $pdf->Cell(20, 6, maxCaracter(number_format($desc,3,',','.'),10),0,1, 'C',0);
+                $cant = $cant + $row1[5];
+                $valor_uni = $valor_uni + $row1[6];
+                $valor_tot = $valor_tot + ($row1[6] * $row1[5]);
+                $desc_tot = $desc_tot + $desc;
+                $total_final = $total_final + $desc;
+            }         
             $pdf->SetX(1);                                             
             $pdf->Cell(205, 0, utf8_decode(""),1,1, 'R',0);
             $pdf->Cell(126, 6, utf8_decode("Totales"),0,0, 'R',0);
@@ -141,8 +141,8 @@
             $pdf->Cell(20, 6, maxCaracter((number_format($valor_uni,2,',','.')),20),0,0, 'C',0);
             $pdf->Cell(20, 6, maxCaracter((number_format($valor_tot,2,',','.')),20),0,0, 'C',0);
             $pdf->Cell(20, 6, maxCaracter((number_format($desc_tot,2,',','.')),20),0,1, 'C',0);
-        }
-        $pdf->Ln(3);
+            $pdf->Ln(3);
+        }        
     }
     $pdf->SetX(1);                                             
     $pdf->Ln(5);              
