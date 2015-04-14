@@ -90,15 +90,15 @@
         }
         $pdf->SetX(1);        
         $pdf->Cell(40, 6, utf8_decode($row[1]),0,0, 'C',0);                               
-        $pdf->Cell(75, 6, utf8_decode($row[2]),0,0, 'C',0);                       
+        $pdf->Cell(75, 6, utf8_decode($row[2]),0,0, 'L',0);                       
         $pdf->Cell(40, 6, utf8_decode($temp),0,0, 'C',0);                       
         $pdf->Cell(40, 6, utf8_decode($temp1),0,1, 'C',0);                           
     }
     $pdf->SetX(1);                                             
     $pdf->Cell(207, 0, utf8_decode(""),1,1, 'R',0);
-    $pdf->Cell(85, 6, utf8_decode("Totales"),0,0, 'R',0);
+    $pdf->Cell(125, 6, utf8_decode("Totales"),0,0, 'R',0);
     $pdf->Cell(25, 6, maxCaracter((number_format($cont1,2,',','.')),20),0,0, 'C',0);                                                    
-    $pdf->Cell(25, 6, maxCaracter((number_format($cont2,2,',','.')),20),0,1, 'C',0);                                                    
+    $pdf->Cell(55, 6, maxCaracter((number_format($cont2,2,',','.')),20),0,1, 'C',0);                                                    
     $pdf->Ln(3);              
     $pdf->Output();
 ?>

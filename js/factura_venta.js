@@ -1051,7 +1051,6 @@ function guardar_serie() {
 
 function guardar_factura() {
     var tam = jQuery("#list").jqGrid("getRowData");
-
     if ($("#num_factura").val() === "") {
         $("#num_factura").focus();
         alertify.alert("Indique número de la factura");
@@ -1071,12 +1070,12 @@ function guardar_factura() {
                     if ($("#id_cliente").val() === "") {
                         $("#ruc_ci").focus();
                         alertify.alert("Indique un cliente");
-                    } else {
-                        if ($("#ruc_ci").val().length !== 10 && $("#ruc_ci").val().length !== 13) {
+                    }else {
+                        if($("#ruc_ci").val().length !== 10 && $("#ruc_ci").val().length !== 13) {
                             $("#ruc_ci").val("");
                             $("#ruc_ci").focus();
                             alertify.alert("Error... Ingrese una Identificación valida");
-                        } else{
+                        }else{
                             if ($("#nombre_cliente").val() === "") {
                                 $("#nombre_cliente").focus();
                                 alertify.alert("Nombres del cliente");
@@ -1138,19 +1137,20 @@ function guardar_factura() {
                                                         var val = data;
                                                         if($("#tipo_venta").val() == "FACTURA"){
                                                            if (val != 0) {
-                                                            alertify.alert("Factura Guardada correctamente", function(){
-                                                                window.open("../reportes_sistema/factura_venta.php?hoja=A4&id="+val,'_blank');
-                                                                location.reload();
-                                                            });
-                                                        }
+                                                                alertify.alert("Factura Guardada correctamente", function(){
+                                                                    window.open("../reportes_sistema/factura_venta.php?hoja=A4&id="+val,'_blank');
+                                                                    location.reload();
+                                                                });
+                                                            }
                                                         }else{
-                                                           if($("#tipo_venta").val() == "NOTA"){
-                                                           if (val != 0) {
-                                                            alertify.alert("Factura Guardada correctamente", function(){
-                                                                window.open("../reportes_sistema/nota_venta.php?hoja=A4&id="+val,'_blank');
-                                                                location.reload();
-                                                            });
-                                                        }
+                                                            if($("#tipo_venta").val() == "NOTA"){
+                                                                if (val != 0) {
+                                                                    alertify.alert("Factura Guardada correctamente", function(){
+                                                                        window.open("../reportes_sistema/nota_venta.php?hoja=A4&id="+val,'_blank');
+                                                                        location.reload();
+                                                                    });
+                                                                }
+                                                            }
                                                         }
                                                     }
                                                 });
