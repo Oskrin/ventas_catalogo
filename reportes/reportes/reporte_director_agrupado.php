@@ -95,7 +95,7 @@
         $valor_uni = 0;
         $valor_tot = 0;
         $desc_tot = 0;
-        $sql1 = pg_query("SELECT productos.cod_productos,productos.codigo,articulo,categoria,marca,sum(cantidad::int),precio_venta,detalle_factura_venta.total_venta from factura_venta,clientes,directores,detalle_factura_venta,productos where clientes.id_director = directores.id_director and factura_venta.id_cliente = clientes.id_cliente and detalle_factura_venta.id_factura_venta = factura_venta.id_factura_venta and detalle_factura_venta.cod_productos = productos.cod_productos and directores.id_director = '".$_GET['id']."' and clientes.id_cliente = '".$row[0]."' and  fecha_actual between '".$_GET['inicio']."' and '".$_GET['fin']."' group by  productos.cod_productos,precio_venta,detalle_factura_venta.total_venta");
+        $sql1 = pg_query("SELECT productos.cod_productos,productos.codigo,articulo,categoria,marca,sum(cantidad::int),precio_venta,detalle_factura_venta.total_venta from factura_venta,clientes,directores,detalle_factura_venta,productos where clientes.id_director = directores.id_director and factura_venta.id_cliente = clientes.id_cliente and detalle_factura_venta.id_factura_venta = factura_venta.id_factura_venta and detalle_factura_venta.cod_productos = productos.cod_productos and directores.id_director = '".$_GET['id']."' and clientes.id_cliente = '".$row[0]."' and  fecha_actual between '".$_GET['inicio']."' and '".$_GET['fin']."' group by  productos.cod_productos,precio_venta,detalle_factura_venta.total_venta, productos.codigo,productos.articulo,productos.categoria,productos.marca");
         if(pg_num_rows($sql1)){
             $pdf->SetX(1);                
             $pdf->Cell(25, 6, utf8_decode("EMPRESARI@"),1,0, 'C',1);
