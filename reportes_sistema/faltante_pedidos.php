@@ -68,7 +68,7 @@
     $stock_producto = array();
     $sql = pg_query("select id_proforma from proforma where fecha_actual between '".$_GET['inicio']."' and '".$_GET['fin']."' and estado = 'Activo'");       
     while ($row = pg_fetch_row($sql)) {
-        $sql1 = pg_query("select detalle_proforma.cod_productos,cantidad,codigo,productos.articulo,productos.stock from detalle_proforma,productos where detalle_proforma.cod_productos = productos.cod_productos and detalle_proforma.estado = 'Activo' and id_proforma = '".$row[0]."'");                
+        $sql1 = pg_query("select detalle_proforma.cod_productos,cantidad,codigo,productos.articulo,productos.stock from detalle_proforma,productos where detalle_proforma.cod_productos = productos.cod_productos and detalle_proforma.estado = 'Activo' and id_proforma = '".$row[0]."' order by productos.codigo asc");                
         while($row1 = pg_fetch_row($sql1)){                        
             $contador;
             $posicion = -1;
@@ -99,17 +99,25 @@
             }          
         }
     }
-    //print_r($cantidad_producto);
+    $agrupados = array();
+    for($i = 0;  $i < count($codigo_producto); $i++){
+        $agrupados[$i]['codigo'] = $codigo_producto[$i];
+        $agrupados[$i]['nombre_producto'] = $nombre_producto[$i];
+        $agrupados[$i]['cantidad_producto'] = $cantidad_producto[$i];
+        $agrupados[$i]['stock_producto'] = $stock_producto[$i];
+    }            
+    array_multisort($agrupados, SORT_ASC);   
+    //print "<pre>";  print_r($agrupados); "</pre>\n";
     $pdf->SetFont('Amble-Regular','',9);   
     $pdf->SetX(5);        
     for($cont_vector = 0; $cont_vector < count($codigo_producto); $cont_vector++){
         $pdf->SetX(1);                  
         $pdf->SetTextColor(0,0,0);
-        $pdf->Cell(30, 5, utf8_decode($codigo_producto[$cont_vector]),0,0, 'L',0);
-        $pdf->Cell(95, 5, maxCaracter(utf8_decode($nombre_producto[$cont_vector]),50),0,0, 'L',0);
-        $pdf->Cell(30, 5, utf8_decode($cantidad_producto[$cont_vector]),0,0, 'C',0);        
-        $pdf->Cell(30, 5, utf8_decode($stock_producto[$cont_vector]),0,0, 'C',0);                         
-        $faltante = $stock_producto[$cont_vector] - $cantidad_producto[$cont_vector];
+        $pdf->Cell(30, 5, utf8_decode($agrupados[$cont_vector]['codigo']),0,0, 'L',0);
+        $pdf->Cell(95, 5, maxCaracter(utf8_decode($agrupados[$cont_vector]['nombre_producto']),50),0,0, 'L',0);
+        $pdf->Cell(30, 5, utf8_decode($agrupados[$cont_vector]['cantidad_producto']),0,0, 'C',0);        
+        $pdf->Cell(30, 5, utf8_decode($agrupados[$cont_vector]['stock_producto']),0,0, 'C',0);                         
+        $faltante = $agrupados[$cont_vector]['stock_producto'] - $agrupados[$cont_vector]['cantidad_producto'];
         if($faltante > 0){
             $pdf->SetTextColor(240,11,11);
             $pdf->Cell(20, 5, utf8_decode('0'),0,0, 'C',0);                             
