@@ -10,7 +10,7 @@ $search = $_GET['_search'];
 
 if (!$sidx)
     $sidx = 1;
-$result = pg_query("SELECT COUNT(*) AS count from proforma P , clientes C where P.id_cliente=C.id_cliente and P.estado='Activo'");
+$result = pg_query("SELECT COUNT(*) AS count from proforma P , clientes C, directores D  where P.id_cliente = C.id_cliente and C.id_director = D.id_director and P.estado='Activo'");
 $row = pg_fetch_row($result);
 $count = $row[0];
 if ($count > 0 && $limit > 0) {
@@ -24,37 +24,37 @@ $start = $limit * $page - $limit;
 if ($start < 0)
     $start = 0;
 if ($search == 'false') {
-    $SQL = "select P.id_proforma, C.identificacion, C.nombres_cli, P.total_proforma, P.fecha_actual from proforma P, clientes C where P.id_cliente= C.id_cliente and P.estado='Activo' ORDER BY $sidx $sord offset $start limit $limit";
+    $SQL = "select P.id_proforma, C.nombres_cli, P.total_proforma, P.fecha_actual, D.identificacion_dire, D.nombres from proforma P, clientes C, directores D where P.id_cliente= C.id_cliente and C.id_director = d.id_director and P.estado='Activo' ORDER BY $sidx $sord offset $start limit $limit";
 } else {
     if ($_GET['searchOper'] == 'eq') {
-        $SQL = "select P.id_proforma, C.identificacion, C.nombres_cli, P.total_proforma, P.fecha_actual from proforma P, clientes C where P.id_cliente= C.id_cliente and P.estado='Activo' and $_GET[searchField] = '$_GET[searchString]' ORDER BY $sidx $sord offset $start limit $limit";
+        $SQL = "select P.id_proforma, C.nombres_cli, P.total_proforma, P.fecha_actual, D.identificacion_dire, D.nombres from proforma P, clientes C, directores D where P.id_cliente= C.id_cliente and C.id_director = d.id_director and P.estado='Activo' and $_GET[searchField] = '$_GET[searchString]' ORDER BY $sidx $sord offset $start limit $limit";
     }
     if ($_GET['searchOper'] == 'ne') {
-        $SQL = "select P.id_proforma, C.identificacion, C.nombres_cli, P.total_proforma, P.fecha_actual from proforma P, clientes C where P.id_cliente= C.id_cliente and P.estado='Activo' and $_GET[searchField] != '$_GET[searchString]' ORDER BY $sidx $sord offset $start limit $limit";
+        $SQL = "select P.id_proforma, C.nombres_cli, P.total_proforma, P.fecha_actual, D.identificacion_dire, D.nombres from proforma P, clientes C, directores D where P.id_cliente= C.id_cliente and C.id_director = d.id_director and P.estado='Activo' and $_GET[searchField] != '$_GET[searchString]' ORDER BY $sidx $sord offset $start limit $limit";
     }
     if ($_GET['searchOper'] == 'bw') {
-        $SQL = "select P.id_proforma, C.identificacion, C.nombres_cli, P.total_proforma, P.fecha_actual from proforma P, clientes C where P.id_cliente= C.id_cliente and P.estado='Activo' and $_GET[searchField] like '$_GET[searchString]%' ORDER BY $sidx $sord offset $start limit $limit";
+        $SQL = "select P.id_proforma, C.nombres_cli, P.total_proforma, P.fecha_actual, D.identificacion_dire, D.nombres from proforma P, clientes C, directores D where P.id_cliente= C.id_cliente and C.id_director = d.id_director and P.estado='Activo' and $_GET[searchField] like '$_GET[searchString]%' ORDER BY $sidx $sord offset $start limit $limit";
     }
     if ($_GET['searchOper'] == 'bn') {
-        $SQL = "select P.id_proforma, C.identificacion, C.nombres_cli, P.total_proforma, P.fecha_actual from proforma P, clientes C where P.id_cliente= C.id_cliente and P.estado='Activo' and $_GET[searchField] not like '$_GET[searchString]%' ORDER BY $sidx $sord offset $start limit $limit";
+        $SQL = "select P.id_proforma, C.nombres_cli, P.total_proforma, P.fecha_actual, D.identificacion_dire, D.nombres from proforma P, clientes C, directores D where P.id_cliente= C.id_cliente and C.id_director = d.id_director and P.estado='Activo' and $_GET[searchField] not like '$_GET[searchString]%' ORDER BY $sidx $sord offset $start limit $limit";
     }
     if ($_GET['searchOper'] == 'ew') {
-        $SQL = "select P.id_proforma, C.identificacion, C.nombres_cli, P.total_proforma, P.fecha_actual from proforma P, clientes C where P.id_cliente= C.id_cliente and P.estado='Activo' and $_GET[searchField] like '%$_GET[searchString]' ORDER BY $sidx $sord offset $start limit $limit";
+        $SQL = "select P.id_proforma, C.nombres_cli, P.total_proforma, P.fecha_actual, D.identificacion_dire, D.nombres from proforma P, clientes C, directores D where P.id_cliente= C.id_cliente and C.id_director = d.id_director and P.estado='Activo' and $_GET[searchField] like '%$_GET[searchString]' ORDER BY $sidx $sord offset $start limit $limit";
     }
     if ($_GET['searchOper'] == 'en') {
-        $SQL = "select P.id_proforma, C.identificacion, C.nombres_cli, P.total_proforma, P.fecha_actual from proforma P, clientes C where P.id_cliente= C.id_cliente and P.estado='Activo' and $_GET[searchField] not like '%$_GET[searchString]' ORDER BY $sidx $sord offset $start limit $limit";
+        $SQL = "select P.id_proforma, C.nombres_cli, P.total_proforma, P.fecha_actual, D.identificacion_dire, D.nombres from proforma P, clientes C, directores D where P.id_cliente= C.id_cliente and C.id_director = d.id_director and P.estado='Activo' and $_GET[searchField] not like '%$_GET[searchString]' ORDER BY $sidx $sord offset $start limit $limit";
     }
     if ($_GET['searchOper'] == 'cn') {
-        $SQL = "select P.id_proforma, C.identificacion, C.nombres_cli, P.total_proforma, P.fecha_actual from proforma P, clientes C where P.id_cliente= C.id_cliente and P.estado='Activo' and $_GET[searchField] like '%$_GET[searchString]%' ORDER BY $sidx $sord offset $start limit $limit";
+        $SQL = "select P.id_proforma, C.nombres_cli, P.total_proforma, P.fecha_actual, D.identificacion_dire, D.nombres from proforma P, clientes C, directores D where P.id_cliente= C.id_cliente and C.id_director = d.id_director and P.estado='Activo' and $_GET[searchField] like '%$_GET[searchString]%' ORDER BY $sidx $sord offset $start limit $limit";
     }
     if ($_GET['searchOper'] == 'nc') {
-        $SQL = "select P.id_proforma, C.identificacion, C.nombres_cli, P.total_proforma, P.fecha_actual from proforma P, clientes C where P.id_cliente= C.id_cliente and P.estado='Activo' and $_GET[searchField] not like '%$_GET[searchString]%' ORDER BY $sidx $sord offset $start limit $limit";
+        $SQL = "select P.id_proforma, C.nombres_cli, P.total_proforma, P.fecha_actual, D.identificacion_dire, D.nombres from proforma P, clientes C, directores D where P.id_cliente= C.id_cliente and C.id_director = d.id_director and P.estado='Activo' and $_GET[searchField] not like '%$_GET[searchString]%' ORDER BY $sidx $sord offset $start limit $limit";
     }
     if ($_GET['searchOper'] == 'in') {
-        $SQL = "select P.id_proforma, C.identificacion, C.nombres_cli, P.total_proforma, P.fecha_actual from proforma P, clientes C where P.id_cliente= C.id_cliente and P.estado='Activo' and $_GET[searchField] like '%$_GET[searchString]%' ORDER BY $sidx $sord offset $start limit $limit";
+        $SQL = "select P.id_proforma, C.nombres_cli, P.total_proforma, P.fecha_actual, D.identificacion_dire, D.nombres from proforma P, clientes C, directores D where P.id_cliente= C.id_cliente and C.id_director = d.id_director and P.estado='Activo' and $_GET[searchField] like '%$_GET[searchString]%' ORDER BY $sidx $sord offset $start limit $limit";
     }
     if ($_GET['searchOper'] == 'ni') {
-        $SQL = "select P.id_proforma, C.identificacion, C.nombres_cli, P.total_proforma, P.fecha_actual from proforma P, clientes C where P.id_cliente= C.id_cliente and P.estado='Activo' and $_GET[searchField] not like '%$_GET[searchString]%' ORDER BY $sidx $sord offset $start limit $limit";
+        $SQL = "select P.id_proforma, C.nombres_cli, P.total_proforma, P.fecha_actual, D.identificacion_dire, D.nombres from proforma P, clientes C, directores D where P.id_cliente= C.id_cliente and C.id_director = d.id_director and P.estado='Activo' and $_GET[searchField] not like '%$_GET[searchString]%' ORDER BY $sidx $sord offset $start limit $limit";
     }
 }
 
@@ -72,6 +72,7 @@ while ($row = pg_fetch_row($result)) {
     $s .= "<cell>" . $row[2] . "</cell>";
     $s .= "<cell>" . $row[3] . "</cell>";
     $s .= "<cell>" . $row[4] . "</cell>";
+    $s .= "<cell>" . $row[5] . "</cell>";
     $s .= "</row>";
 }
 $s .= "</rows>";

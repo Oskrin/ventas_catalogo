@@ -2799,13 +2799,14 @@ function inicio() {
         jQuery("#list4").jqGrid({
         url: '../xml/xmlBuscarProforma2.php',
         datatype: 'xml',
-        colNames: ['ID','IDENTIFICACIÓN','CLIENTE','MONTO TOTAL','FECHA PROFORMA'],
+        colNames: ['ID','CLIENTE','MONTO TOTAL','FECHA PROFORMA','IDENTIFICACIÓN','DIRECTOR@'],
         colModel: [
             {name: 'id_proforma', index: 'id_factura_venta', editable: false, search: false, hidden: false, editrules: {edithidden: false}, align: 'center',frozen: true, width: 50},
-            {name: 'identificacion', index: 'identificacion', editable: false, search: true, hidden: false, editrules: {edithidden: false}, align: 'center',frozen: true, width: 150},
             {name: 'nombres_cli', index: 'nombres_cli', editable: true, search: true, hidden: false, editrules: {edithidden: false}, align: 'center',frozen: true, width: 200},
             {name: 'total_proforma', index: 'total_venta', editable: true, search: false, hidden: false, editrules: {edithidden: false}, align: 'center',frozen: true, width: 100},
             {name: 'fecha_actual', index: 'fecha_actual', editable: true, search: false, hidden: false, editrules: {edithidden: false}, align: 'center',frozen: true, width: 100},
+            {name: 'identificacion', index: 'identificacion', editable: false, search: true, hidden: false, editrules: {edithidden: false}, align: 'center',frozen: true, width: 150},
+            {name: 'nombres', index: 'nombres', editable: true, search: true, hidden: false, editrules: {edithidden: false}, align: 'center',frozen: true, width: 250},
         ],
         rowNum: 30,
         width: 750,
