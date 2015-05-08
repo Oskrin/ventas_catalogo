@@ -13,7 +13,34 @@ while ($row = pg_fetch_row($consulta)) {
     $cont1 = $row[0];
 }
 $cont1++;
+////////////////////
+
+date_default_timezone_set('America/Guayaquil');
+$dia_semana = date("w");
+
+$arr_data = array();
+
+$sql = pg_query("select * from dias where id_dias = '1'");
+while($row = pg_fetch_row($sql)){
+    $arr_data[] = $row[7];
+    $arr_data[] = $row[1];
+    $arr_data[] = $row[2];
+    $arr_data[] = $row[3];
+    $arr_data[] = $row[4];
+    $arr_data[] = $row[5];
+    $arr_data[] = $row[6];    
+}
+
+if($_SESSION['cargo'] == '1'){
+    
+}else{
+    if($arr_data[$dia_semana] == 0){
+        header('Location: index.php');
+    }    
+}
+
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>

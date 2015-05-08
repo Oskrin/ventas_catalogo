@@ -17,6 +17,7 @@ function menu_1() {
                     <ul>
                           <li><a href="../html/categorias.php" target="_blank">Categorias</a></li>
                           <li><a href="../html/marcas.php" target="_blank">Marcas</a></li>
+                          <li><a href="../html/dias.php" target="_blank">Activar Días</a></li>
                     </ul>
                     </li>
                     <li><a href="../html/productos.php" target="_blank">Productos</a></li>
