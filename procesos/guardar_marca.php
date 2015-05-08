@@ -8,7 +8,7 @@ $cont = 0;
 $repe = 0;
 
 //////////////////validar repetidos//////////////////
-$consulta = pg_query("select * from marcas where nombre_marca='" . strtoupper($_POST[nombre_marca]) . "'");
+$consulta = pg_query("select * from marcas where nombre_marca='" . strtoupper($_POST['nombre_marca']) . "'");
 while ($row = pg_fetch_row($consulta)) {
     $repe++;
 }
@@ -23,7 +23,7 @@ if ($repe == 0) {
     $cont++;
 ////////////////////////////////////////
 
-    pg_query("insert into marcas values('$cont','" . strtoupper($_POST[nombre_marca]) . "','Activo')");
+    pg_query("insert into marcas values('$cont','" . strtoupper($_POST['nombre_marca']) . "','Activo')");
     $data = 1;
 } else {
     $data = 0;
