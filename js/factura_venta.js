@@ -1138,8 +1138,8 @@ function guardar_factura() {
                                                         if($("#tipo_venta").val() == "FACTURA"){
                                                            if (val != 0) {
                                                                 alertify.alert("Factura Guardada correctamente", function(){
-                                                                    window.open("../reportes_sistema/factura_venta.php?hoja=A4&id="+val,'_blank');
-                                                                    location.reload();
+                                                                    // window.open("../reportes_sistema/factura_venta.php?hoja=A4&id="+val,'_blank');
+                                                                    // location.reload();
                                                                 });
                                                             }
                                                         }else{
