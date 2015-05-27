@@ -1138,8 +1138,8 @@ function guardar_factura() {
                                                         if($("#tipo_venta").val() == "FACTURA"){
                                                            if (val != 0) {
                                                                 alertify.alert("Factura Guardada correctamente", function(){
-                                                                    // window.open("../reportes_sistema/factura_venta.php?hoja=A4&id="+val,'_blank');
-                                                                    // location.reload();
+                                                                    window.open("../reportes_sistema/factura_venta.php?hoja=A4&id="+val,'_blank');
+                                                                    location.reload();
                                                                 });
                                                             }
                                                         }else{
@@ -2827,10 +2827,10 @@ function inicio() {
            // alert(valor);
 
            /////////////////llamado datos personales/////////////
+           $("#proforma").val(valor);
         $.getJSON('../procesos/retornar_proforma_clientes.php?id1=' + valor, function(data) {
             var tama2 = data.length;
-            for (var i = 0; i < tama2; i = i + 8)
-            {
+            for (var i = 0; i < tama2; i = i + 8) {
                 $("#id_cliente").val(data[i]);
                 $("#ruc_ci").val(data[i + 1 ]);
                 $("#nombre_cliente").val(data[i + 2]);
