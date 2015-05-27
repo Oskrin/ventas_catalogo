@@ -22,15 +22,16 @@ $(function() {
 function nuevo() {
     location.reload();
 }
+
 function inicio() {  
-
-
+    alertify.set({ delay: 1000 });
     ///////////////////        
     $("#btnGuardar").on("click", modificar_dias);
     $("#btnNuevo").on("click", nuevo);
     ////////
     cargar_dias();     
 }
+
 function cargar_dias(){
     $.ajax({
         type: "POST",
@@ -72,12 +73,11 @@ function cargar_dias(){
             }else{
                 $("#domingo").prop("checked",true);
             }
-
-            alertify.success('Datos Cargados Correctamente');                                                  
-            
+            // alertify.success('Datos Cargados Correctamente');                                                  
         }
     });
 }
+
 function modificar_dias(){    
     if($("#lunes").is(":checked")){
         lunes = 1;

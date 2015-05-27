@@ -140,7 +140,7 @@ include '../menus/menu.php';
                 <div class="container">
                     <div class="row">
                         <div class="span12">
-                            &copy; 2014 <a href=""> <?php echo $_SESSION['empresa']; ?></a>.
+                            &copy; 2015 <a href=""> <?php echo $_SESSION['empresa']; ?></a>.
                         </div> 
                     </div> 
                 </div> 
