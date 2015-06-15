@@ -961,7 +961,7 @@ function guardar_factura() {
                                                 $("#meses").focus();
                                                 alertify.alert("Meses a diferir");
                                             } else {
-
+                                                $("#btnGuardar").attr("disabled", true);
                                                 var v1 = new Array();
                                                 var v2 = new Array();
                                                 var v3 = new Array();
