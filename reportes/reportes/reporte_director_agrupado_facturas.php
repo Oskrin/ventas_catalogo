@@ -40,7 +40,7 @@
             $this->SetFillColor(120,120,120);
             $this->Line(1,50,210,50);            
             $this->SetFont('Arial','B',12);                                                                
-            $this->Cell(190, 5, utf8_decode("REPORTE DE DIRECTOR AGRUPADO POR EMPRESARIO"),0,1, 'C',0);                                                                                                                
+            $this->Cell(190, 5, utf8_decode("REPORTE DE DIRECTOR AGRUPADO POR EMPRESARIO POR FACTURA"),0,1, 'C',0);                                                                                                                
             $this->SetFont('Arial','B',10);                                                                            
             $this->Cell(90, 5, utf8_decode($_GET['inicio']),0,0, 'R',0);                                                                                        
             $this->Cell(40, 5, utf8_decode($_GET['fin']),0,1, 'C',0);                                      
@@ -97,7 +97,8 @@
             while ($row2 = pg_fetch_row($sql2)) {            
                 $total_sql2 =$total_sql2 + $row2[2];
                 if($cont_sql2 == 0){
-                    $pdf->SetX(1);                
+                    $pdf->SetX(1);                                    
+                    $pdf->SetFillColor(247, 219, 181);
                     $pdf->Cell(25, 6, utf8_decode("EMPRESARI@"),1,0, 'C',1);
                     $pdf->Cell(70, 6, maxCaracter(utf8_decode($row2[0]),40),1,0, 'L',1);
                     $pdf->Cell(20, 6, utf8_decode("CI/RUC"),1,0, 'C',1);        
@@ -119,6 +120,7 @@
                 $pdf->Cell(25, 6, utf8_decode("TOTAL VENTA"),1,1, 'C',0);                                       
 
                 $pdf->SetX(1);  
+                $pdf->SetFillColor(120,120,120);
                 $pdf->Cell(40, 6, maxCaracter(utf8_decode($row2[3]),40),1,0, 'C',1);                            
                 $pdf->Cell(30, 6, maxCaracter(utf8_decode($row2[4]),20),1,0, 'C',1);                            
                 $pdf->Cell(30, 6, maxCaracter(utf8_decode($row2[5]),20),1,0, 'C',1);                            
@@ -157,7 +159,8 @@
                     $pdf->Cell(20, 6, maxCaracter(utf8_decode($row3[4]),50),0,0, 'C',0);
                     $pdf->Cell(20, 6, maxCaracter(utf8_decode($row3[5]),50),0,0, 'C',0);
                     $pdf->Cell(20, 6, maxCaracter(utf8_decode($row3[4] * $row3[5]),50),0,0, 'C',0);
-                    $desc = ($row3[4] * $row3[5]) * 0.30;
+                    //$desc = ($row3[4] * $row3[5]) * 0.30;
+                    $desc = ($row3[4] * $row3[5]) * ($row3[7] / 100);///ver si es 30%
                     $desc = ($row3[4] * $row3[5]) - $desc;
                     $pdf->Cell(20, 6, maxCaracter(number_format($desc,3,',','.'),10),0,1, 'C',0);
                     $cant = $cant + $row3[4];

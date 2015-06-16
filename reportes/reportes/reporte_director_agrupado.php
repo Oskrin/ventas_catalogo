@@ -95,7 +95,7 @@
         $valor_uni = 0;
         $valor_tot = 0;
         $desc_tot = 0;
-        $sql1 = pg_query("SELECT productos.cod_productos,productos.codigo,articulo,categoria,marca,sum(cantidad::int),precio_venta,detalle_factura_venta.total_venta from factura_venta,clientes,directores,detalle_factura_venta,productos where clientes.id_director = directores.id_director and factura_venta.id_cliente = clientes.id_cliente and detalle_factura_venta.id_factura_venta = factura_venta.id_factura_venta and detalle_factura_venta.cod_productos = productos.cod_productos and directores.id_director = '".$_GET['id']."' and clientes.id_cliente = '".$row[0]."' and  fecha_actual between '".$_GET['inicio']."' and '".$_GET['fin']."' group by  productos.cod_productos,precio_venta,detalle_factura_venta.total_venta, productos.codigo,productos.articulo,productos.categoria,productos.marca");
+        $sql1 = pg_query("SELECT productos.cod_productos,productos.codigo,articulo,categoria,marca,sum(cantidad::int),precio_venta,detalle_factura_venta.total_venta,descuento from factura_venta,clientes,directores,detalle_factura_venta,productos where clientes.id_director = directores.id_director and factura_venta.id_cliente = clientes.id_cliente and detalle_factura_venta.id_factura_venta = factura_venta.id_factura_venta and detalle_factura_venta.cod_productos = productos.cod_productos and directores.id_director = '".$_GET['id']."' and clientes.id_cliente = '".$row[0]."' and  fecha_actual between '".$_GET['inicio']."' and '".$_GET['fin']."' group by  productos.cod_productos,precio_venta,detalle_factura_venta.total_venta, productos.codigo,productos.articulo,productos.categoria,productos.marca");
         if(pg_num_rows($sql1)){
             $pdf->SetX(1);                
             $pdf->Cell(25, 6, utf8_decode("EMPRESARI@"),1,0, 'C',1);
@@ -125,7 +125,8 @@
                 $pdf->Cell(20, 6, maxCaracter(utf8_decode($row1[5]),50),0,0, 'C',0);
                 $pdf->Cell(20, 6, maxCaracter(utf8_decode($row1[6]),50),0,0, 'C',0);
                 $pdf->Cell(20, 6, maxCaracter(utf8_decode($row1[6] * $row1[5]),50),0,0, 'C',0);
-                $desc = ($row1[6] * $row1[5]) * 0.30;
+                $desc = ($row1[6] * $row1[5]) * ($row1[8] / 100);///ver si es 30%
+                //$desc = ($row1[6] * $row1[5]) * 0.30;///ver si es 30%
                 $desc = ($row1[6] * $row1[5]) - $desc;
                 $pdf->Cell(20, 6, maxCaracter(number_format($desc,3,',','.'),10),0,1, 'C',0);
                 $cant = $cant + $row1[5];
@@ -155,11 +156,11 @@
 
     $pdf->Cell(127, 6, utf8_decode("DESCUENTO LIDER"),0,0, 'R',0);
     $pdf->Cell(40, 6, utf8_decode("10%"),1,0, 'C',0);
-    $pdf->Cell(40, 6, utf8_decode($total_final * 0.10),1,1, 'C',0);
+    $pdf->Cell(40, 6, truncateFloat(utf8_decode($total_final * 0.10),2),1,1, 'C',0);
 
     $pdf->Cell(127, 6, utf8_decode("SUBTOTAL"),0,0, 'R',0);
     $pdf->Cell(40, 6, utf8_decode(""),1,0, 'C',0);
-    $pdf->Cell(40, 6, $total_final -($total_final * 0.10),1,1, 'C',0);    
+    $pdf->Cell(40, 6, truncateFloat($total_final -($total_final * 0.10),2),1,1, 'C',0);    
     
     $pdf->Cell(127, 6, utf8_decode("COST0 ENVIO"),0,0, 'R',0);
     $pdf->Cell(40, 6, utf8_decode(""),1,0, 'C',0);
@@ -167,7 +168,7 @@
 
     $pdf->Cell(127, 6, utf8_decode("TOTAL A DEPOSITAR"),0,0, 'R',0);
     $pdf->Cell(40, 6, '',1,0, 'C',0);
-    $pdf->Cell(40, 6, $total_final -($total_final * 0.10),1,1, 'C',0);
+    $pdf->Cell(40, 6, truncateFloat($total_final -($total_final * 0.10),2),1,1, 'C',0);
                                                         
     $pdf->Ln(3);              
     $pdf->Output();

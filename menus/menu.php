@@ -65,6 +65,7 @@ function menu_1() {
                             <li><a href="" id="total_director">Total Por Director</a></li>                            
                             <li><a href="" id="faltante_pedido">Faltante de Pedidos</a></li>                            
                             <li><a href="" id="reporte_director_agrupado">Agrupados por empresario</a></li>                            
+                            <li><a href="" id="reporte_director_agrupado_factura">A. por empresario (facturas)</a></li>                            
                         </ul>
                    </li>
                     <li><a href="" target="_parent">Productos</a>
