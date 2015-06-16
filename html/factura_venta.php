@@ -290,6 +290,25 @@ $cont1++;
                                                     </div>
                                                 </div>
 
+                                                <div id="tipo_busqueda" title="TIPO BUSQUEDA">
+                                                   <table cellpadding="2" border="0" style="margin-left: 10px">
+                                                       <tr>
+                                                           <td><label>Buscar por:</label></td>
+                                                           <td><select id="tipo_venta_busqueda" name="tipo_venta_busqueda" style="width: 180px">
+                                                                <option value="FACTURA">FACTURA</option>
+                                                                <option value="NOTA">NOTA VENTA</option>
+                                                            </select></td>
+                                                       </tr> 
+                                                   </table> 
+                                                   <br />
+                                                   <button class="btn btn-primary" id='btnTipoBuscar'><i class="icon-ok"></i> Buscar</button>
+                                                </div>
+
+                                                <div id="buscar_notas_venta" title="BUSCAR NOTAS VENTAS">
+                                                    <table id="list5"><tr><td></td></tr></table>
+                                                    <div id="pager5"></div>
+                                                </div> 
+
                                                 <div id="buscar_facturas_venta" title="BUSCAR FACTURAS VENTAS">
                                                     <table id="list2"><tr><td></td></tr></table>
                                                     <div id="pager2"></div>
