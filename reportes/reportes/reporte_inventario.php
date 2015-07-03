@@ -55,7 +55,7 @@
     $pdf->SetX(5);    
     $pdf->SetFont('Amble-Regular','',9);     
     
-    $sql = pg_query("select  I.comprobante, I.fecha_actual, I.hora_actual, U.nombre_usuario, U.apellido_usuario  from inventario I, usuario U where I.id_usuario = U.id_usuario and I.comprobante='$_GET[id]'");
+    $sql = pg_query("select  I.comprobante, I.fecha_actual, I.hora_actual, U.nombre_usuario, U.apellido_usuario  from inventario I, usuario U where I.id_usuario = U.id_usuario and I.id_inventario='$_GET[id]'");
     while ($row = pg_fetch_row($sql)) {
         $pdf->SetX(1);                                                
         $pdf->Cell(50, 6, utf8_decode('Comprobante: '),0,0, 'C',0);                                         

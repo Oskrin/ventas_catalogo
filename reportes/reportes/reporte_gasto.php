@@ -61,7 +61,7 @@
     $contador=0; 
     $pv=0;
     $pc=0;
-    $sql=pg_query("select * from gastos_internos,usuario,proveedores where gastos_internos.id_usuario=usuario.id_usuario and gastos_internos.id_proveedor=proveedores.id_proveedor and comprobante='$_GET[id]'");
+    $sql=pg_query("select * from gastos_internos,usuario,proveedores where gastos_internos.id_usuario=usuario.id_usuario and gastos_internos.id_proveedor=proveedores.id_proveedor and id_gastos='$_GET[id]'");
     while($row=pg_fetch_row($sql)){
         $pdf->SetX(1); 
         $pdf->SetFillColor(187, 179, 180);            
