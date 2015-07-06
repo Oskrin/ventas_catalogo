@@ -61,7 +61,7 @@
     $temp4= 0;
     $temp5= 0;
 
-    $sql=pg_query("select * from ingresos,usuario,empresa where ingresos.id_usuario=usuario.id_usuario and ingresos.id_empresa=empresa.id_empresa  and comprobante='$_GET[comprobante]'");        
+    $sql=pg_query("select * from ingresos,usuario,empresa where ingresos.id_usuario=usuario.id_usuario and ingresos.id_empresa=empresa.id_empresa  and id_ingresos='$_GET[comprobante]'");        
     while($row=pg_fetch_row($sql)){ 
         $pdf->SetX(1); 
         $pdf->SetFillColor(187, 179, 180);            

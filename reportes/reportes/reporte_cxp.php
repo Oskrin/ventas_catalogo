@@ -115,7 +115,7 @@
             $pdf->Cell(20, 6, utf8_decode('Saldo'),1,0, 'C',0);                                             
             $pdf->Cell(25, 6, utf8_decode('Fecha Pago'),1,1, 'C',0);                    
         }        
-        $sql=pg_query("select * from pagos_pagar where num_factura='$_GET[id]' and comprobante='$_GET[comprobante]'");
+        $sql=pg_query("select * from pagos_pagar where num_factura='$_GET[id]' and id_cuentas_pagar='$_GET[comprobante]'");
         $meses=0;
         $id_pv=0;
         while($row=pg_fetch_row($sql)){                        

@@ -55,7 +55,7 @@
     $pdf->SetX(5);    
     $pdf->SetFont('Amble-Regular','',9);     
     
-    $sql=pg_query("select * from egresos,usuario,empresa where egresos.id_usuario=usuario.id_usuario and egresos.id_empresa=empresa.id_empresa and comprobante='$_GET[comprobante]';");        
+    $sql=pg_query("select * from egresos,usuario,empresa where egresos.id_usuario=usuario.id_usuario and egresos.id_empresa=empresa.id_empresa and id_egresos='$_GET[comprobante]';");        
     while($row=pg_fetch_row($sql)){ 
         $pdf->SetX(1); 
         $pdf->SetFillColor(187, 179, 180);            

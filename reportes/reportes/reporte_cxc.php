@@ -124,7 +124,7 @@
         }
         
         $fec="";
-        $sql=pg_query("select fecha_actual from pagos_cobrar where comprobante='$_GET[comprobante]'");
+        $sql=pg_query("select fecha_actual from pagos_cobrar where id_cuentas_cobrar='$_GET[comprobante]'");
         while($row=pg_fetch_row($sql)){
             $fec=$row[0];
         }
