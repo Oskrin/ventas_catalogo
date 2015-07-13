@@ -267,15 +267,15 @@ function entrar3() {
                             var resultado = 0;
                             var repe = 0;
                             var suma = 0;    
-                            if (filas.length === 0) {
+                            if (filas.length === 0) {                                                                                                       
                                 if ($("#descuento").val() !== "") {
-                                    desc = $("#descuento").val();
-                                    precio = (parseFloat($("#p_venta").val())).toFixed(2);
-                                    multi = (parseFloat($("#cantidad").val()) * parseFloat($("#p_venta").val())).toFixed(2);
-                                    descuento = ((multi * parseFloat($("#descuento").val())) / 100);
-                                    flotante = parseFloat(descuento);
-                                    resultado = (Math.round(flotante * Math.pow(10,2)) / Math.pow(10,2)).toFixed(2);
-                                    total = (multi - resultado).toFixed(2);
+                                    desc = $("#descuento").val();                                    
+                                    precio = (parseFloat($("#p_venta").val())).toFixed(2);                                    
+                                    multi = (parseFloat($("#cantidad").val()) * parseFloat($("#p_venta").val())).toFixed(2);                                    
+                                    descuento = ((multi * parseFloat($("#descuento").val())) / 100);                                    
+                                    flotante = parseFloat(descuento);                                    
+                                    resultado = (Math.round(flotante * Math.pow(10,2)) / Math.pow(10,2)).toFixed(2);                                    
+                                    total = (multi - resultado).toFixed(2);                                    
                                 } else {
                                     desc = 0;
                                     precio = (parseFloat($("#p_venta").val())).toFixed(2);
@@ -317,9 +317,9 @@ function entrar3() {
                                     suma = parseInt(can) + parseInt($("#cantidad").val());
                                     if(suma > parseInt($("#disponibles").val())){
                                         $("#cantidad").focus();
-                                        alertify.alert("Error.. La cantidad ingresada es mayor a la disponible");  
+                                        alertify.alert("Error.. La cantidad ingresada es mayor a la disponible");                                          
                                     }else{
-                                        if ($("#descuento").val() !== "") {
+                                        if ($("#descuento").val() !== "") {                                         
                                             desc = $("#descuento").val();
                                             precio = (parseFloat($("#p_venta").val())).toFixed(2);
                                             multi = (parseFloat(suma) * parseFloat($("#p_venta").val())).toFixed(2);
@@ -408,7 +408,7 @@ function entrar3() {
                             var t_fc = 0;
                             var sub = 0;
                             var descu_total = 0;                        
-                            if ($("#iva_producto").val() === "Si") {
+                            if ($("#iva_producto").val() === "Si") {                                
                                 var fil = jQuery("#list").jqGrid("getRowData");
                                 for (var t = 0; t < fil.length; t++) {
                                     var dd = fil[t];
@@ -418,7 +418,7 @@ function entrar3() {
                                         iva = (sub * 0.12).toFixed(3);
                                         descu_total = (parseFloat(descu_total) + parseFloat(dd['cal_des'])).toFixed(2);
                                         t_fc = ((parseFloat(sub) + (parseFloat(iva)) + parseFloat($("#total_p").val()))).toFixed(2);
-                                        $("#iva_producto").val("");
+                                        //$("#iva_producto").val("");
                                     }
                                 }
                                 $("#total_p2").val(sub);
@@ -435,7 +435,7 @@ function entrar3() {
                                             sub = parseFloat(subtotal).toFixed(2);
                                             descu_total = (parseFloat($("#desc").val()) + parseFloat(dd['cal_des'])).toFixed(2);
                                             t_fc = ((parseFloat(sub)) + parseFloat($("#tot").val())).toFixed(2);
-                                            $("#iva_producto").val("");
+                                            //$("#iva_producto").val("");
                                         }
                                     }
                                     $("#total_p").val(sub);
@@ -1697,7 +1697,7 @@ function inicio() {
                     $("#p_venta").val("");
                     $("#descuento").val("");
                     $("#disponibles").val("");
-                    $("#iva_producto").val("");
+                    //$("#iva_producto").val("");
                     $("#carga_series").val("");
                     $("#cod_producto").val("");
                     $("#des").val("");
@@ -1728,7 +1728,7 @@ function inicio() {
                         $("#p_venta").val("");
                         $("#descuento").val("");
                         $("#disponibles").val("");
-                        $("#iva_producto").val("");
+                        //$("#iva_producto").val("");
                         $("#carga_series").val("");
                         $("#cod_producto").val("");
                         $("#des").val("");
@@ -2904,7 +2904,8 @@ function inicio() {
 
 
      ////////////////////buscador proformas/////////////////////////
-        jQuery("#list4").jqGrid({
+        
+    jQuery("#list4").jqGrid({
         url: '../xml/xmlBuscarProforma2.php',
         datatype: 'xml',
         colNames: ['ID','DIRECTOR@','IDENTIFICACIÓN','CLIENTE','MONTO TOTAL','FECHA PROFORMA'],
@@ -3049,7 +3050,7 @@ function inicio() {
                                 iva = (sub * 0.12).toFixed(3);
                                 descu_total = (parseFloat(descu_total) + parseFloat(dd['cal_des'])).toFixed(2);
                                 t_fc = ((parseFloat(sub) + (parseFloat(iva)) + parseFloat($("#total_p").val()))).toFixed(2);
-                                $("#iva_producto").val("");
+                                //$("#iva_producto").val("");
                             }
                         }
                         $("#total_p2").val(sub);
@@ -3071,7 +3072,7 @@ function inicio() {
                                     mu = (dd['cantidad'] * dd['precio_u']).toFixed(2);
                                     des = ((mu * dd['descuento'])/100).toFixed(2);
                                     descu = (parseFloat(descu) + parseFloat(des)).toFixed(2);
-                                    $("#iva_producto").val("");
+                                    //$("#iva_producto").val("");
                                 }
                             }
                             
@@ -3245,7 +3246,7 @@ function inicio() {
                                 iva = (sub * 0.12).toFixed(3);
                                 descu_total = (parseFloat(descu_total) + parseFloat(dd['cal_des'])).toFixed(2);
                                 t_fc = ((parseFloat(sub) + (parseFloat(iva)) + parseFloat($("#total_p").val()))).toFixed(2);
-                                $("#iva_producto").val("");
+                                //$("#iva_producto").val("");
                             }
                         }
                         $("#total_p2").val(sub);
@@ -3267,7 +3268,7 @@ function inicio() {
                                     mu = (dd['cantidad'] * dd['precio_u']).toFixed(2);
                                     des = ((mu * dd['descuento'])/100).toFixed(2);
                                     descu = (parseFloat(descu) + parseFloat(des)).toFixed(2);
-                                    $("#iva_producto").val("");
+                                    //$("#iva_producto").val("");
                                 }
                             }
                             
